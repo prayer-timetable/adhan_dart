@@ -1,0 +1,12 @@
+name: prayer_calc
+version: 1.0.0
+description: >-
+  Library to calculate prayer times for muslims.
+  Based on precise astronomical formula.
+homepage: https://ensar.me
+documentation: https://ensar.me/docs
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+dependencies:
+
+dev_dependencies:
