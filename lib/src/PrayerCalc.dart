@@ -1,8 +1,17 @@
 import 'dart:math';
+// import 'package:prayer_calc/src/SunnahTimes.dart';
 
 class PrayerCalc {
-  // final lat;
-  // final fajr;
+  DateTime dawn;
+  DateTime sunrise;
+  DateTime midday;
+  DateTime afternoon;
+  DateTime sunset;
+  DateTime dusk;
+  DateTime dawnTomorrow;
+  DateTime duskYesterday;
+  DateTime midnight;
+  DateTime lastThird;
 
   PrayerCalc(
     double lat,
@@ -14,6 +23,7 @@ class PrayerCalc {
     int month,
     int day,
     int asrMethod,
+    double ishaAngle,
   }) {
     DateTime timestamp = DateTime.now().toUtc();
     DateTime beginingOfYear = DateTime(timestamp.year, 1, 1).toUtc();
@@ -28,17 +38,15 @@ class PrayerCalc {
 
     int TZ = timezone;
 
-// int J = 142; //	Day of Year
+    int J = 142; //	Day of Year
     int hoursSinceBeginingOfYear = date.difference(beginingOfYear).inHours;
-    double J = hoursSinceBeginingOfYear / 24;
-
-    int G = 18; // ??? not used // Degrees
+    // double J = hoursSinceBeginingOfYear / 24;
 
     double Gd = angle; //	Dawn’s Twilight Angle (15°-19°)
-    double Gn = angle; // Night’s Twilight Angle (15°-19°)
+    double Gn = ishaAngle ?? angle; // Night’s Twilight Angle (15°-19°)
     int R = 15 * TZ; // Reference Longitude (Degrees)
 
-// ***** Solar Declination D (Degrees)
+    // ***** Solar Declination D (Degrees)
     double gama = 2 * pi * (J - 0) / 365; // or J-1? //TODO: 366 for leap
     double Drad = 0.006918 -
         0.399912 * cos(gama) +
@@ -94,65 +102,35 @@ class PrayerCalc {
       return DateTime(date.year, date.month, date.day, hour, minute);
     }
 
-    double noonFraction = Z;
-    DateTime noon = getTime(noonFraction);
+    double dawnFraction = Z - Vd;
+    this.dawn = getTime(dawnFraction);
 
     double sunriseFraction = Z - U;
-    DateTime sunrise = getTime(sunriseFraction);
+    this.sunrise = getTime(sunriseFraction);
 
-    double dawnFraction = Z - Vd;
-    DateTime dawn = getTime(dawnFraction);
-
-    double duskFraction = Z + Vn;
-    DateTime dusk = getTime(duskFraction);
-
-    double sunsetFraction = Z + U;
-    DateTime sunset = getTime(sunsetFraction);
+    double middayFraction = Z;
+    this.midday = getTime(middayFraction);
 
     double afternoonFraction = Z + W;
-    DateTime afternoon = getTime(afternoonFraction);
+    this.afternoon = getTime(afternoonFraction);
 
-    // this.fajr = dawn;
+    double sunsetFraction = Z + U;
+    this.sunset = getTime(sunsetFraction);
 
-    // return PrayerCalc(lat, long,)
-    // return dawn;
+    double duskFraction = Z + Vn;
+    this.dusk = getTime(duskFraction);
+
+    // ***** Sunnah times
+
+    // SunnahTimes sunnahTimes = SunnahTimes(
+    //   B,
+    //   L,
+    //   H,
+    //   Gd,
+    //   TZ,
+    //   date: date,
+    //   asrMethod: Sh,
+    //   ishaAngle: Gn,
+    // );
   }
 }
-
-//
-// main() {
-//   // print('J\t$J');
-//   // // print('D\t$T');
-//   // print('D\t$D');
-//   // print('DD\t$DD');
-//   // print('DDD\t$DDD');
-//   // print('DDDD\t$DDDD');
-//   // print('T\t$T');
-//   // print(now.isUtc);
-//   // print(now);
-//   // print(beginingOfYear);
-//   // print('beta $beta gama $gama');
-//   // print('U1\t$U1');
-//   // print('U2\t$U2');
-//   // print('U3\t$U3');
-//   // print('U4\t$U4');
-//   // print('U\t$U');
-//   // print('H\t${H / H.abs()}');
-//   // print(pow(H.abs(), 0.5));
-//   // print('Vd1\t$Vd1');
-//   // print('Vd2\t$Vd2');
-//   // print('Vd3\t$Vd3');
-//   // print('Vd4\t$Vd4');
-//   // print('Vd\t$Vd');
-//   // print((-Vd2 - Vd3) / Vd4);
-
-//   print('W1\t$W1');
-//   print('W\t$W');
-
-//   print('dawn\t$dawn');
-//   print('sunrise\t$sunrise');
-//   print('noon\t$noon');
-//   print('af\'noon\t$afternoon');
-//   print('sunset\t$sunset');
-//   print('dusk\t$dusk');
-// }
