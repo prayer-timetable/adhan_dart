@@ -1,9 +1,7 @@
-import 'dart:math';
+import 'package:prayers_calc/src/Sunnah.dart';
 import 'package:prayers_calc/src/Prayers.dart';
 import 'package:prayers_calc/src/func.dart';
-import 'package:prayers_calc/src/Prayers.dart';
-// import 'package:prayers_calc/src/Sunnah.dart';
-// import 'package:prayers_calc/src/Durations.dart';
+import 'package:prayers_calc/src/Durations.dart';
 
 class Index {
   // PrayersStructure prayers;
@@ -19,6 +17,8 @@ class Index {
   Prayers yesterday;
   Prayers tomorrow;
   Index prayers;
+  Sunnah sunnah;
+  Durations durations;
 
   Index(
     int timezone,
@@ -39,6 +39,7 @@ class Index {
     // UTC date
     DateTime date = DateTime.utc(year ?? timestamp.year,
         month ?? timestamp.month, day ?? timestamp.day, 0, 0);
+    // DateTime nowUtc = DateTime.now().toUtc();
 
     // Local dates needed for dst calc and local midnight past (0:00)
     DateTime dateLocal = DateTime(
@@ -48,7 +49,7 @@ class Index {
         12,
         0); // using noon of local date to avoid +- 1 hour
     // define now (local)
-    DateTime now = DateTime.now();
+    DateTime nowLocal = DateTime.now();
 
     // ***** tomorrow and yesterday
     DateTime today = date;
@@ -113,14 +114,18 @@ class Index {
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
     );
-    print(
-        '${prayersToday.sunset}, ${prayersTomorrow.sunset}, ${prayersYesterday.sunset}');
+
     // define components
-    // this.prayers. set today;
-    // this.prayers;
-    // this.prayers.today = prayersToday;
     this.prayers =
         Index.prayers(prayersToday, prayersTomorrow, prayersYesterday);
+
+    this.sunnah =
+        Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
+
+    this.durations =
+        Durations(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
+
+    //end
   }
 
   Index.prayers(

@@ -42,9 +42,18 @@ Index icci =
 
 main() {
   print('****** Sarajevo *******');
-  print(sarajevo.prayers.today.sunset);
-  print(sarajevo.prayers.tomorrow.sunset);
-  print(sarajevo.prayers.yesterday.sunset);
+  // print(sarajevo.prayers.today.sunset);
+  // print(sarajevo.prayers.tomorrow.sunset);
+  // print(sarajevo.prayers.yesterday.sunset);
+  // print(sarajevo.sunnah.midnight);
+  // print(sarajevo.sunnah.lastThird);
+  print(sarajevo.durations.now);
+  print(sarajevo.durations.current);
+  print(sarajevo.durations.next);
+  print(sarajevo.durations.previous);
+  print(sarajevo.durations.isAfterIsha);
+  print(sarajevo.durations.currentId);
+
   // print(sarajevo.prayers.sunrise);
   // print(sarajevo.prayers.midday);
   // print(sarajevo.prayers.afternoon);

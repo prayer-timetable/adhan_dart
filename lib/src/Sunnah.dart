@@ -5,30 +5,11 @@ class Sunnah {
   DateTime lastThird;
 
   Sunnah(
-    double lat,
-    double long,
-    double altitude,
-    double angle,
-    int timezone, {
-    int year,
-    int month,
-    int day,
-    int asrMethod,
-    double ishaAngle,
-  }) {
-    DateTime timestamp = DateTime.now().toUtc();
-
-    // define date in utc
-    DateTime date = DateTime.utc(year ?? timestamp.year,
-        month ?? timestamp.month, day ?? timestamp.day, 0, 0);
-
-    // define now (local)
-    DateTime now = DateTime.now();
-
-    // ***** tomorrow and yesterday
-    DateTime tomorrow = date.add(Duration(days: 1));
-    DateTime yesterday = date.subtract(Duration(days: 1));
-
+    DateTime now,
+    Prayers prayersToday,
+    Prayers prayersTomorrow,
+    Prayers prayersYesterday,
+  ) {
     DateTime dawnTomorrow = prayersTomorrow.dawn;
     DateTime dawnToday = prayersToday.dawn;
     DateTime sunsetToday = prayersToday.sunset;
