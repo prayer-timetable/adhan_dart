@@ -3,7 +3,7 @@ import 'package:prayers_calc/src/Prayers.dart';
 import 'package:prayers_calc/src/func.dart';
 import 'package:prayers_calc/src/Durations.dart';
 
-class Index {
+class PrayersCalc {
   // PrayersStructure prayers;
   DateTime dawn;
   DateTime sunrise;
@@ -16,11 +16,11 @@ class Index {
   Prayers today;
   Prayers yesterday;
   Prayers tomorrow;
-  Index prayers;
+  PrayersCalc prayers;
   Sunnah sunnah;
   Durations durations;
 
-  Index(
+  PrayersCalc(
     int timezone,
     double lat,
     double long,
@@ -117,7 +117,7 @@ class Index {
 
     // define components
     this.prayers =
-        Index.prayers(prayersToday, prayersTomorrow, prayersYesterday);
+        PrayersCalc.prayers(prayersToday, prayersTomorrow, prayersYesterday);
 
     this.sunnah =
         Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
@@ -128,7 +128,7 @@ class Index {
     //end
   }
 
-  Index.prayers(
+  PrayersCalc.prayers(
       Prayers prayersToday, Prayers prayersTomorrow, Prayers prayersYesterday) {
     today = prayersToday;
     tomorrow = prayersTomorrow;

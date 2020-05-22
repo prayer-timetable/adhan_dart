@@ -1,4 +1,4 @@
-import 'package:prayers_calc/src/Index.dart';
+import 'package:prayers_calc/src/PrayersCalc.dart';
 
 // ICCI
 double latI = 53.3046593;
@@ -16,9 +16,10 @@ double angleS = 14.6;
 int timezoneS = 1;
 
 // Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
-Index sarajevo = new Index(timezoneS, latS, longS, altitudeS, angleS);
-Index icci =
-    new Index(timezoneI, latI, longI, altitudeI, angleI, ishaAngle: iangleI);
+PrayersCalc sarajevo =
+    new PrayersCalc(timezoneS, latS, longS, altitudeS, angleS);
+PrayersCalc icci = new PrayersCalc(timezoneI, latI, longI, altitudeI, angleI,
+    ishaAngle: iangleI);
 
 // optional parameters:
 // int year, int month, int day, int asrMethod, double ishaAngle, bool summerTimeCalc
@@ -30,7 +31,7 @@ Index icci =
 // summerTimeCalc is true by default, set to false if no daylight saving should happen
 //
 // example (icci location, Hanafi, 1st June 2020, different ishaAngle, no summer time):
-Index test = new Index(
+PrayersCalc test = new PrayersCalc(
   timezoneI,
   latI,
   longI,
@@ -44,7 +45,7 @@ Index test = new Index(
   day: 1,
 );
 
-Index location = icci;
+PrayersCalc location = icci;
 
 main() {
   print('**************** Today *****************');
