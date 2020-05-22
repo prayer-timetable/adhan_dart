@@ -5,14 +5,6 @@ import 'package:prayers_calc/src/Durations.dart';
 
 class PrayersCalc {
   // PrayersStructure prayers;
-  DateTime dawn;
-  DateTime sunrise;
-  DateTime midday;
-  DateTime afternoon;
-  DateTime sunset;
-  DateTime dusk;
-  DateTime midnight;
-  DateTime lastThird;
   Prayers today;
   Prayers yesterday;
   Prayers tomorrow;

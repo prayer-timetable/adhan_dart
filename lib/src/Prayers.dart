@@ -7,10 +7,6 @@ class Prayers {
   DateTime afternoon;
   DateTime sunset;
   DateTime dusk;
-  DateTime dawnTomorrow;
-  DateTime duskYesterday;
-  DateTime midnight;
-  DateTime lastThird;
 
   Prayers(
     int timezone,
