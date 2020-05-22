@@ -1,5 +1,6 @@
-import 'package:prayers_calc/src/Prayers.dart';
-import 'package:prayers_calc/src/Sunnah.dart';
+// import 'package:prayers_calc/src/Prayers.dart';
+// import 'package:prayers_calc/src/Sunnah.dart';
+import 'package:prayers_calc/src/Index.dart';
 
 // ICCI
 double latI = 53.3046593;
@@ -17,9 +18,9 @@ double angleS = 14.6;
 int timezoneS = 1;
 
 // Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
-Sunnah sarajevo = new Sunnah(latS, longS, altitudeS, angleS, timezoneS);
-Prayers icci =
-    new Prayers(latI, longI, altitudeI, angleI, timezoneI, ishaAngle: iangleI);
+Index sarajevo = new Index(timezoneS, latS, longS, altitudeS, angleS);
+Index icci =
+    new Index(timezoneI, latI, longI, altitudeI, angleI, ishaAngle: iangleI);
 
 // optional parameters:
 // int year, int month, int day, int asrMethod, double ishaAngle, bool summerTimeCalc
@@ -31,30 +32,32 @@ Prayers icci =
 // summerTimeCalc is true by default, set to false if no daylight saving should happen
 //
 // example (icci location, Hanafi, 1st January 2020, different ishaAngle):
-Prayers test = new Prayers(latI, longI, altitudeI, angleI, timezoneI,
-    asrMethod: 2,
-    year: 2020,
-    month: 5,
-    day: 22,
-    ishaAngle: 15,
-    summerTimeCalc: false);
+// Prayers test = new Prayers(latI, longI, altitudeI, angleI, timezoneI,
+//     asrMethod: 2,
+//     year: 2020,
+//     month: 5,
+//     day: 22,
+//     ishaAngle: 15,
+//     summerTimeCalc: false);
 
 main() {
-  // print('****** Sarajevo *******');
-  // print(sarajevo.dawn);
-  // print(sarajevo.sunrise);
-  // print(sarajevo.midday);
-  // print(sarajevo.afternoon);
-  // print(sarajevo.sunset);
-  // print(sarajevo.dusk);
+  print('****** Sarajevo *******');
+  print(sarajevo.prayers.today.sunset);
+  print(sarajevo.prayers.tomorrow.sunset);
+  print(sarajevo.prayers.yesterday.sunset);
+  // print(sarajevo.prayers.sunrise);
+  // print(sarajevo.prayers.midday);
+  // print(sarajevo.prayers.afternoon);
+  // print(sarajevo.prayers.sunset);
+  // print(sarajevo.prayers.dusk);
   // print('\n******** ICCI *********');
-  // print(icci.dawn);
-  // print(icci.sunrise);
-  // print(icci.midday);
-  // print(icci.afternoon);
-  // print(icci.sunset);
-  // print(icci.dusk);
-  // // print(icci.midnight);
+  // print(icci.prayers.dawn);
+  // print(icci.prayers.sunrise);
+  // print(icci.prayers.midday);
+  // print(icci.prayers.afternoon);
+  // print(icci.prayers.sunset);
+  // print(icci.prayers.dusk);
+  // print(icci.midnight);
   // print('\n******** test *********');
   // print(test.dawn);
   // print(test.sunrise);
@@ -62,6 +65,7 @@ main() {
   // print(test.afternoon);
   // print(test.sunset);
   // print(test.dusk);
-  print(sarajevo.midnight);
-  print(sarajevo.lastThird);
+  // print(sarajevo.midnight);
+  // print(sarajevo.lastThird);
+  // print(sarajevo.prayers.sunset);
 }

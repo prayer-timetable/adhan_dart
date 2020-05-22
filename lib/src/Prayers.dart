@@ -14,39 +14,28 @@ class Prayers {
   DateTime lastThird;
 
   Prayers(
+    int timezone,
     double lat,
     double long,
     double altitude,
     double angle,
-    int timezone, {
-    int year,
-    int month,
-    int day,
+    DateTime date,
+    int dayOfYear,
+    bool isLeap,
+    Duration adjustTime, {
     int asrMethod,
     double ishaAngle,
     bool summerTimeCalc: true,
   }) {
-    DateTime timestamp = DateTime.now().toUtc();
-    DateTime beginingOfYear = DateTime.utc(timestamp.year); // Jan 1, 0:00
-
-    // define date in utc
-    DateTime date = DateTime.utc(year ?? timestamp.year,
-        month ?? timestamp.month, day ?? timestamp.day, 0, 0);
-    // local date needed for dst calc
-    DateTime dateLocal = DateTime(
-        year ?? timestamp.year,
-        month ?? timestamp.month,
-        day ?? timestamp.day,
-        12,
-        0); // using noon of local date to avoid +- 1 hour
-
-    // check if leap year
-    bool isLeap = date.year % 4 == 0;
-
-    // adjust times for dst
-    int adjustDST = summerTimeCalc && isDSTCalc(dateLocal) ? 1 : 0;
-    Duration adjustTime = Duration(hours: adjustDST);
-
+    // print(timezone);
+    // print(lat);
+    // print(long);
+    // print(altitude);
+    // print(angle);
+    // print(date);
+    // print(dayOfYear);
+    // print(isLeap);
+    // print(adjustTime);
     // define parameters
     int TZ = timezone;
     double H = altitude; // height above sea level in meters
@@ -59,11 +48,7 @@ class Prayers {
 
     //	Day of Year
     // date needs to be utc for accurate calculation
-    int J = date.difference(beginingOfYear).inDays;
-    // int hoursSinceBeginingOfYear = date.difference(beginingOfYear).inHours;
-    // int J =
-    // (hoursSinceBeginingOfYear / 24).floor(); // because Jan 1 should be 0
-    // if using above hours, times would change throughout the day
+    int J = dayOfYear;
 
     // ***** Solar Declination D (Degrees)
     int daysInYear = isLeap ? 366 : 365;

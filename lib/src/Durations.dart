@@ -1,10 +1,10 @@
 import 'package:prayers_calc/src/Prayers.dart';
 
-class Sunnah {
+class Durations {
   DateTime midnight;
   DateTime lastThird;
 
-  Sunnah(
+  Durations(
     double lat,
     double long,
     double altitude,
@@ -28,6 +28,45 @@ class Sunnah {
     // ***** tomorrow and yesterday
     DateTime tomorrow = date.add(Duration(days: 1));
     DateTime yesterday = date.subtract(Duration(days: 1));
+
+    Prayers prayersToday = Prayers(
+      lat,
+      long,
+      altitude,
+      angle,
+      timezone,
+      year: date.year,
+      month: date.month,
+      day: date.day,
+      asrMethod: asrMethod,
+      ishaAngle: ishaAngle,
+    );
+
+    Prayers prayersTomorrow = Prayers(
+      lat,
+      long,
+      altitude,
+      angle,
+      timezone,
+      year: tomorrow.year,
+      month: tomorrow.month,
+      day: tomorrow.day,
+      asrMethod: asrMethod,
+      ishaAngle: ishaAngle,
+    );
+
+    Prayers prayersYesterday = Prayers(
+      lat,
+      long,
+      altitude,
+      angle,
+      timezone,
+      year: yesterday.year,
+      month: yesterday.month,
+      day: yesterday.day,
+      asrMethod: asrMethod,
+      ishaAngle: ishaAngle,
+    );
 
     DateTime dawnTomorrow = prayersTomorrow.dawn;
     DateTime dawnToday = prayersToday.dawn;

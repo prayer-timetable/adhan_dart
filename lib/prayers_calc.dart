@@ -1,1 +1,1 @@
-export 'src/Prayers.dart';
+export 'src/Index.dart';
