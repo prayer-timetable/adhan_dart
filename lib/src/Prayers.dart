@@ -33,40 +33,41 @@ class Prayers {
     DateTime date = DateTime.utc(year ?? timestamp.year,
         month ?? timestamp.month, day ?? timestamp.day, 0, 0);
     // local date needed for dst calc
-    DateTime dateLocal = DateTime(year ?? timestamp.year,
-        month ?? timestamp.month, day ?? timestamp.day, 12, 0);
-    int adjustDST = summerTimeCalc && isDSTCalc(dateLocal) ? 1 : 0;
+    DateTime dateLocal = DateTime(
+        year ?? timestamp.year,
+        month ?? timestamp.month,
+        day ?? timestamp.day,
+        12,
+        0); // using noon of local date to avoid +- 1 hour
 
-    // adjust times
+    // check if leap year
+    bool isLeap = date.year % 4 == 0;
+
+    // adjust times for dst
+    int adjustDST = summerTimeCalc && isDSTCalc(dateLocal) ? 1 : 0;
     Duration adjustTime = Duration(hours: adjustDST);
 
+    // define parameters
+    int TZ = timezone;
     double H = altitude; // height above sea level in meters
     double B = lat; //	Latitude (Degrees)
     double L = long; // Longitude (Degrees)
     int Sh = asrMethod ?? 1; //	Sh=1 (Shafii) - Sh=2 (Hanafi)
-
-    int TZ = timezone;
-
-    // int J = 142; //	Day of Year
-    // int hoursSinceBeginingOfYear = date.difference(beginingOfYear).inHours;
-    // int J =
-    // (hoursSinceBeginingOfYear / 24).floor(); // because Jan 1 should be 0
-
-    // date needs to be utc for accurate calculation
-    int J = date.difference(beginingOfYear).inDays;
-
-    print(date);
-    // print(hoursSinceBeginingOfYear / 24);
-    print(date.difference(beginingOfYear).inDays);
-
     double Gd = angle; //	Dawn’s Twilight Angle (15°-19°)
     double Gn = ishaAngle ?? angle; // Night’s Twilight Angle (15°-19°)
     int R = 15 * TZ; // Reference Longitude (Degrees)
 
-    print(Gd);
-    print(Gn);
+    //	Day of Year
+    // date needs to be utc for accurate calculation
+    int J = date.difference(beginingOfYear).inDays;
+    // int hoursSinceBeginingOfYear = date.difference(beginingOfYear).inHours;
+    // int J =
+    // (hoursSinceBeginingOfYear / 24).floor(); // because Jan 1 should be 0
+    // if using above hours, times would change throughout the day
+
     // ***** Solar Declination D (Degrees)
-    double gama = 2 * pi * (J - 0) / 365; // or J-1? //TODO: 366 for leap
+    int daysInYear = isLeap ? 366 : 365;
+    double gama = 2 * pi * (J - 0) / daysInYear; // or J-1? //TODO: 366 for leap
     double Drad = 0.006918 -
         0.399912 * cos(gama) +
         0.070257 * sin(gama) -
@@ -133,6 +134,7 @@ class Prayers {
         : Z -
             Vd; // if dawn can not be calculated, make it 1.5 hours before sunrise
     this.dawn = getTime(dawnFraction);
+
     double sunriseFraction = Z - U;
     this.sunrise = getTime(sunriseFraction);
 
@@ -149,20 +151,6 @@ class Prayers {
         ? Z + U + 1.5
         : Z +
             Vn; // if dusk can not be calculated, make it 1.5 hours after sunset
-
     this.dusk = getTime(duskFraction);
-
-    // ***** Sunnah times
-
-    // SunnahTimes sunnahTimes = SunnahTimes(
-    //   B,
-    //   L,
-    //   H,
-    //   Gd,
-    //   TZ,
-    //   date: date,
-    //   asrMethod: Sh,
-    //   ishaAngle: Gn,
-    // );
   }
 }
