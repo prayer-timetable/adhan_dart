@@ -127,8 +127,11 @@ class Prayers {
           .add(adjustTime);
     }
 
-    print('$Z $Vd $U $W, $Vn');
-    double dawnFraction = Z - Vd;
+    // print('$Z $Vd $U $W, $Vn');
+    double dawnFraction = Vd.isNaN
+        ? Z - U - 1.5
+        : Z -
+            Vd; // if dawn can not be calculated, make it 1.5 hours before sunrise
     this.dawn = getTime(dawnFraction);
     double sunriseFraction = Z - U;
     this.sunrise = getTime(sunriseFraction);
@@ -142,9 +145,10 @@ class Prayers {
     double sunsetFraction = Z + U;
     this.sunset = getTime(sunsetFraction);
 
-    print('****');
-    double duskFraction = Vn.isNaN ? 0 : Z + Vn;
-    print('****${Vn.isNaN}');
+    double duskFraction = Vn.isNaN
+        ? Z + U + 1.5
+        : Z +
+            Vn; // if dusk can not be calculated, make it 1.5 hours after sunset
 
     this.dusk = getTime(duskFraction);
 

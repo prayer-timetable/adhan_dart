@@ -5,7 +5,7 @@ double latI = 53.3046593;
 double longI = -6.2344076;
 double altitudeI = 85;
 double angleI = 12.3;
-double iangleI = 20.7;
+double iangleI = 11.7;
 int timezoneI = 0;
 
 // Sarajevo
