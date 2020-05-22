@@ -1,4 +1,4 @@
-name: prayer_calc
+name: prayers_calc
 version: 1.0.0
 description: >-
   Library to calculate prayer times for muslims.

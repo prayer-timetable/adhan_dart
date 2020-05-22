@@ -1,25 +1,33 @@
 import 'dart:math';
-import 'package:prayer_calc/src/PrayerCalc.dart';
+import 'package:prayer_calc/src/Prayers.dart';
 
-class SunnahTimes {
+class Sunnah {
   DateTime midnight;
   DateTime lastThird;
 
-  SunnahTimes(
+  Sunnah(
     double lat,
     double long,
     double altitude,
     double angle,
     int timezone, {
-    DateTime date,
+    int year,
+    int month,
+    int day,
     int asrMethod,
     double ishaAngle,
   }) {
+    DateTime timestamp = DateTime.now().toUtc();
+    DateTime beginingOfYear = DateTime(timestamp.year, 1, 1).toUtc();
+
+    DateTime date = DateTime(
+        year ?? timestamp.year, month ?? timestamp.month, day ?? timestamp.day);
+
     // ***** tomorrow and yesterday
     DateTime tomorrow = date.add(Duration(days: 1));
     DateTime yesterday = date.subtract(Duration(days: 1));
 
-    PrayerCalc prayersToday = PrayerCalc(
+    Prayers prayersToday = Prayers(
       lat,
       long,
       altitude,
@@ -32,7 +40,7 @@ class SunnahTimes {
       ishaAngle: ishaAngle,
     );
 
-    PrayerCalc prayersTomorrow = PrayerCalc(
+    Prayers prayersTomorrow = Prayers(
       lat,
       long,
       altitude,
@@ -45,7 +53,7 @@ class SunnahTimes {
       ishaAngle: ishaAngle,
     );
 
-    PrayerCalc prayersYesterday = PrayerCalc(
+    Prayers prayersYesterday = Prayers(
       lat,
       long,
       altitude,

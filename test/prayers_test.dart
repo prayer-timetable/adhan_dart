@@ -1,4 +1,4 @@
-import 'package:prayer_calc/src/PrayerCalc.dart';
+import 'package:prayer_calc/src/Prayers.dart';
 
 // ICCI
 double latI = 53.3046593;
@@ -15,8 +15,8 @@ double altitudeS = 450;
 double angleS = 14.6;
 int timezoneS = 1;
 
-PrayerCalc sarajevo = new PrayerCalc(latS, longS, altitudeS, angleS, timezoneS);
-PrayerCalc icci = new PrayerCalc(latI, longI, altitudeI, angleI, timezoneI);
+Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
+Prayers icci = new Prayers(latI, longI, altitudeI, angleI, timezoneI);
 
 // optional parameters: int year, int month, int day, int asrMethod
 // year, month, day defaults to current time,
@@ -24,7 +24,7 @@ PrayerCalc icci = new PrayerCalc(latI, longI, altitudeI, angleI, timezoneI);
 // angle value sets both dawn and night twilight angle,
 // if you use ishaAngle, then angle value is used for dawn and ishaAngle for night
 // example (icci location, Hanafi, 1st January 2020, different ishaAngle):
-PrayerCalc test = new PrayerCalc(latI, longI, altitudeI, angleI, timezoneI,
+Prayers test = new Prayers(latI, longI, altitudeI, angleI, timezoneI,
     asrMethod: 2, year: 2020, month: 1, day: 1, ishaAngle: 15);
 
 main() {

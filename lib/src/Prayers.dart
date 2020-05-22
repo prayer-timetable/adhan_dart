@@ -1,7 +1,7 @@
 import 'dart:math';
 // import 'package:prayer_calc/src/SunnahTimes.dart';
 
-class PrayerCalc {
+class Prayers {
   DateTime dawn;
   DateTime sunrise;
   DateTime midday;
@@ -13,7 +13,7 @@ class PrayerCalc {
   DateTime midnight;
   DateTime lastThird;
 
-  PrayerCalc(
+  Prayers(
     double lat,
     double long,
     double altitude,
