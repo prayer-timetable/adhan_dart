@@ -1,5 +1,5 @@
 import 'dart:math';
-// import 'package:prayer_calc/src/SunnahTimes.dart';
+import 'package:prayers_calc/src/func.dart';
 
 class Prayers {
   DateTime dawn;
@@ -24,12 +24,21 @@ class Prayers {
     int day,
     int asrMethod,
     double ishaAngle,
+    bool summerTimeCalc: true,
   }) {
     DateTime timestamp = DateTime.now().toUtc();
-    DateTime beginingOfYear = DateTime(timestamp.year, 1, 1).toUtc();
+    DateTime beginingOfYear = DateTime.utc(timestamp.year); // Jan 1, 0:00
 
-    DateTime date = DateTime(
-        year ?? timestamp.year, month ?? timestamp.month, day ?? timestamp.day);
+    // define date in utc
+    DateTime date = DateTime.utc(year ?? timestamp.year,
+        month ?? timestamp.month, day ?? timestamp.day, 0, 0);
+    // local date needed for dst calc
+    DateTime dateLocal = DateTime(year ?? timestamp.year,
+        month ?? timestamp.month, day ?? timestamp.day, 12, 0);
+    int adjustDST = summerTimeCalc && isDSTCalc(dateLocal) ? 1 : 0;
+
+    // adjust times
+    Duration adjustTime = Duration(hours: adjustDST);
 
     double H = altitude; // height above sea level in meters
     double B = lat; //	Latitude (Degrees)
@@ -38,14 +47,24 @@ class Prayers {
 
     int TZ = timezone;
 
-    int J = 142; //	Day of Year
-    int hoursSinceBeginingOfYear = date.difference(beginingOfYear).inHours;
-    // double J = hoursSinceBeginingOfYear / 24;
+    // int J = 142; //	Day of Year
+    // int hoursSinceBeginingOfYear = date.difference(beginingOfYear).inHours;
+    // int J =
+    // (hoursSinceBeginingOfYear / 24).floor(); // because Jan 1 should be 0
+
+    // date needs to be utc for accurate calculation
+    int J = date.difference(beginingOfYear).inDays;
+
+    print(date);
+    // print(hoursSinceBeginingOfYear / 24);
+    print(date.difference(beginingOfYear).inDays);
 
     double Gd = angle; //	Dawn’s Twilight Angle (15°-19°)
     double Gn = ishaAngle ?? angle; // Night’s Twilight Angle (15°-19°)
     int R = 15 * TZ; // Reference Longitude (Degrees)
 
+    print(Gd);
+    print(Gn);
     // ***** Solar Declination D (Degrees)
     double gama = 2 * pi * (J - 0) / 365; // or J-1? //TODO: 366 for leap
     double Drad = 0.006918 -
@@ -97,14 +116,20 @@ class Prayers {
 
 // ***** prayer times
     DateTime getTime(hourFraction) {
-      int hour = hourFraction.floor();
+      int hour;
+      if (hourFraction != double.nan)
+        hour = hourFraction.floor();
+      else
+        hour = 23;
+
       int minute = ((hourFraction - hour) * 60).round();
-      return DateTime(date.year, date.month, date.day, hour, minute);
+      return DateTime.utc(date.year, date.month, date.day, hour, minute)
+          .add(adjustTime);
     }
 
+    print('$Z $Vd $U $W, $Vn');
     double dawnFraction = Z - Vd;
     this.dawn = getTime(dawnFraction);
-
     double sunriseFraction = Z - U;
     this.sunrise = getTime(sunriseFraction);
 
@@ -117,7 +142,10 @@ class Prayers {
     double sunsetFraction = Z + U;
     this.sunset = getTime(sunsetFraction);
 
-    double duskFraction = Z + Vn;
+    print('****');
+    double duskFraction = Vn.isNaN ? 0 : Z + Vn;
+    print('****${Vn.isNaN}');
+
     this.dusk = getTime(duskFraction);
 
     // ***** Sunnah times
