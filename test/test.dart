@@ -1,5 +1,3 @@
-// import 'package:prayers_calc/src/Prayers.dart';
-// import 'package:prayers_calc/src/Sunnah.dart';
 import 'package:prayers_calc/src/Index.dart';
 
 // ICCI
@@ -31,71 +29,55 @@ Index icci =
 // if you use ishaAngle, then angle value is used for dawn and ishaAngle for night
 // summerTimeCalc is true by default, set to false if no daylight saving should happen
 //
-// example (icci location, Hanafi, 1st January 2020, different ishaAngle):
-// Prayers test = new Prayers(latI, longI, altitudeI, angleI, timezoneI,
-//     asrMethod: 2,
-//     year: 2020,
-//     month: 5,
-//     day: 22,
-//     ishaAngle: 15,
-//     summerTimeCalc: false);
+// example (icci location, Hanafi, 1st June 2020, different ishaAngle, no summer time):
+Index test = new Index(
+  timezoneI,
+  latI,
+  longI,
+  altitudeI,
+  angleI,
+  ishaAngle: 15,
+  asrMethod: 2,
+  summerTimeCalc: false,
+  year: 2020,
+  month: 6,
+  day: 1,
+);
+
+Index location = icci;
 
 main() {
-  print('***************** Today ****************');
-  print('dawn:\t\t${sarajevo.prayers.today.dawn}');
-  print('sunrise:\t${sarajevo.prayers.today.sunrise}');
-  print('midday:\t\t${sarajevo.prayers.today.midday}');
-  print('afternoon:\t${sarajevo.prayers.today.afternoon}');
-  print('sunset:\t\t${sarajevo.prayers.today.sunset}');
-  print('dusk:\t\t${sarajevo.prayers.today.dusk}');
+  print('**************** Today *****************');
+  print('dawn:\t\t${location.prayers.today.dawn}');
+  print('sunrise:\t${location.prayers.today.sunrise}');
+  print('midday:\t\t${location.prayers.today.midday}');
+  print('afternoon:\t${location.prayers.today.afternoon}');
+  print('sunset:\t\t${location.prayers.today.sunset}');
+  print('dusk:\t\t${location.prayers.today.dusk}');
   print('*************** Tomorrow **************');
-  print('dawn:\t\t${sarajevo.prayers.tomorrow.dawn}');
-  print('sunrise:\t${sarajevo.prayers.tomorrow.sunrise}');
-  print('midday:\t\t${sarajevo.prayers.tomorrow.midday}');
-  print('afternoon:\t${sarajevo.prayers.tomorrow.afternoon}');
-  print('sunset:\t\t${sarajevo.prayers.tomorrow.sunset}');
-  print('dusk:\t\t${sarajevo.prayers.tomorrow.dusk}');
+  print('dawn:\t\t${location.prayers.tomorrow.dawn}');
+  print('sunrise:\t${location.prayers.tomorrow.sunrise}');
+  print('midday:\t\t${location.prayers.tomorrow.midday}');
+  print('afternoon:\t${location.prayers.tomorrow.afternoon}');
+  print('sunset:\t\t${location.prayers.tomorrow.sunset}');
+  print('dusk:\t\t${location.prayers.tomorrow.dusk}');
   print('************** Yesterday ***************');
-  print('dawn:\t\t${sarajevo.prayers.yesterday.dawn}');
-  print('sunrise:\t${sarajevo.prayers.yesterday.sunrise}');
-  print('midday:\t\t${sarajevo.prayers.yesterday.midday}');
-  print('afternoon:\t${sarajevo.prayers.yesterday.afternoon}');
-  print('sunset:\t\t${sarajevo.prayers.yesterday.sunset}');
-  print('dusk:\t\t${sarajevo.prayers.yesterday.dusk}');
-  print('**************** Sunnah ****************');
-  print('midnight:\t${sarajevo.sunnah.midnight}');
-  print('lastThird\t${sarajevo.sunnah.lastThird}');
-  print('*************** Durations **************');
-  print('nowLocal:\t${sarajevo.durations.nowLocal}');
-  print('current:\t${sarajevo.durations.current}');
-  print('next:\t\t${sarajevo.durations.next}');
-  print('previous:\t${sarajevo.durations.previous}');
-  print('isAfterIsha:\t${sarajevo.durations.isAfterIsha}');
-  print('currentId:\t${sarajevo.durations.currentId}');
-  print('countDown:\t${sarajevo.durations.countDown}');
-  print('countUp:\t${sarajevo.durations.countUp}');
-
-  // print(sarajevo.prayers.sunrise);
-  // print(sarajevo.prayers.midday);
-  // print(sarajevo.prayers.afternoon);
-  // print(sarajevo.prayers.sunset);
-  // print(sarajevo.prayers.dusk);
-  // print('\n******** ICCI *********');
-  // print(icci.prayers.dawn);
-  // print(icci.prayers.sunrise);
-  // print(icci.prayers.midday);
-  // print(icci.prayers.afternoon);
-  // print(icci.prayers.sunset);
-  // print(icci.prayers.dusk);
-  // print(icci.midnight);
-  // print('\n******** test *********');
-  // print(test.dawn);
-  // print(test.sunrise);
-  // print(test.midday);
-  // print(test.afternoon);
-  // print(test.sunset);
-  // print(test.dusk);
-  // print(sarajevo.midnight);
-  // print(sarajevo.lastThird);
-  // print(sarajevo.prayers.sunset);
+  print('dawn:\t\t${location.prayers.yesterday.dawn}');
+  print('sunrise:\t${location.prayers.yesterday.sunrise}');
+  print('midday:\t\t${location.prayers.yesterday.midday}');
+  print('afternoon:\t${location.prayers.yesterday.afternoon}');
+  print('sunset:\t\t${location.prayers.yesterday.sunset}');
+  print('dusk:\t\t${location.prayers.yesterday.dusk}');
+  print('*************** Sunnah *****************');
+  print('midnight:\t${location.sunnah.midnight}');
+  print('lastThird\t${location.sunnah.lastThird}');
+  print('************** Durations ***************');
+  print('nowLocal:\t${location.durations.nowLocal}');
+  print('current:\t${location.durations.current}');
+  print('next:\t\t${location.durations.next}');
+  print('previous:\t${location.durations.previous}');
+  print('isAfterIsha:\t${location.durations.isAfterIsha}');
+  print('currentId:\t${location.durations.currentId}');
+  print('countDown:\t${location.durations.countDown}');
+  print('countUp:\t${location.durations.countUp}');
 }

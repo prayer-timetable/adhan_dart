@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:prayers_calc/src/func.dart';
 
 class Prayers {
   DateTime dawn;
@@ -27,16 +26,6 @@ class Prayers {
     double ishaAngle,
     bool summerTimeCalc: true,
   }) {
-    // print(timezone);
-    // print(lat);
-    // print(long);
-    // print(altitude);
-    // print(angle);
-    // print(date);
-    // print(dayOfYear);
-    // print(isLeap);
-    // print(adjustTime);
-    // define parameters
     int TZ = timezone;
     double H = altitude; // height above sea level in meters
     double B = lat; //	Latitude (Degrees)
@@ -52,7 +41,10 @@ class Prayers {
 
     // ***** Solar Declination D (Degrees)
     int daysInYear = isLeap ? 366 : 365;
-    double gama = 2 * pi * (J - 0) / daysInYear; // or J-1? //TODO: 366 for leap
+    double gama = 2 *
+        pi *
+        (J - 0) /
+        daysInYear; // or J-1? // daysInYear is 366 for leap, otherwise 365
     double Drad = 0.006918 -
         0.399912 * cos(gama) +
         0.070257 * sin(gama) -
