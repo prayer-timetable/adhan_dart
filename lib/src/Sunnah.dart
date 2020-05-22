@@ -72,7 +72,6 @@ class Sunnah {
     // midnight
     this.midnight = date.add(Duration(
         minutes:
-            (prayersTomorrow.dawn.difference(prayersToday.dusk).inMinutes / 2)
-                .floor()));
+            (dawnTomorrow.difference(duskYesterday).inMinutes / 2).floor()));
   }
 }
