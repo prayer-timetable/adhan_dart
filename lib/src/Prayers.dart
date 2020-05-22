@@ -109,7 +109,7 @@ class Prayers {
         hour = 23;
 
       int minute = ((hourFraction - hour) * 60).round();
-      return DateTime.utc(date.year, date.month, date.day, hour, minute)
+      return DateTime(date.year, date.month, date.day, hour, minute)
           .add(adjustTime);
     }
 

@@ -39,7 +39,7 @@ class Index {
     // UTC date
     DateTime date = DateTime.utc(year ?? timestamp.year,
         month ?? timestamp.month, day ?? timestamp.day, 0, 0);
-    // DateTime nowUtc = DateTime.now().toUtc();
+    DateTime nowUtc = DateTime.now().toUtc();
 
     // Local dates needed for dst calc and local midnight past (0:00)
     DateTime dateLocal = DateTime(
@@ -122,8 +122,8 @@ class Index {
     this.sunnah =
         Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
 
-    this.durations =
-        Durations(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
+    this.durations = Durations(
+        nowLocal, nowUtc, prayersToday, prayersTomorrow, prayersYesterday);
 
     //end
   }

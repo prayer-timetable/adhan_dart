@@ -7,9 +7,12 @@ class Durations {
   DateTime previous;
   bool isAfterIsha;
   int currentId;
+  Duration countDown;
+  Duration countUp;
 
   Durations(
     DateTime _nowLocal,
+    DateTime _nowUtc,
     Prayers prayersToday,
     Prayers prayersTomorrow,
     Prayers prayersYesterday,
@@ -71,6 +74,8 @@ class Durations {
     this.previous = previous;
     this.isAfterIsha = isAfterIsha;
     this.currentId = currentId;
+    this.countDown = next.difference(_nowLocal);
+    this.countUp = _nowLocal.difference(current);
     //end
   }
 }
