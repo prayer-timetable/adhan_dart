@@ -1,4 +1,5 @@
 import 'package:prayers_calc/src/Prayers.dart';
+import 'package:prayers_calc/src/Sunnah.dart';
 
 // ICCI
 double latI = 53.3046593;
@@ -15,7 +16,8 @@ double altitudeS = 518;
 double angleS = 14.6;
 int timezoneS = 1;
 
-Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
+// Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
+Sunnah sarajevo = new Sunnah(latS, longS, altitudeS, angleS, timezoneS);
 Prayers icci =
     new Prayers(latI, longI, altitudeI, angleI, timezoneI, ishaAngle: iangleI);
 
@@ -38,26 +40,28 @@ Prayers test = new Prayers(latI, longI, altitudeI, angleI, timezoneI,
     summerTimeCalc: false);
 
 main() {
-  print('****** Sarajevo *******');
-  print(sarajevo.dawn);
-  print(sarajevo.sunrise);
-  print(sarajevo.midday);
-  print(sarajevo.afternoon);
-  print(sarajevo.sunset);
-  print(sarajevo.dusk);
-  print('\n******** ICCI *********');
-  print(icci.dawn);
-  print(icci.sunrise);
-  print(icci.midday);
-  print(icci.afternoon);
-  print(icci.sunset);
-  print(icci.dusk);
-  // print(icci.midnight);
-  print('\n******** test *********');
-  print(test.dawn);
-  print(test.sunrise);
-  print(test.midday);
-  print(test.afternoon);
-  print(test.sunset);
-  print(test.dusk);
+  // print('****** Sarajevo *******');
+  // print(sarajevo.dawn);
+  // print(sarajevo.sunrise);
+  // print(sarajevo.midday);
+  // print(sarajevo.afternoon);
+  // print(sarajevo.sunset);
+  // print(sarajevo.dusk);
+  // print('\n******** ICCI *********');
+  // print(icci.dawn);
+  // print(icci.sunrise);
+  // print(icci.midday);
+  // print(icci.afternoon);
+  // print(icci.sunset);
+  // print(icci.dusk);
+  // // print(icci.midnight);
+  // print('\n******** test *********');
+  // print(test.dawn);
+  // print(test.sunrise);
+  // print(test.midday);
+  // print(test.afternoon);
+  // print(test.sunset);
+  // print(test.dusk);
+  print(sarajevo.midnight);
+  print(sarajevo.lastThird);
 }

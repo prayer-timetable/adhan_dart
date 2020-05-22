@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:prayers_calc/src/Prayers.dart';
 
 class Sunnah {
@@ -18,10 +17,13 @@ class Sunnah {
     double ishaAngle,
   }) {
     DateTime timestamp = DateTime.now().toUtc();
-    DateTime beginingOfYear = DateTime(timestamp.year, 1, 1).toUtc();
 
-    DateTime date = DateTime(
-        year ?? timestamp.year, month ?? timestamp.month, day ?? timestamp.day);
+    // define date in utc
+    DateTime date = DateTime.utc(year ?? timestamp.year,
+        month ?? timestamp.month, day ?? timestamp.day, 0, 0);
+
+    // define midnight of today (local)
+    DateTime now = DateTime.now();
 
     // ***** tomorrow and yesterday
     DateTime tomorrow = date.add(Duration(days: 1));
@@ -35,7 +37,7 @@ class Sunnah {
       timezone,
       year: date.year,
       month: date.month,
-      day: date.year,
+      day: date.day,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
     );
@@ -48,7 +50,7 @@ class Sunnah {
       timezone,
       year: tomorrow.year,
       month: tomorrow.month,
-      day: tomorrow.year,
+      day: tomorrow.day,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
     );
@@ -61,17 +63,32 @@ class Sunnah {
       timezone,
       year: yesterday.year,
       month: yesterday.month,
-      day: yesterday.year,
+      day: yesterday.day,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
     );
 
     DateTime dawnTomorrow = prayersTomorrow.dawn;
-    DateTime duskYesterday = prayersYesterday.dusk;
+    DateTime dawnToday = prayersToday.dawn;
+    DateTime sunsetToday = prayersToday.sunset;
+    DateTime sunsetYesterday = prayersYesterday.sunset;
 
+    // print(now.isBefore(dawnToday));
     // midnight
-    this.midnight = date.add(Duration(
-        minutes:
-            (dawnTomorrow.difference(duskYesterday).inMinutes / 2).floor()));
+    this.midnight = now.isBefore(dawnToday)
+        ? sunsetYesterday.add(Duration(
+            minutes:
+                (dawnToday.difference(sunsetYesterday).inMinutes / 2).floor()))
+        : sunsetToday.add(Duration(
+            minutes:
+                (dawnTomorrow.difference(sunsetToday).inMinutes / 2).floor()));
+
+    this.lastThird = now.isBefore(dawnToday)
+        ? sunsetYesterday.add(Duration(
+            minutes: (2 * dawnToday.difference(sunsetYesterday).inMinutes / 3)
+                .floor()))
+        : sunsetToday.add(Duration(
+            minutes: (2 * dawnTomorrow.difference(sunsetToday).inMinutes / 3)
+                .floor()));
   }
 }
