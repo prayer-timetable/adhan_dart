@@ -1,30 +1,30 @@
-import 'package:prayers_calc/src/Sunnah.dart';
-import 'package:prayers_calc/src/Prayers.dart';
-import 'package:prayers_calc/src/func.dart';
-import 'package:prayers_calc/src/Durations.dart';
+import 'package:prayer_calc/src/Sunnah.dart';
+import 'package:prayer_calc/src/Prayers.dart';
+import 'package:prayer_calc/src/func/helpers.dart';
+import 'package:prayer_calc/src/Durations.dart';
+import 'package:prayer_calc/src/func/prayerVaktija.dart';
 
-class PrayersCalc {
+class PrayerVaktija {
   // PrayersStructure prayers;
   Prayers today;
   Prayers yesterday;
   Prayers tomorrow;
-  PrayersCalc prayers;
+  PrayerVaktija prayers;
   Sunnah sunnah;
   Durations durations;
 
-  PrayersCalc(
-    int timezone,
-    double lat,
-    double long,
-    double altitude,
-    double angle, {
+  PrayerVaktija({
     int year,
     int month,
     int day,
-    int asrMethod,
-    double ishaAngle,
+    List timetable,
+    List<int> difference,
+    int hijriOffset,
     bool summerTimeCalc: true,
   }) {
+    print(timetable);
+    print(year);
+
     DateTime timestamp = DateTime.now().toUtc();
     DateTime beginingOfYear = DateTime.utc(timestamp.year); // Jan 1, 0:00
 
@@ -62,54 +62,27 @@ class PrayersCalc {
     int dayOfYearYesterday = yesterday.difference(beginingOfYear).inDays;
 
     // ***** PRAYERS
-    Prayers prayersToday = Prayers(
-      timezone,
-      lat,
-      long,
-      altitude,
-      angle,
-      today,
-      dayOfYearToday,
-      isLeap,
-      adjustTime,
-      asrMethod: asrMethod,
-      ishaAngle: ishaAngle,
-      summerTimeCalc: summerTimeCalc ?? true,
+    Prayers prayersToday = prayersVaktija(
+      timetable: timetable,
+      difference: difference ?? [0, 0, 0, 0, -0, 0],
+      hijriOffset: hijriOffset ?? 0,
     );
 
-    Prayers prayersTomorrow = Prayers(
-      timezone,
-      lat,
-      long,
-      altitude,
-      angle,
-      tomorrow,
-      dayOfYearTomorrow,
-      isLeap,
-      adjustTime,
-      asrMethod: asrMethod,
-      ishaAngle: ishaAngle,
-      summerTimeCalc: summerTimeCalc ?? true,
+    Prayers prayersTomorrow = prayersVaktija(
+      timetable: timetable,
+      difference: difference ?? [0, 0, 0, 0, -0, 0],
+      hijriOffset: hijriOffset ?? 0,
     );
 
-    Prayers prayersYesterday = Prayers(
-      timezone,
-      lat,
-      long,
-      altitude,
-      angle,
-      yesterday,
-      dayOfYearYesterday,
-      isLeap,
-      adjustTime,
-      asrMethod: asrMethod,
-      ishaAngle: ishaAngle,
-      summerTimeCalc: summerTimeCalc ?? true,
+    Prayers prayersYesterday = prayersVaktija(
+      timetable: timetable,
+      difference: difference ?? [0, 0, 0, 0, -0, 0],
+      hijriOffset: hijriOffset ?? 0,
     );
 
     // define components
     this.prayers =
-        PrayersCalc.prayers(prayersToday, prayersTomorrow, prayersYesterday);
+        PrayerVaktija.prayers(prayersToday, prayersTomorrow, prayersYesterday);
 
     this.sunnah =
         Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
@@ -120,7 +93,7 @@ class PrayersCalc {
     //end
   }
 
-  PrayersCalc.prayers(
+  PrayerVaktija.prayers(
       Prayers prayersToday, Prayers prayersTomorrow, Prayers prayersYesterday) {
     today = prayersToday;
     tomorrow = prayersTomorrow;

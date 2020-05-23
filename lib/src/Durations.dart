@@ -1,4 +1,4 @@
-import 'package:prayers_calc/src/Prayers.dart';
+import 'package:prayer_calc/src/Prayers.dart';
 
 class Durations {
   DateTime nowLocal;
