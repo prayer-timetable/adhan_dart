@@ -1,7 +1,7 @@
 import 'package:prayer_calc/src/components/Sunnah.dart';
 import 'package:prayer_calc/src/components/Prayers.dart';
 import 'package:prayer_calc/src/components/Durations.dart';
-import 'package:prayer_calc/src/func/prayerAngle.dart';
+import 'package:prayer_calc/src/func/prayerCalc.dart';
 
 class PrayerCalc {
   // PrayersStructure prayers;
@@ -67,7 +67,7 @@ class PrayerCalc {
     int dayOfYearYesterday = dayYesterday.difference(beginingOfYear).inDays;
 
     // ***** PRAYERS CURRENT, NEXT, PREVIOUS
-    Prayers prayersCurrent = prayerAngle(
+    Prayers prayersCurrent = prayerCalc(
       timezone: timezone,
       lat: lat,
       long: long,
@@ -80,7 +80,7 @@ class PrayerCalc {
       summerTimeCalc: summerTimeCalc ?? true,
     );
 
-    Prayers prayersNext = prayerAngle(
+    Prayers prayersNext = prayerCalc(
       timezone: timezone,
       lat: lat,
       long: long,
@@ -93,7 +93,7 @@ class PrayerCalc {
       summerTimeCalc: summerTimeCalc ?? true,
     );
 
-    Prayers prayersPrevious = prayerAngle(
+    Prayers prayersPrevious = prayerCalc(
       timezone: timezone,
       lat: lat,
       long: long,
@@ -107,7 +107,7 @@ class PrayerCalc {
     );
 
     // ***** PRAYERS TODAY, TOMORROW, YESTERDAY
-    Prayers prayersToday = prayerAngle(
+    Prayers prayersToday = prayerCalc(
       timezone: timezone,
       lat: lat,
       long: long,
@@ -120,7 +120,7 @@ class PrayerCalc {
       summerTimeCalc: summerTimeCalc ?? true,
     );
 
-    Prayers prayersTomorrow = prayerAngle(
+    Prayers prayersTomorrow = prayerCalc(
       timezone: timezone,
       lat: lat,
       long: long,
@@ -133,7 +133,7 @@ class PrayerCalc {
       summerTimeCalc: summerTimeCalc ?? true,
     );
 
-    Prayers prayersYesterday = prayerAngle(
+    Prayers prayersYesterday = prayerCalc(
       timezone: timezone,
       lat: lat,
       long: long,

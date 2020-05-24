@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:prayer_calc/src/components/Prayers.dart';
 import 'package:prayer_calc/src/func/helpers.dart';
 
-Prayers prayerAngle({
+Prayers prayerCalc({
   int timezone,
   double lat,
   double long,
