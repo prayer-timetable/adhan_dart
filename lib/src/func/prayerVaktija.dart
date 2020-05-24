@@ -18,6 +18,13 @@ Prayers prayersVaktija({
   // print(date);
   DateTime timestamp = date ?? DateTime.now();
 
+  // check if leap year
+  // bool isLeap = date.year % 4 == 0;
+
+  // adjust times for dst
+  int adjustDST = isDSTCalc(timestamp) ? 1 : 0;
+  Duration adjustTime = Duration(hours: adjustDST);
+
   /* *********************** */
   /* PRAYER LISTS            */
   /* *********************** */
@@ -32,6 +39,7 @@ Prayers prayersVaktija({
             timestamp,
             offset: 0)
         .add(Duration(seconds: difference[prayerId]));
+    // .add(adjustTime);
 
     // bool isNext = false;//TODO
 

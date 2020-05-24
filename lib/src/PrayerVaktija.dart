@@ -44,13 +44,6 @@ class PrayerVaktija {
     DateTime tomorrow = date.add(Duration(days: 1));
     DateTime yesterday = date.subtract(Duration(days: 1));
 
-    // check if leap year
-    bool isLeap = date.year % 4 == 0;
-
-    // adjust times for dst
-    int adjustDST = summerTimeCalc && isDSTCalc(dateLocal) ? 1 : 0;
-    Duration adjustTime = Duration(hours: adjustDST);
-
     // ***** PRAYERS
     Prayers prayersToday = prayersVaktija(
       timetable: timetable,

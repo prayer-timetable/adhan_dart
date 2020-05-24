@@ -12,9 +12,9 @@ int timezoneS = 1;
 PrayerVaktija sarajevo = new PrayerVaktija(
   timetable: base,
   summerTimeCalc: false,
-  // year: 2020,
-  // month: 6,
-  // day: 1,
+  year: 2020,
+  month: 3,
+  day: 28,
 );
 // optional parameters:
 // int year, int month, int day, int asrMethod, double ishaAngle, bool summerTimeCalc

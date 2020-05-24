@@ -1,5 +1,5 @@
 import './test_angle.dart';
 import './test_vaktija.dart';
 
-// main() => angleTest();
-main() => vaktijaTest();
+main() => angleTest();
+// main() => vaktijaTest();

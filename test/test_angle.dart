@@ -16,7 +16,16 @@ double angleS = 14.6;
 int timezoneS = 1;
 
 // Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
-PrayerCalc sarajevo = new PrayerCalc(timezoneS, latS, longS, altitudeS, angleS);
+PrayerCalc sarajevo = new PrayerCalc(
+  timezoneS,
+  latS,
+  longS,
+  altitudeS,
+  angleS,
+  year: 2020,
+  month: 3,
+  day: 28,
+);
 PrayerCalc icci = new PrayerCalc(timezoneI, latI, longI, altitudeI, angleI,
     ishaAngle: iangleI);
 
@@ -40,8 +49,8 @@ PrayerCalc test = new PrayerCalc(
   asrMethod: 2,
   summerTimeCalc: false,
   year: 2020,
-  month: 6,
-  day: 1,
+  month: 3,
+  day: 28,
 );
 
 PrayerCalc location = sarajevo;

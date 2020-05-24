@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:prayer_calc/src/Prayers.dart';
+import 'package:prayer_calc/src/func/helpers.dart';
 
 Prayers prayersAngle({
   int timezone,
@@ -15,6 +16,17 @@ Prayers prayersAngle({
   double ishaAngle,
   bool summerTimeCalc: true,
 }) {
+  // check if leap year
+  bool isLeap = date.year % 4 == 0;
+
+  // adjust times for dst
+  int adjustDST = summerTimeCalc && isDSTCalc(date) ? 1 : 0;
+  Duration adjustTime = Duration(hours: adjustDST);
+  // print((date));
+
+  date = date.toUtc();
+  // print((date));
+
   int TZ = timezone ?? 0;
   double H = altitude ?? 0; // height above sea level in meters
   double B = lat ?? 0; //	Latitude (Degrees)

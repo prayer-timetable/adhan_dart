@@ -1,6 +1,5 @@
 import 'package:prayer_calc/src/Sunnah.dart';
 import 'package:prayer_calc/src/Prayers.dart';
-import 'package:prayer_calc/src/func/helpers.dart';
 import 'package:prayer_calc/src/Durations.dart';
 import 'package:prayer_calc/src/func/prayerAngle.dart';
 
@@ -30,12 +29,12 @@ class PrayerCalc {
     DateTime beginingOfYear = DateTime.utc(timestamp.year); // Jan 1, 0:00
 
     // UTC date
-    DateTime date = DateTime.utc(year ?? timestamp.year,
-        month ?? timestamp.month, day ?? timestamp.day, 0, 0);
-    DateTime nowUtc = DateTime.now().toUtc();
+    // DateTime date = DateTime.utc(year ?? timestamp.year,
+    //     month ?? timestamp.month, day ?? timestamp.day, 0, 0);
+    // DateTime nowUtc = DateTime.now().toUtc();
 
     // Local dates needed for dst calc and local midnight past (0:00)
-    DateTime dateLocal = DateTime(
+    DateTime date = DateTime(
         year ?? timestamp.year,
         month ?? timestamp.month,
         day ?? timestamp.day,
@@ -48,13 +47,6 @@ class PrayerCalc {
     DateTime today = date;
     DateTime tomorrow = date.add(Duration(days: 1));
     DateTime yesterday = date.subtract(Duration(days: 1));
-
-    // check if leap year
-    bool isLeap = date.year % 4 == 0;
-
-    // adjust times for dst
-    int adjustDST = summerTimeCalc && isDSTCalc(dateLocal) ? 1 : 0;
-    Duration adjustTime = Duration(hours: adjustDST);
 
     //	Day of Year
     // date needs to be utc for accurate calculation
@@ -71,8 +63,6 @@ class PrayerCalc {
       angle: angle,
       date: today,
       dayOfYear: dayOfYearToday,
-      isLeap: isLeap,
-      adjustTime: adjustTime,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
@@ -86,8 +76,6 @@ class PrayerCalc {
       angle: angle,
       date: tomorrow,
       dayOfYear: dayOfYearTomorrow,
-      isLeap: isLeap,
-      adjustTime: adjustTime,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
@@ -101,8 +89,6 @@ class PrayerCalc {
       angle: angle,
       date: yesterday,
       dayOfYear: dayOfYearYesterday,
-      isLeap: isLeap,
-      adjustTime: adjustTime,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
