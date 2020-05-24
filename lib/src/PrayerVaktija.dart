@@ -22,9 +22,6 @@ class PrayerVaktija {
     int hijriOffset,
     bool summerTimeCalc: true,
   }) {
-    print(timetable);
-    print(year);
-
     DateTime timestamp = DateTime.now().toUtc();
     DateTime beginingOfYear = DateTime.utc(timestamp.year); // Jan 1, 0:00
 
@@ -55,29 +52,26 @@ class PrayerVaktija {
     int adjustDST = summerTimeCalc && isDSTCalc(dateLocal) ? 1 : 0;
     Duration adjustTime = Duration(hours: adjustDST);
 
-    //	Day of Year
-    // date needs to be utc for accurate calculation
-    int dayOfYearToday = today.difference(beginingOfYear).inDays;
-    int dayOfYearTomorrow = tomorrow.difference(beginingOfYear).inDays;
-    int dayOfYearYesterday = yesterday.difference(beginingOfYear).inDays;
-
     // ***** PRAYERS
     Prayers prayersToday = prayersVaktija(
       timetable: timetable,
-      difference: difference ?? [0, 0, 0, 0, -0, 0],
+      difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
+      date: today,
     );
 
     Prayers prayersTomorrow = prayersVaktija(
       timetable: timetable,
-      difference: difference ?? [0, 0, 0, 0, -0, 0],
+      difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
+      date: tomorrow,
     );
 
     Prayers prayersYesterday = prayersVaktija(
       timetable: timetable,
-      difference: difference ?? [0, 0, 0, 0, -0, 0],
+      difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
+      date: yesterday,
     );
 
     // define components

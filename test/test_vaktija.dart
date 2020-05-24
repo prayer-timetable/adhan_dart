@@ -9,8 +9,13 @@ double angleS = 14.6;
 int timezoneS = 1;
 
 // Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
-PrayerVaktija sarajevo = new PrayerVaktija();
-
+PrayerVaktija sarajevo = new PrayerVaktija(
+  timetable: base,
+  summerTimeCalc: false,
+  // year: 2020,
+  // month: 6,
+  // day: 1,
+);
 // optional parameters:
 // int year, int month, int day, int asrMethod, double ishaAngle, bool summerTimeCalc
 //
@@ -65,5 +70,5 @@ vaktijaTest() {
   print('currentId:\t${location.durations.currentId}');
   print('countDown:\t${location.durations.countDown}');
   print('countUp:\t${location.durations.countUp}');
-  print(location.today);
+  // print(location.today);
 }

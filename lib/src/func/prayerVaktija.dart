@@ -8,14 +8,15 @@ Prayers prayersVaktija({
   List timetable,
   List difference,
   int hijriOffset,
+  DateTime date,
 }) {
-  print(timetable);
-
   /* *********************** */
   /* TIMES                   */
   /* *********************** */
 
-  DateTime now = DateTime.now();
+  // print('###');
+  // print(date);
+  DateTime timestamp = date ?? DateTime.now();
 
   /* *********************** */
   /* PRAYER LISTS            */
@@ -26,8 +27,9 @@ Prayers prayersVaktija({
   List prayerCount = Iterable<int>.generate(6).toList();
 
   prayerCount.forEach((prayerId) {
-    DateTime timeToday = convertToDateTime(
-            timetable[now.month - 1][now.day - 1][prayerId],
+    DateTime prayerTime = convertToDateTime(
+            timetable[timestamp.month - 1][timestamp.day - 1][prayerId],
+            timestamp,
             offset: 0)
         .add(Duration(seconds: difference[prayerId]));
 
@@ -36,7 +38,7 @@ Prayers prayersVaktija({
     // DateTime time, int id, bool hasPassed, String name, String when, bool isNext,
     prayerTimes.insert(
       prayerId,
-      timeToday,
+      prayerTime,
     );
   });
 

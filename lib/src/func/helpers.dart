@@ -1,14 +1,13 @@
 /* *********************** */
 /* HELPER FUNCTIONS        */
 /* *********************** */
-DateTime convertToDateTime(seconds, {int offset = 0}) {
-  DateTime now = DateTime.now();
-  int dstAdjust = isDSTCalc(now) ? 1 : 0;
+DateTime convertToDateTime(int seconds, DateTime date, {int offset = 0}) {
+  int dstAdjust = isDSTCalc(date) ? 1 : 0;
 
   return new DateTime(
-          now.add(Duration(days: offset)).year,
-          now.add(Duration(days: offset)).month,
-          now.add(Duration(days: offset)).day,
+          date.add(Duration(days: offset)).year,
+          date.add(Duration(days: offset)).month,
+          date.add(Duration(days: offset)).day,
           0,
           0,
           0,
