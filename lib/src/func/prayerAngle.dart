@@ -11,18 +11,12 @@ Prayers prayersAngle({
   DateTime date,
   int dayOfYear,
   bool isLeap,
-  Duration adjustTime,
   int asrMethod,
   double ishaAngle,
   bool summerTimeCalc: true,
 }) {
   // check if leap year
   bool isLeap = date.year % 4 == 0;
-
-  // adjust times for dst
-  int adjustDST = summerTimeCalc && isDSTCalc(date) ? 1 : 0;
-  Duration adjustTime = Duration(hours: adjustDST);
-  // print((date));
 
   date = date.toUtc();
   // print((date));
@@ -93,17 +87,6 @@ Prayers prayersAngle({
   double W = mainCalc(W1);
 
 // ***** prayer times
-  DateTime getTime(hourFraction) {
-    int hour;
-    if (hourFraction != double.nan)
-      hour = hourFraction.floor();
-    else
-      hour = 23;
-
-    int minute = ((hourFraction - hour) * 60).round();
-    return DateTime(date.year, date.month, date.day, hour, minute)
-        .add(adjustTime);
-  }
 
   // print('$Z $Vd $U $W, $Vn');
   double dawnFraction = Vd.isNaN
@@ -119,12 +102,14 @@ Prayers prayersAngle({
       : Z + Vn; // if dusk can not be calculated, make it 1.5 hours after sunset
 
   Prayers prayers = new Prayers();
-  prayers.dawn = getTime(dawnFraction);
-  prayers.sunrise = getTime(sunriseFraction);
-  prayers.midday = getTime(middayFraction);
-  prayers.afternoon = getTime(afternoonFraction);
-  prayers.sunset = getTime(sunsetFraction);
-  prayers.dusk = getTime(duskFraction);
+  prayers.dawn = hourFractionToDateTime(dawnFraction, date, summerTimeCalc);
+  prayers.sunrise =
+      hourFractionToDateTime(sunriseFraction, date, summerTimeCalc);
+  prayers.midday = hourFractionToDateTime(middayFraction, date, summerTimeCalc);
+  prayers.afternoon =
+      hourFractionToDateTime(afternoonFraction, date, summerTimeCalc);
+  prayers.sunset = hourFractionToDateTime(sunsetFraction, date, summerTimeCalc);
+  prayers.dusk = hourFractionToDateTime(duskFraction, date, summerTimeCalc);
 
   return prayers;
 }

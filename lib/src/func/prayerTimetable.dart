@@ -21,10 +21,6 @@ Prayers prayersTimetable({
   // check if leap year
   // bool isLeap = date.year % 4 == 0;
 
-  // adjust times for dst
-  int adjustDST = isDSTCalc(timestamp) ? 1 : 0;
-  Duration adjustTime = Duration(hours: adjustDST);
-
   /* *********************** */
   /* PRAYER LISTS            */
   /* *********************** */
@@ -34,12 +30,11 @@ Prayers prayersTimetable({
   List prayerCount = Iterable<int>.generate(6).toList();
 
   prayerCount.forEach((prayerId) {
-    DateTime prayerTime = convertToDateTime(
+    DateTime prayerTime = secondsToDateTime(
             timetable[timestamp.month - 1][timestamp.day - 1][prayerId],
             timestamp,
             offset: 0)
         .add(Duration(seconds: difference[prayerId]));
-    // .add(adjustTime);
 
     // bool isNext = false;//TODO
 
