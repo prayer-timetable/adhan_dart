@@ -5,12 +5,13 @@ import 'package:prayer_calc/src/func/prayerAngle.dart';
 
 class PrayerCalc {
   // PrayersStructure prayers;
-  Prayers today;
-  Prayers yesterday;
-  Prayers tomorrow;
+  Prayers current;
+  Prayers next;
+  Prayers previous;
   PrayerCalc prayers;
   Sunnah sunnah;
   Durations durations;
+  int dayOfYear;
 
   PrayerCalc(
     int timezone,
@@ -25,8 +26,8 @@ class PrayerCalc {
     double ishaAngle,
     bool summerTimeCalc: true,
   }) {
-    DateTime timestamp = DateTime.now().toUtc();
-    DateTime beginingOfYear = DateTime.utc(timestamp.year); // Jan 1, 0:00
+    DateTime timestamp = DateTime.now();
+    DateTime beginingOfYear = DateTime(timestamp.year); // Jan 1, 0:00
 
     // UTC date
     // DateTime date = DateTime.utc(year ?? timestamp.year,
@@ -43,51 +44,102 @@ class PrayerCalc {
     // define now (local)
     DateTime nowLocal = DateTime.now();
 
-    // ***** tomorrow and yesterday
-    DateTime today = date;
-    DateTime tomorrow = date.add(Duration(days: 1));
-    DateTime yesterday = date.subtract(Duration(days: 1));
+    // ***** current, next and previous day
+    DateTime dayCurrent = date;
+    DateTime dayNext = date.add(Duration(days: 1));
+    DateTime dayPrevious = date.subtract(Duration(days: 1));
 
-    //	Day of Year
+    // ***** today, tomorrow and yesterday
+    DateTime dayToday = DateTime.now();
+    DateTime dayTomorrow = dayToday.add(Duration(days: 1));
+    DateTime dayYesterday = dayToday.subtract(Duration(days: 1));
+
+    //	Day of Year current, next, previous
     // date needs to be utc for accurate calculation
-    int dayOfYearToday = today.difference(beginingOfYear).inDays;
-    int dayOfYearTomorrow = tomorrow.difference(beginingOfYear).inDays;
-    int dayOfYearYesterday = yesterday.difference(beginingOfYear).inDays;
+    int dayOfYearCurrent = dayCurrent.difference(beginingOfYear).inDays;
+    int dayOfYearNext = dayNext.difference(beginingOfYear).inDays;
+    int dayOfYearPrevious = dayPrevious.difference(beginingOfYear).inDays;
 
-    // ***** PRAYERS
-    Prayers prayersToday = prayersAngle(
+    //	Day of Year today, tomorrow, previous
+    // date needs to be utc for accurate calculation
+    int dayOfYearToday = dayToday.difference(beginingOfYear).inDays;
+    int dayOfYearTomorrow = dayTomorrow.difference(beginingOfYear).inDays;
+    int dayOfYearYesterday = dayYesterday.difference(beginingOfYear).inDays;
+
+    // ***** PRAYERS CURRENT, NEXT, PREVIOUS
+    Prayers prayersCurrent = prayerAngle(
       timezone: timezone,
       lat: lat,
       long: long,
       altitude: altitude,
       angle: angle,
-      date: today,
+      date: dayCurrent,
+      dayOfYear: dayOfYearCurrent,
+      asrMethod: asrMethod,
+      ishaAngle: ishaAngle,
+      summerTimeCalc: summerTimeCalc ?? true,
+    );
+
+    Prayers prayersNext = prayerAngle(
+      timezone: timezone,
+      lat: lat,
+      long: long,
+      altitude: altitude,
+      angle: angle,
+      date: dayNext,
+      dayOfYear: dayOfYearNext,
+      asrMethod: asrMethod,
+      ishaAngle: ishaAngle,
+      summerTimeCalc: summerTimeCalc ?? true,
+    );
+
+    Prayers prayersPrevious = prayerAngle(
+      timezone: timezone,
+      lat: lat,
+      long: long,
+      altitude: altitude,
+      angle: angle,
+      date: dayPrevious,
+      dayOfYear: dayOfYearPrevious,
+      asrMethod: asrMethod,
+      ishaAngle: ishaAngle,
+      summerTimeCalc: summerTimeCalc ?? true,
+    );
+
+    // ***** PRAYERS TODAY, TOMORROW, YESTERDAY
+    Prayers prayersToday = prayerAngle(
+      timezone: timezone,
+      lat: lat,
+      long: long,
+      altitude: altitude,
+      angle: angle,
+      date: dayToday,
       dayOfYear: dayOfYearToday,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
     );
 
-    Prayers prayersTomorrow = prayersAngle(
+    Prayers prayersTomorrow = prayerAngle(
       timezone: timezone,
       lat: lat,
       long: long,
       altitude: altitude,
       angle: angle,
-      date: tomorrow,
+      date: dayTomorrow,
       dayOfYear: dayOfYearTomorrow,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
     );
 
-    Prayers prayersYesterday = prayersAngle(
+    Prayers prayersYesterday = prayerAngle(
       timezone: timezone,
       lat: lat,
       long: long,
       altitude: altitude,
       angle: angle,
-      date: yesterday,
+      date: dayYesterday,
       dayOfYear: dayOfYearYesterday,
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
@@ -96,21 +148,22 @@ class PrayerCalc {
 
     // define components
     this.prayers =
-        PrayerCalc.prayers(prayersToday, prayersTomorrow, prayersYesterday);
+        PrayerCalc.prayers(prayersCurrent, prayersNext, prayersPrevious);
 
     this.sunnah =
-        Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
+        Sunnah(nowLocal, prayersCurrent, prayersNext, prayersPrevious);
 
     this.durations =
         Durations(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
 
+    this.dayOfYear = dayOfYearCurrent;
     //end
   }
 
-  PrayerCalc.prayers(
-      Prayers prayersToday, Prayers prayersTomorrow, Prayers prayersYesterday) {
-    today = prayersToday;
-    tomorrow = prayersTomorrow;
-    yesterday = prayersYesterday;
+  PrayerCalc.prayers(Prayers prayersCurrent, Prayers prayersTomorrow,
+      Prayers prayersYesterday) {
+    current = prayersCurrent;
+    next = prayersTomorrow;
+    previous = prayersYesterday;
   }
 }

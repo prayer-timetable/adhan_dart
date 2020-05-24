@@ -22,7 +22,7 @@ DateTime secondsToDateTime(int seconds, DateTime date, {int offset = 0}) {
 
 DateTime hourFractionToDateTime(hourFraction, date, summerTimeCalc) {
   // adjust times for dst
-  int adjustDST = summerTimeCalc && isDSTCalc(date) ? 1 : 0;
+  int dstAdjust = summerTimeCalc && isDSTCalc(date) ? 1 : 0;
 
   int hour;
   if (hourFraction != double.nan)
@@ -33,5 +33,5 @@ DateTime hourFractionToDateTime(hourFraction, date, summerTimeCalc) {
   int minute = ((hourFraction - hour) * 60).round();
 
   return DateTime(date.year, date.month, date.day, hour, minute)
-      .add(Duration(hours: adjustDST));
+      .add(Duration(hours: dstAdjust));
 }

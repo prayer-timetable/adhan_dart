@@ -56,27 +56,27 @@ PrayerCalc test = new PrayerCalc(
 PrayerCalc location = sarajevo;
 
 angleTest() {
-  print('**************** Today *****************');
-  print('dawn:\t\t${location.prayers.today.dawn}');
-  print('sunrise:\t${location.prayers.today.sunrise}');
-  print('midday:\t\t${location.prayers.today.midday}');
-  print('afternoon:\t${location.prayers.today.afternoon}');
-  print('sunset:\t\t${location.prayers.today.sunset}');
-  print('dusk:\t\t${location.prayers.today.dusk}');
-  print('*************** Tomorrow **************');
-  print('dawn:\t\t${location.prayers.tomorrow.dawn}');
-  print('sunrise:\t${location.prayers.tomorrow.sunrise}');
-  print('midday:\t\t${location.prayers.tomorrow.midday}');
-  print('afternoon:\t${location.prayers.tomorrow.afternoon}');
-  print('sunset:\t\t${location.prayers.tomorrow.sunset}');
-  print('dusk:\t\t${location.prayers.tomorrow.dusk}');
-  print('************** Yesterday ***************');
-  print('dawn:\t\t${location.prayers.yesterday.dawn}');
-  print('sunrise:\t${location.prayers.yesterday.sunrise}');
-  print('midday:\t\t${location.prayers.yesterday.midday}');
-  print('afternoon:\t${location.prayers.yesterday.afternoon}');
-  print('sunset:\t\t${location.prayers.yesterday.sunset}');
-  print('dusk:\t\t${location.prayers.yesterday.dusk}');
+  print('**************** current *****************');
+  print('dawn:\t\t${location.prayers.current.dawn}');
+  print('sunrise:\t${location.prayers.current.sunrise}');
+  print('midday:\t\t${location.prayers.current.midday}');
+  print('afternoon:\t${location.prayers.current.afternoon}');
+  print('sunset:\t\t${location.prayers.current.sunset}');
+  print('dusk:\t\t${location.prayers.current.dusk}');
+  print('*************** next **************');
+  print('dawn:\t\t${location.prayers.next.dawn}');
+  print('sunrise:\t${location.prayers.next.sunrise}');
+  print('midday:\t\t${location.prayers.next.midday}');
+  print('afternoon:\t${location.prayers.next.afternoon}');
+  print('sunset:\t\t${location.prayers.next.sunset}');
+  print('dusk:\t\t${location.prayers.next.dusk}');
+  print('************** previous ***************');
+  print('dawn:\t\t${location.prayers.previous.dawn}');
+  print('sunrise:\t${location.prayers.previous.sunrise}');
+  print('midday:\t\t${location.prayers.previous.midday}');
+  print('afternoon:\t${location.prayers.previous.afternoon}');
+  print('sunset:\t\t${location.prayers.previous.sunset}');
+  print('dusk:\t\t${location.prayers.previous.dusk}');
   print('*************** Sunnah *****************');
   print('midnight:\t${location.sunnah.midnight}');
   print('lastThird\t${location.sunnah.lastThird}');
@@ -89,5 +89,6 @@ angleTest() {
   print('currentId:\t${location.durations.currentId}');
   print('countDown:\t${location.durations.countDown}');
   print('countUp:\t${location.durations.countUp}');
-  print(location.today);
+  print(location.current); // TODO
+  print(location.dayOfYear);
 }

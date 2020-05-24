@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:prayer_calc/src/components/Prayers.dart';
 import 'package:prayer_calc/src/func/helpers.dart';
 
-Prayers prayersAngle({
+Prayers prayerAngle({
   int timezone,
   double lat,
   double long,
@@ -18,7 +18,9 @@ Prayers prayersAngle({
   // check if leap year
   bool isLeap = date.year % 4 == 0;
 
-  date = date.toUtc();
+  DateTime dateLocal = date;
+
+  // dateUtc = date.toUtc();
   // print((date));
 
   int TZ = timezone ?? 0;
@@ -102,14 +104,18 @@ Prayers prayersAngle({
       : Z + Vn; // if dusk can not be calculated, make it 1.5 hours after sunset
 
   Prayers prayers = new Prayers();
-  prayers.dawn = hourFractionToDateTime(dawnFraction, date, summerTimeCalc);
+  prayers.dawn =
+      hourFractionToDateTime(dawnFraction, dateLocal, summerTimeCalc);
   prayers.sunrise =
-      hourFractionToDateTime(sunriseFraction, date, summerTimeCalc);
-  prayers.midday = hourFractionToDateTime(middayFraction, date, summerTimeCalc);
+      hourFractionToDateTime(sunriseFraction, dateLocal, summerTimeCalc);
+  prayers.midday =
+      hourFractionToDateTime(middayFraction, dateLocal, summerTimeCalc);
   prayers.afternoon =
-      hourFractionToDateTime(afternoonFraction, date, summerTimeCalc);
-  prayers.sunset = hourFractionToDateTime(sunsetFraction, date, summerTimeCalc);
-  prayers.dusk = hourFractionToDateTime(duskFraction, date, summerTimeCalc);
+      hourFractionToDateTime(afternoonFraction, dateLocal, summerTimeCalc);
+  prayers.sunset =
+      hourFractionToDateTime(sunsetFraction, dateLocal, summerTimeCalc);
+  prayers.dusk =
+      hourFractionToDateTime(duskFraction, dateLocal, summerTimeCalc);
 
   return prayers;
 }

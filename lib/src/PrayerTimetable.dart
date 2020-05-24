@@ -5,9 +5,9 @@ import 'package:prayer_calc/src/func/prayerTimetable.dart';
 
 class PrayerTimetable {
   // PrayersStructure prayers;
-  Prayers today;
-  Prayers yesterday;
-  Prayers tomorrow;
+  Prayers current;
+  Prayers previous;
+  Prayers next;
   PrayerTimetable prayers;
   Sunnah sunnah;
   Durations durations;
@@ -38,27 +38,54 @@ class PrayerTimetable {
     // define now (local)
     DateTime nowLocal = DateTime.now();
 
-    // ***** tomorrow and yesterday
-    DateTime today = date;
-    DateTime tomorrow = date.add(Duration(days: 1));
-    DateTime yesterday = date.subtract(Duration(days: 1));
+    // ***** current, next and previous
+    DateTime current = date;
+    DateTime next = date.add(Duration(days: 1));
+    DateTime previous = date.subtract(Duration(days: 1));
 
-    // ***** PRAYERS
-    Prayers prayersToday = prayersTimetable(
+    // ***** today, tomorrow and yesterday
+    DateTime today = DateTime.now();
+    DateTime tomorrow = today.add(Duration(days: 1));
+    DateTime yesterday = today.subtract(Duration(days: 1));
+
+    // ***** PRAYERS CURRENT, NEXT, PREVIOUS
+    Prayers prayersCurrent = prayerTimetable(
+      timetable: timetable,
+      difference: difference ?? [0, 0, 0, 0, 0, 0],
+      hijriOffset: hijriOffset ?? 0,
+      date: current,
+    );
+
+    Prayers prayersNext = prayerTimetable(
+      timetable: timetable,
+      difference: difference ?? [0, 0, 0, 0, 0, 0],
+      hijriOffset: hijriOffset ?? 0,
+      date: next,
+    );
+
+    Prayers prayersPrevious = prayerTimetable(
+      timetable: timetable,
+      difference: difference ?? [0, 0, 0, 0, 0, 0],
+      hijriOffset: hijriOffset ?? 0,
+      date: previous,
+    );
+
+    // ***** PRAYERS TODAY, TOMORROW, YESTERDAY
+    Prayers prayersToday = prayerTimetable(
       timetable: timetable,
       difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
       date: today,
     );
 
-    Prayers prayersTomorrow = prayersTimetable(
+    Prayers prayersTomorrow = prayerTimetable(
       timetable: timetable,
       difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
       date: tomorrow,
     );
 
-    Prayers prayersYesterday = prayersTimetable(
+    Prayers prayersYesterday = prayerTimetable(
       timetable: timetable,
       difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
@@ -66,11 +93,11 @@ class PrayerTimetable {
     );
 
     // define components
-    this.prayers = PrayerTimetable.prayers(
-        prayersToday, prayersTomorrow, prayersYesterday);
+    this.prayers =
+        PrayerTimetable.prayers(prayersCurrent, prayersNext, prayersPrevious);
 
     this.sunnah =
-        Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
+        Sunnah(nowLocal, prayersCurrent, prayersNext, prayersPrevious);
 
     this.durations =
         Durations(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
@@ -79,9 +106,9 @@ class PrayerTimetable {
   }
 
   PrayerTimetable.prayers(
-      Prayers prayersToday, Prayers prayersTomorrow, Prayers prayersYesterday) {
-    today = prayersToday;
-    tomorrow = prayersTomorrow;
-    yesterday = prayersYesterday;
+      Prayers prayersCurrent, Prayers prayersNext, Prayers prayersPrevious) {
+    current = prayersCurrent;
+    next = prayersNext;
+    previous = prayersPrevious;
   }
 }
