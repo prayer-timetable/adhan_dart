@@ -115,8 +115,8 @@ class PrayerCalc {
     this.sunnah =
         Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
 
-    this.durations = Durations(
-        nowLocal, nowUtc, prayersToday, prayersTomorrow, prayersYesterday);
+    this.durations =
+        Durations(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
 
     //end
   }

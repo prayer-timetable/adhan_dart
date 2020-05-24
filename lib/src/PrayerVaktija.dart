@@ -22,13 +22,12 @@ class PrayerVaktija {
     int hijriOffset,
     bool summerTimeCalc: true,
   }) {
-    DateTime timestamp = DateTime.now().toUtc();
-    DateTime beginingOfYear = DateTime.utc(timestamp.year); // Jan 1, 0:00
+    DateTime timestamp = DateTime.now();
+    DateTime beginingOfYear = DateTime(timestamp.year); // Jan 1, 0:00
 
-    // UTC date
-    DateTime date = DateTime.utc(year ?? timestamp.year,
-        month ?? timestamp.month, day ?? timestamp.day, 0, 0);
-    DateTime nowUtc = DateTime.now().toUtc();
+    // Local date
+    DateTime date = DateTime(year ?? timestamp.year, month ?? timestamp.month,
+        day ?? timestamp.day, 0, 0);
 
     // Local dates needed for dst calc and local midnight past (0:00)
     DateTime dateLocal = DateTime(
@@ -81,8 +80,8 @@ class PrayerVaktija {
     this.sunnah =
         Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
 
-    this.durations = Durations(
-        nowLocal, nowUtc, prayersToday, prayersTomorrow, prayersYesterday);
+    this.durations =
+        Durations(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
 
     //end
   }

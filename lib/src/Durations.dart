@@ -12,7 +12,6 @@ class Durations {
 
   Durations(
     DateTime _nowLocal,
-    DateTime _nowUtc,
     Prayers prayersToday,
     Prayers prayersTomorrow,
     Prayers prayersYesterday,
