@@ -1,19 +1,18 @@
-import 'package:prayer_calc/src/Sunnah.dart';
-import 'package:prayer_calc/src/Prayers.dart';
-import 'package:prayer_calc/src/func/helpers.dart';
-import 'package:prayer_calc/src/Durations.dart';
-import 'package:prayer_calc/src/func/prayerVaktija.dart';
+import 'package:prayer_calc/src/components/Sunnah.dart';
+import 'package:prayer_calc/src/components/Prayers.dart';
+import 'package:prayer_calc/src/components/Durations.dart';
+import 'package:prayer_calc/src/func/prayerTimetable.dart';
 
-class PrayerVaktija {
+class PrayerTimetable {
   // PrayersStructure prayers;
   Prayers today;
   Prayers yesterday;
   Prayers tomorrow;
-  PrayerVaktija prayers;
+  PrayerTimetable prayers;
   Sunnah sunnah;
   Durations durations;
 
-  PrayerVaktija({
+  PrayerTimetable({
     int year,
     int month,
     int day,
@@ -45,21 +44,21 @@ class PrayerVaktija {
     DateTime yesterday = date.subtract(Duration(days: 1));
 
     // ***** PRAYERS
-    Prayers prayersToday = prayersVaktija(
+    Prayers prayersToday = prayersTimetable(
       timetable: timetable,
       difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
       date: today,
     );
 
-    Prayers prayersTomorrow = prayersVaktija(
+    Prayers prayersTomorrow = prayersTimetable(
       timetable: timetable,
       difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
       date: tomorrow,
     );
 
-    Prayers prayersYesterday = prayersVaktija(
+    Prayers prayersYesterday = prayersTimetable(
       timetable: timetable,
       difference: difference ?? [0, 0, 0, 0, 0, 0],
       hijriOffset: hijriOffset ?? 0,
@@ -67,8 +66,8 @@ class PrayerVaktija {
     );
 
     // define components
-    this.prayers =
-        PrayerVaktija.prayers(prayersToday, prayersTomorrow, prayersYesterday);
+    this.prayers = PrayerTimetable.prayers(
+        prayersToday, prayersTomorrow, prayersYesterday);
 
     this.sunnah =
         Sunnah(nowLocal, prayersToday, prayersTomorrow, prayersYesterday);
@@ -79,7 +78,7 @@ class PrayerVaktija {
     //end
   }
 
-  PrayerVaktija.prayers(
+  PrayerTimetable.prayers(
       Prayers prayersToday, Prayers prayersTomorrow, Prayers prayersYesterday) {
     today = prayersToday;
     tomorrow = prayersTomorrow;

@@ -1,2 +1,2 @@
 export 'src/PrayerCalc.dart';
-export 'src/PrayerVaktija.dart';
+export 'src/PrayerTimetable.dart';

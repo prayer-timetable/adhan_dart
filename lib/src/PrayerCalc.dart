@@ -1,6 +1,6 @@
-import 'package:prayer_calc/src/Sunnah.dart';
-import 'package:prayer_calc/src/Prayers.dart';
-import 'package:prayer_calc/src/Durations.dart';
+import 'package:prayer_calc/src/components/Sunnah.dart';
+import 'package:prayer_calc/src/components/Prayers.dart';
+import 'package:prayer_calc/src/components/Durations.dart';
 import 'package:prayer_calc/src/func/prayerAngle.dart';
 
 class PrayerCalc {

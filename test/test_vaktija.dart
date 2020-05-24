@@ -1,4 +1,4 @@
-import 'package:prayer_calc/src/PrayerVaktija.dart';
+import 'package:prayer_calc/src/PrayerTimetable.dart';
 import './src/timetable.dart';
 
 // Sarajevo
@@ -9,7 +9,7 @@ double angleS = 14.6;
 int timezoneS = 1;
 
 // Prayers sarajevo = new Prayers(latS, longS, altitudeS, angleS, timezoneS);
-PrayerVaktija sarajevo = new PrayerVaktija(
+PrayerTimetable sarajevo = new PrayerTimetable(
   timetable: base,
   summerTimeCalc: false,
   year: 2020,
@@ -26,7 +26,7 @@ PrayerVaktija sarajevo = new PrayerVaktija(
 // summerTimeCalc is true by default, set to false if no daylight saving should happen
 //
 // example (icci location, Hanafi, 1st June 2020, different ishaAngle, no summer time):
-PrayerVaktija test = new PrayerVaktija(
+PrayerTimetable test = new PrayerTimetable(
   timetable: base,
   summerTimeCalc: false,
   year: 2020,
@@ -34,7 +34,7 @@ PrayerVaktija test = new PrayerVaktija(
   day: 1,
 );
 
-PrayerVaktija location = sarajevo;
+PrayerTimetable location = sarajevo;
 
 vaktijaTest() {
   print('**************** Today *****************');
