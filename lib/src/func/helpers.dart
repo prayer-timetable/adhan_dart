@@ -30,7 +30,7 @@ DateTime hourFractionToDateTime(hourFraction, date, summerTimeCalc) {
   else
     hour = 23;
 
-  int minute = ((hourFraction - hour) * 60).round();
+  int minute = ((hourFraction - hour) * 60).round(); // rounding minutes
 
   return DateTime(date.year, date.month, date.day, hour, minute)
       .add(Duration(hours: dstAdjust));
