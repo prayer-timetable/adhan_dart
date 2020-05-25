@@ -91,6 +91,7 @@ calcTest() {
   print('currentId:\t${location.durations.currentId}');
   print('countDown:\t${location.durations.countDown}');
   print('countUp:\t${location.durations.countUp}');
+  print('percentage:\t${location.durations.percentage}');
   print(location.current); // TODO
   print(location.dayOfYear);
 }

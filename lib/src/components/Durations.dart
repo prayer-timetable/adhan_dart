@@ -1,4 +1,5 @@
 import 'package:prayer_calc/src/components/Prayers.dart';
+import 'package:prayer_calc/src/func/helpers.dart';
 
 class Durations {
   DateTime nowLocal;
@@ -9,6 +10,7 @@ class Durations {
   int currentId;
   Duration countDown;
   Duration countUp;
+  double percentage;
 
   Durations(
     DateTime _nowLocal,
@@ -75,6 +77,9 @@ class Durations {
     this.currentId = currentId;
     this.countDown = next.difference(_nowLocal);
     this.countUp = _nowLocal.difference(current);
+    this.percentage = round2Decimals(100 *
+        (this.countUp.inSeconds /
+            (this.countDown.inSeconds + this.countUp.inSeconds)));
     //end
   }
 }
