@@ -1,5 +1,5 @@
-import './test_angle.dart';
-import './test_vaktija.dart';
+import './test_calc.dart';
+import './test_timetable.dart';
 
-// main() => angleTest();
-main() => vaktijaTest();
+main() => calcTest();
+// main() => timetableTest();
