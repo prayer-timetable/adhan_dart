@@ -35,7 +35,7 @@ DateTime hourFractionToDateTime(
       ? ((hourFraction - hour) * 60).round()
       : ((hourFraction - hour) * 60).floor(); // rounding minutes
 
-  int second = showSeconds ? (hourFraction - hour - minute) : 0;
+  int second = showSeconds ? (hourFraction - hour - minute).floor : 0;
 
   return DateTime(date.year, date.month, date.day, hour, minute, second)
       .add(Duration(hours: dstAdjust));
