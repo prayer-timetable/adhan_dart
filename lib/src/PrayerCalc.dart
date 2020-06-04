@@ -22,6 +22,9 @@ class PrayerCalc {
     int year,
     int month,
     int day,
+    int hour,
+    int minute,
+    int second,
     int asrMethod,
     double ishaAngle,
     bool summerTimeCalc: true,
@@ -39,8 +42,9 @@ class PrayerCalc {
         year ?? timestamp.year,
         month ?? timestamp.month,
         day ?? timestamp.day,
-        12,
-        0); // using noon of local date to avoid +- 1 hour
+        hour ?? 12,
+        minute ?? 0,
+        second ?? 0); // using noon of local date to avoid +- 1 hour
     // define now (local)
     DateTime nowLocal = DateTime.now();
 
