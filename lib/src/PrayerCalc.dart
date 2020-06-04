@@ -28,6 +28,7 @@ class PrayerCalc {
     int asrMethod,
     double ishaAngle,
     bool summerTimeCalc: true,
+    DateTime time,
   }) {
     DateTime timestamp = DateTime.now();
     DateTime beginingOfYear = DateTime(timestamp.year); // Jan 1, 0:00
@@ -46,7 +47,7 @@ class PrayerCalc {
         minute ?? 0,
         second ?? 0); // using noon of local date to avoid +- 1 hour
     // define now (local)
-    DateTime nowLocal = DateTime.now();
+    DateTime nowLocal = time ?? timestamp;
 
     // ***** current, next and previous day
     DateTime dayCurrent = date;
@@ -54,7 +55,7 @@ class PrayerCalc {
     DateTime dayPrevious = date.subtract(Duration(days: 1));
 
     // ***** today, tomorrow and yesterday
-    DateTime dayToday = DateTime.now();
+    DateTime dayToday = time ?? timestamp;
     DateTime dayTomorrow = dayToday.add(Duration(days: 1));
     DateTime dayYesterday = dayToday.subtract(Duration(days: 1));
 
