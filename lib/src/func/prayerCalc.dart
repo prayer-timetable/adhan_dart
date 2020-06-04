@@ -22,6 +22,7 @@ Prayers prayerCalc({
 
   // dateUtc = date.toUtc();
   // print((date));
+  // altitude shouldn't be zero or later in formula division by zero
   if (altitude == 0) altitude = 0.1;
 
   int TZ = timezone ?? 0;
