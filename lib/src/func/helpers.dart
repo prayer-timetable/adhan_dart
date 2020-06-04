@@ -25,7 +25,7 @@ DateTime hourFractionToDateTime(hourFraction, date, summerTimeCalc) {
   int dstAdjust = summerTimeCalc && isDSTCalc(date) ? 1 : 0;
 
   int hour;
-  if (hourFraction != double.nan)
+  if (hourFraction != double.nan && hourFraction != null)
     hour = hourFraction.floor();
   else
     hour = 23;

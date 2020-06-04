@@ -23,10 +23,12 @@ PrayerCalc sarajevo = new PrayerCalc(
   longS,
   altitudeS,
   angleS,
-  year: 2021,
-  month: 3,
-  day: 29,
-  ishaAngle: iangleS,
+  // 19,
+  // year: 2021,
+  // month: 11,
+  // day: 30,
+  // ishaAngle: iangleS,
+  // ishaAngle: 17,
 );
 PrayerCalc icci = new PrayerCalc(timezoneI, latI, longI, altitudeI, angleI,
     ishaAngle: iangleI);

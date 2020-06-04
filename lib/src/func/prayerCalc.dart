@@ -22,9 +22,10 @@ Prayers prayerCalc({
 
   // dateUtc = date.toUtc();
   // print((date));
+  if (altitude == 0) altitude = 0.1;
 
   int TZ = timezone ?? 0;
-  double H = altitude ?? 0; // height above sea level in meters
+  double H = altitude ?? 0.1; // height above sea level in meters
   double B = lat ?? 0; //	Latitude (Degrees)
   double L = long ?? 0; // Longitude (Degrees)
   int Sh = asrMethod ?? 1; //	Sh=1 (Shafii) - Sh=2 (Hanafi)
