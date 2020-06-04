@@ -20,7 +20,8 @@ DateTime secondsToDateTime(int seconds, DateTime date, {int offset = 0}) {
   ).add(Duration(seconds: seconds)).add(Duration(hours: dstAdjust));
 }
 
-DateTime hourFractionToDateTime(hourFraction, date, summerTimeCalc) {
+DateTime hourFractionToDateTime(
+    double hourFraction, DateTime date, bool summerTimeCalc, bool showSeconds) {
   // adjust times for dst
   int dstAdjust = summerTimeCalc && isDSTCalc(date) ? 1 : 0;
 
@@ -30,8 +31,12 @@ DateTime hourFractionToDateTime(hourFraction, date, summerTimeCalc) {
   else
     hour = 23;
 
-  int minute = ((hourFraction - hour) * 60).round(); // rounding minutes
+  int minute = showSeconds
+      ? ((hourFraction - hour) * 60).round()
+      : ((hourFraction - hour) * 60).floor(); // rounding minutes
 
-  return DateTime(date.year, date.month, date.day, hour, minute)
+  int second = showSeconds ? (hourFraction - hour - minute) : 0;
+
+  return DateTime(date.year, date.month, date.day, hour, minute, second)
       .add(Duration(hours: dstAdjust));
 }

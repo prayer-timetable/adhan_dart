@@ -14,6 +14,7 @@ Prayers prayerCalc({
   int asrMethod,
   double ishaAngle,
   bool summerTimeCalc: true,
+  bool showSeconds: false,
 }) {
   // check if leap year
   bool isLeap = date.year % 4 == 0;
@@ -106,18 +107,18 @@ Prayers prayerCalc({
       : Z + Vn; // if dusk can not be calculated, make it 1.5 hours after sunset
 
   Prayers prayers = new Prayers();
-  prayers.dawn =
-      hourFractionToDateTime(dawnFraction, dateLocal, summerTimeCalc);
-  prayers.sunrise =
-      hourFractionToDateTime(sunriseFraction, dateLocal, summerTimeCalc);
-  prayers.midday =
-      hourFractionToDateTime(middayFraction, dateLocal, summerTimeCalc);
-  prayers.afternoon =
-      hourFractionToDateTime(afternoonFraction, dateLocal, summerTimeCalc);
-  prayers.sunset =
-      hourFractionToDateTime(sunsetFraction, dateLocal, summerTimeCalc);
-  prayers.dusk =
-      hourFractionToDateTime(duskFraction, dateLocal, summerTimeCalc);
+  prayers.dawn = hourFractionToDateTime(
+      dawnFraction, dateLocal, summerTimeCalc, showSeconds);
+  prayers.sunrise = hourFractionToDateTime(
+      sunriseFraction, dateLocal, summerTimeCalc, showSeconds);
+  prayers.midday = hourFractionToDateTime(
+      middayFraction, dateLocal, summerTimeCalc, showSeconds);
+  prayers.afternoon = hourFractionToDateTime(
+      afternoonFraction, dateLocal, summerTimeCalc, showSeconds);
+  prayers.sunset = hourFractionToDateTime(
+      sunsetFraction, dateLocal, summerTimeCalc, showSeconds);
+  prayers.dusk = hourFractionToDateTime(
+      duskFraction, dateLocal, summerTimeCalc, showSeconds);
 
   return prayers;
 }

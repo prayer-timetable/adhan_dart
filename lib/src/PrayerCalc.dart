@@ -29,6 +29,7 @@ class PrayerCalc {
     double ishaAngle,
     bool summerTimeCalc: true,
     DateTime time,
+    bool showSeconds,
   }) {
     DateTime timestamp = DateTime.now();
     DateTime beginingOfYear = DateTime(timestamp.year); // Jan 1, 0:00
@@ -83,6 +84,7 @@ class PrayerCalc {
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
+      showSeconds: showSeconds,
     );
 
     Prayers prayersNext = prayerCalc(
@@ -96,6 +98,7 @@ class PrayerCalc {
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
+      showSeconds: showSeconds,
     );
 
     Prayers prayersPrevious = prayerCalc(
@@ -109,6 +112,7 @@ class PrayerCalc {
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
+      showSeconds: showSeconds,
     );
 
     // ***** PRAYERS TODAY, TOMORROW, YESTERDAY
@@ -123,6 +127,7 @@ class PrayerCalc {
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
+      showSeconds: showSeconds,
     );
 
     Prayers prayersTomorrow = prayerCalc(
@@ -136,6 +141,7 @@ class PrayerCalc {
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
+      showSeconds: showSeconds,
     );
 
     Prayers prayersYesterday = prayerCalc(
@@ -149,6 +155,7 @@ class PrayerCalc {
       asrMethod: asrMethod,
       ishaAngle: ishaAngle,
       summerTimeCalc: summerTimeCalc ?? true,
+      showSeconds: showSeconds,
     );
 
     // define components
