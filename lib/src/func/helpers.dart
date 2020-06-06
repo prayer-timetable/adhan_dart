@@ -45,11 +45,11 @@ DateTime hourFractionToDateTime(
   //     ? ((hourFraction - hour) * 60).floor()
   //     : ((hourFraction - hour) * 60).round(); // rounding minutes
 
-  print('###\nhourFraction: $hourFraction\thour: $hour\tminute: $minute');
+  // print('###\nhourFraction: $hourFraction\thour: $hour\tminute: $minute');
 
   // int second = showSeconds ? (hourFraction - hour - minute / 60).floor : 0;
 
-  print('***** second: $second');
+  // print('***** second: $second');
   return DateTime(date.year, date.month, date.day, hour, minute, second)
       .add(Duration(hours: dstAdjust));
 }
