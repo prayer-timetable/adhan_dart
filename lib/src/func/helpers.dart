@@ -32,8 +32,8 @@ DateTime hourFractionToDateTime(
     hour = 23;
 
   int minute = showSeconds
-      ? ((hourFraction - hour) * 60).round()
-      : ((hourFraction - hour) * 60).floor(); // rounding minutes
+      ? ((hourFraction - hour) * 60).floor()
+      : ((hourFraction - hour) * 60).round(); // rounding minutes
 
   int second = showSeconds ? (hourFraction - hour - minute).floor : 0;
 
