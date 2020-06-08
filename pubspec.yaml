@@ -6,7 +6,7 @@ description: >-
 homepage: https://ensar.me
 documentation: https://ensar.me/docs
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.2.0 <3.0.0'
 dependencies:
 
 dev_dependencies:
