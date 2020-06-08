@@ -1,12 +1,12 @@
 class Madhab {
   // Madhab(){}
-  final String Shafi = 'shafi';
-  final String Hanafi = 'hanafi';
+  static const String Shafi = 'shafi';
+  static const String Hanafi = 'hanafi';
 }
 
 shadowLength(madhab) {
-  const shafi = 'shafi';
-  const hanafi = 'hanafi';
+  const shafi = Madhab.Shafi;
+  const hanafi = Madhab.Hanafi;
   switch (madhab) {
     case shafi:
       return 1;

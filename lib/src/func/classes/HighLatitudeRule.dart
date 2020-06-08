@@ -1,10 +1,5 @@
 class HighLatitudeRule {
-  String MiddleOfTheNight;
-
-  HighLatitudeRule() {
-    this.MiddleOfTheNight = 'middleofthenight';
-  }
-  // String MiddleOfTheNight = 'middleofthenight';
-  String SeventhOfTheNight = 'seventhofthenight';
-  String wilightAngle = 'twilightangle';
+  static const String MiddleOfTheNight = 'middleofthenight';
+  static const String SeventhOfTheNight = 'seventhofthenight';
+  static const String TwilightAngle = 'twilightangle';
 }
