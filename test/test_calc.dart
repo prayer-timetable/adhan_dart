@@ -4,8 +4,8 @@ import 'package:prayer_calc/src/PrayerCalc.dart';
 double latI = 53.3046593;
 double longI = -6.2344076;
 double altitudeI = 85;
-double angleI = 12.35;
-double iangleI = 11.75;
+double angleI = 18;
+double iangleI = 16;
 int timezoneI = 0;
 
 // Sarajevo
@@ -57,7 +57,7 @@ PrayerCalc test = new PrayerCalc(
   day: 28,
 );
 
-PrayerCalc location = sarajevo;
+PrayerCalc location = icci;
 
 calcTest() {
   print('**************** current *****************');

@@ -1,4 +1,5 @@
 // import 'package:prayer_calc/src/classes/SunnahTimes.dart';
+import 'package:prayer_calc/src/classes/HighLatitudeRule.dart';
 import 'package:prayer_calc/src/classes/Qibla.dart';
 import 'package:prayer_calc/src/components/Sunnah.dart';
 import 'package:prayer_calc/src/components/Prayers.dart';
@@ -74,6 +75,7 @@ class PrayerCalc {
     // DEFINITIONS
     Coordinates coordinates = Coordinates(lat, lng);
     CalculationParameters params = CalculationMethod.Other();
+    params.highLatitudeRule = HighLatitudeRule.TwilightAngle;
     params.madhab = asrMethod == 2 ? Madhab.Hanafi : Madhab.Shafi;
     // params.methodAdjustments = {'dhuhr': 0};
     params.fajrAngle = angle;
