@@ -1,15 +1,15 @@
 import 'dart:math';
 
-import 'package:prayer_calc/src/func/classes/Astronomical.dart';
-import 'package:prayer_calc/src/func/classes/MathUtils.dart';
+import 'package:prayer_calc/src/classes/Astronomical.dart';
+import 'package:prayer_calc/src/classes/MathUtils.dart';
 
 class SolarCoordinates {
   double declination;
   double rightAscension;
   double apparentSiderealTime;
 
-  SolarCoordinates(julianDay) {
-    int T = Astronomical.julianCentury(julianDay);
+  SolarCoordinates(double julianDay) {
+    double T = Astronomical.julianCentury(julianDay);
     double L0 = Astronomical.meanSolarLongitude(T);
     double Lp = Astronomical.meanLunarLongitude(T);
     double Omega = Astronomical.ascendingLunarNodeLongitude(T);

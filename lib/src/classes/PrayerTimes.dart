@@ -1,12 +1,12 @@
-import 'package:prayer_calc/src/func/classes/SolarTime.dart';
-import 'package:prayer_calc/src/func/classes/TimeComponents.dart';
-import 'package:prayer_calc/src/func/classes/Prayer.dart';
-import 'package:prayer_calc/src/func/classes/Astronomical.dart';
-import 'package:prayer_calc/src/func/classes/DateUtils.dart';
-import 'package:prayer_calc/src/func/classes/Madhab.dart';
+import 'package:prayer_calc/src/classes/SolarTime.dart';
+import 'package:prayer_calc/src/classes/TimeComponents.dart';
+import 'package:prayer_calc/src/classes/Prayer.dart';
+import 'package:prayer_calc/src/classes/Astronomical.dart';
+import 'package:prayer_calc/src/classes/DateUtils.dart';
+import 'package:prayer_calc/src/classes/Madhab.dart';
 
-import 'package:prayer_calc/src/func/classes/Coordinates.dart';
-import 'package:prayer_calc/src/func/classes/CalculationParameters.dart';
+import 'package:prayer_calc/src/classes/Coordinates.dart';
+import 'package:prayer_calc/src/classes/CalculationParameters.dart';
 
 class PrayerTimes {
   Coordinates coordinates;
@@ -69,9 +69,9 @@ class PrayerTimes {
         return Astronomical.seasonAdjustedMorningTwilight(
             coordinates.latitude, dayOfYear(date), date.year, sunriseTime);
       } else {
-        var portion = calculationParameters.nightPortions().fajr;
+        var portion = calculationParameters.nightPortions()["fajr"];
         nightFraction = portion * night;
-        return dateByAddingSeconds(sunriseTime, -nightFraction);
+        return dateByAddingSeconds(sunriseTime, -nightFraction.round());
       }
     }
 
@@ -81,7 +81,8 @@ class PrayerTimes {
       fajrTime = safeFajr();
     }
 
-    if (calculationParameters.ishaInterval > 0) {
+    if (calculationParameters.ishaInterval != null &&
+        calculationParameters.ishaInterval > 0) {
       ishaTime =
           dateByAddingMinutes(sunsetTime, calculationParameters.ishaInterval);
     } else {
@@ -101,9 +102,9 @@ class PrayerTimes {
           return Astronomical.seasonAdjustedEveningTwilight(
               coordinates.latitude, dayOfYear(date), date.year, sunsetTime);
         } else {
-          var portion = calculationParameters.nightPortions().isha;
+          var portion = calculationParameters.nightPortions()["isha"];
           nightFraction = portion * night;
-          return dateByAddingSeconds(sunsetTime, nightFraction);
+          return dateByAddingSeconds(sunsetTime, nightFraction.round());
         }
       }
 
@@ -126,18 +127,20 @@ class PrayerTimes {
     }
 
     // double fajrAdjustment = (calculationParameters.adjustments["fajr"] && 0) + (calculationParameters.methodAdjustments["fajr"] && 0);
-    double fajrAdjustment = (calculationParameters.adjustments["fajr"]) +
-        (calculationParameters.methodAdjustments["fajr"]);
-    double sunriseAdjustment = (calculationParameters.adjustments["sunrise"]) +
-        (calculationParameters.methodAdjustments["sunrise"]);
-    double dhuhrAdjustment = (calculationParameters.adjustments["dhuhr"]) +
-        (calculationParameters.methodAdjustments["dhuhr"]);
-    double asrAdjustment = (calculationParameters.adjustments["asr"]) +
-        (calculationParameters.methodAdjustments["asr"]);
-    double maghribAdjustment = (calculationParameters.adjustments["maghrib"]) +
-        (calculationParameters.methodAdjustments["maghrib"]);
-    double ishaAdjustment = (calculationParameters.adjustments["isha"]) +
-        (calculationParameters.methodAdjustments["isha"]);
+    int fajrAdjustment = (calculationParameters.adjustments["fajr"] ?? 0) +
+        (calculationParameters.methodAdjustments["fajr"] ?? 0);
+    int sunriseAdjustment =
+        (calculationParameters.adjustments["sunrise"] ?? 0) +
+            (calculationParameters.methodAdjustments["sunrise"] ?? 0);
+    int dhuhrAdjustment = (calculationParameters.adjustments["dhuhr"] ?? 0) +
+        (calculationParameters.methodAdjustments["dhuhr"] ?? 0);
+    int asrAdjustment = (calculationParameters.adjustments["asr"] ?? 0) +
+        (calculationParameters.methodAdjustments["asr"] ?? 0);
+    int maghribAdjustment =
+        (calculationParameters.adjustments["maghrib"] ?? 0) +
+            (calculationParameters.methodAdjustments["maghrib"] ?? 0);
+    int ishaAdjustment = (calculationParameters.adjustments["isha"] ?? 0) +
+        (calculationParameters.methodAdjustments["isha"] ?? 0);
 
     this.fajr = roundedMinute(dateByAddingMinutes(fajrTime, fajrAdjustment));
     this.sunrise =

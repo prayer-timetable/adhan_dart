@@ -1,4 +1,4 @@
-import 'package:prayer_calc/src/func/classes/CalculationParameters.dart';
+import 'package:prayer_calc/src/classes/CalculationParameters.dart';
 
 class CalculationMethod {
   // Muslim World League

@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:prayer_calc/src/func/classes/Astronomical.dart';
-import 'package:prayer_calc/src/func/classes/MathUtils.dart';
-import 'package:prayer_calc/src/func/classes/SolarCoordinates.dart';
-import 'package:prayer_calc/src/func/classes/Coordinates.dart';
+import 'package:prayer_calc/src/classes/Astronomical.dart';
+import 'package:prayer_calc/src/classes/MathUtils.dart';
+import 'package:prayer_calc/src/classes/SolarCoordinates.dart';
+import 'package:prayer_calc/src/classes/Coordinates.dart';
 
 class SolarTime {
   Coordinates observer;
@@ -17,8 +17,8 @@ class SolarTime {
   double sunset;
 
   SolarTime(date, coordinates) {
-    double julianDay = Astronomical.julianDay(
-        date.getFullYear(), date.getMonth() + 1, date.getDate(), 0);
+    double julianDay =
+        Astronomical.julianDay(date.year, date.month, date.day, 0);
 
     this.observer = coordinates;
     this.solar = new SolarCoordinates(julianDay);

@@ -1,4 +1,4 @@
-import 'package:prayer_calc/src/func/classes/Astronomical.dart';
+import 'package:prayer_calc/src/classes/Astronomical.dart';
 
 dateByAddingDays(DateTime date, int days) {
   return date.add(Duration(days: days));
@@ -24,9 +24,9 @@ roundedMinute(DateTime date) {
 
 dayOfYear(date) {
   int returnedDayOfYear = 0;
-  int feb = Astronomical.isLeapYear(date.getFullYear()) ? 29 : 28;
+  int feb = Astronomical.isLeapYear(date.year) ? 29 : 28;
   List<int> months = [31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  for (var i = 0; i < date.getMonth(); i++) {
+  for (var i = 0; i < (date.month - 1); i++) {
     returnedDayOfYear += months[i];
   }
 

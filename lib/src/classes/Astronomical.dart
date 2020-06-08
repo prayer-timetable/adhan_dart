@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:prayer_calc/src/func/classes/MathUtils.dart';
-import 'package:prayer_calc/src/func/classes/DateUtils.dart';
+import 'package:prayer_calc/src/classes/MathUtils.dart';
+import 'package:prayer_calc/src/classes/DateUtils.dart';
 
 class Astronomical {
   /* The geometric mean longitude of the sun in degrees. */
-  static double meanSolarLongitude(int julianCentury) {
-    int T = julianCentury;
+  static double meanSolarLongitude(double julianCentury) {
+    double T = julianCentury;
     /* Equation from Astronomical Algorithms page 163 */
     const term1 = 280.4664567;
     double term2 = 36000.76983 * T;
@@ -16,8 +16,8 @@ class Astronomical {
   }
 
   /* The geometric mean longitude of the moon in degrees. */
-  static double meanLunarLongitude(int julianCentury) {
-    int T = julianCentury;
+  static double meanLunarLongitude(double julianCentury) {
+    double T = julianCentury;
     /* Equation from Astronomical Algorithms page 144 */
     const term1 = 218.3165;
     double term2 = 481267.8813 * T;
@@ -25,8 +25,8 @@ class Astronomical {
     return unwindAngle(Lp);
   }
 
-  static double ascendingLunarNodeLongitude(int julianCentury) {
-    int T = julianCentury;
+  static double ascendingLunarNodeLongitude(double julianCentury) {
+    double T = julianCentury;
     /* Equation from Astronomical Algorithms page 144 */
     const term1 = 125.04452;
     double term2 = 1934.136261 * T;
@@ -37,8 +37,8 @@ class Astronomical {
   }
 
   /* The mean anomaly of the sun. */
-  static double meanSolarAnomaly(int julianCentury) {
-    int T = julianCentury;
+  static double meanSolarAnomaly(double julianCentury) {
+    double T = julianCentury;
     /* Equation from Astronomical Algorithms page 163 */
     const term1 = 357.52911;
     double term2 = 35999.05029 * T;
@@ -49,7 +49,7 @@ class Astronomical {
 
   /* The Sun's equation of the center in degrees. */
   static double solarEquationOfTheCenter(julianCentury, meanAnomaly) {
-    int T = julianCentury;
+    double T = julianCentury;
     /* Equation from Astronomical Algorithms page 164 */
     double Mrad = degreesToRadians(meanAnomaly);
     double term1 =
@@ -62,7 +62,7 @@ class Astronomical {
   /* The apparent longitude of the Sun, referred to the
         true equinox of the date. */
   static double apparentSolarLongitude(julianCentury, meanLongitude) {
-    int T = julianCentury;
+    double T = julianCentury;
     double L0 = meanLongitude;
     /* Equation from Astronomical Algorithms page 164 */
     double longitude = L0 +
@@ -77,8 +77,8 @@ class Astronomical {
   /* The mean obliquity of the ecliptic, formula
         adopted by the International Astronomical Union.
         Represented in degrees. */
-  static double meanObliquityOfTheEcliptic(int julianCentury) {
-    int T = julianCentury;
+  static double meanObliquityOfTheEcliptic(double julianCentury) {
+    double T = julianCentury;
     /* Equation from Astronomical Algorithms page 147 */
     const term1 = 23.439291;
     double term2 = 0.013004167 * T;
@@ -91,7 +91,7 @@ class Astronomical {
         calculating the apparent position of the sun, in degrees. */
   static double apparentObliquityOfTheEcliptic(
       julianCentury, meanObliquityOfTheEcliptic) {
-    int T = julianCentury;
+    double T = julianCentury;
     double Epsilon0 = meanObliquityOfTheEcliptic;
     /* Equation from Astronomical Algorithms page 165 */
     double O = 125.04 - (1934.136 * T);
@@ -99,8 +99,8 @@ class Astronomical {
   }
 
   /* Mean sidereal time, the hour angle of the vernal equinox, in degrees. */
-  static double meanSiderealTime(int julianCentury) {
-    int T = julianCentury;
+  static double meanSiderealTime(double julianCentury) {
+    double T = julianCentury;
     /* Equation from Astronomical Algorithms page 165 */
     double JD = (T * 36525) + 2451545.0;
     const term1 = 280.46061837;
@@ -269,7 +269,7 @@ class Astronomical {
   }
 
   /* Julian century from the epoch. */
-  static int julianCentury(julianDay) {
+  static double julianCentury(double julianDay) {
     /* Equation from Astronomical Algorithms page 163 */
     return (julianDay - 2451545.0) / 36525;
   }

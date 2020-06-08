@@ -1,4 +1,4 @@
-import 'package:prayer_calc/src/PrayerCalc.dart';
+import 'package:prayer_calc/src/PrayerCalcOrig.dart';
 
 // ICCI
 double latI = 53.3046593;
@@ -95,5 +95,5 @@ calcTest() {
   print('countUp:\t${location.durations.countUp}');
   print('percentage:\t${location.durations.percentage}');
   print(location.current); // TODO
-  // print(location.dayOfYear);
+  print(location.dayOfYear);
 }
