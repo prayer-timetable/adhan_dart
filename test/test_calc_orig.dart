@@ -1,4 +1,4 @@
-import 'package:prayer_calc/src/PrayerCalcOrig.dart';
+import 'package:prayer_calc/src/PrayerCalcAlt.dart';
 
 // ICCI
 double latI = 53.3046593;
@@ -85,7 +85,7 @@ calcTest() {
   print('midnight:\t${location.sunnah.midnight}');
   print('lastThird\t${location.sunnah.lastThird}');
   print('************** Durations ***************');
-  print('nowLocal:\t${location.durations.nowLocal}');
+  print('now:\t${location.durations.now}');
   print('current:\t${location.durations.current}');
   print('next:\t\t${location.durations.next}');
   print('previous:\t${location.durations.previous}');

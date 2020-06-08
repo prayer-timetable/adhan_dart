@@ -2,7 +2,7 @@ import 'package:prayer_calc/src/components/Prayers.dart';
 import 'package:prayer_calc/src/func/helpers.dart';
 
 class Durations {
-  DateTime nowLocal;
+  DateTime now;
   DateTime current;
   DateTime next;
   DateTime previous;
@@ -13,7 +13,7 @@ class Durations {
   double percentage;
 
   Durations(
-    DateTime _nowLocal,
+    DateTime _now,
     Prayers prayersToday,
     Prayers prayersTomorrow,
     Prayers prayersYesterday,
@@ -24,40 +24,41 @@ class Durations {
     int currentId;
     bool isAfterIsha = false;
 
-    // now is local
+    // now is local for PrayerTimetable and PrayerCalcAlt
+    // utc for PrayerCalc
     /* *********************** */
     /* CURRENT, PREVIOUS, NEXT */
     /* *********************** */
     // from midnight to fajr
-    if (_nowLocal.isBefore(prayersToday.dawn)) {
+    if (_now.isBefore(prayersToday.dawn)) {
       current = prayersYesterday.dusk;
       next = prayersToday.dawn;
       previous = prayersYesterday.sunset;
       currentId = 5;
-    } else if (_nowLocal.isBefore(prayersToday.sunrise)) {
+    } else if (_now.isBefore(prayersToday.sunrise)) {
       current = prayersToday.dawn;
       next = prayersToday.sunrise;
       previous = prayersYesterday.dusk;
       currentId = 0;
-    } else if (_nowLocal.isBefore(prayersToday.midday)) {
+    } else if (_now.isBefore(prayersToday.midday)) {
       current = prayersToday.sunrise;
       next = prayersToday.midday;
-      previous = prayersYesterday.dusk;
+      previous = prayersToday.dawn;
       currentId = 1;
-    } else if (_nowLocal.isBefore(prayersToday.afternoon)) {
+    } else if (_now.isBefore(prayersToday.afternoon)) {
       current = prayersToday.midday;
       next = prayersToday.afternoon;
-      previous = prayersYesterday.dusk;
+      previous = prayersToday.sunrise;
       currentId = 2;
-    } else if (_nowLocal.isBefore(prayersToday.sunset)) {
+    } else if (_now.isBefore(prayersToday.sunset)) {
       current = prayersToday.afternoon;
       next = prayersToday.sunset;
-      previous = prayersYesterday.dusk;
+      previous = prayersToday.midday;
       currentId = 3;
-    } else if (_nowLocal.isBefore(prayersToday.dusk)) {
+    } else if (_now.isBefore(prayersToday.dusk)) {
       current = prayersToday.sunset;
       next = prayersToday.dusk;
-      previous = prayersYesterday.dusk;
+      previous = prayersToday.afternoon;
       currentId = 4;
     } else {
       // dusk till midnight
@@ -69,14 +70,14 @@ class Durations {
     }
 
     // components
-    this.nowLocal = _nowLocal;
+    this.now = _now;
     this.current = current;
     this.next = next;
     this.previous = previous;
     this.isAfterIsha = isAfterIsha;
     this.currentId = currentId;
-    this.countDown = next.difference(_nowLocal);
-    this.countUp = _nowLocal.difference(current);
+    this.countDown = next.difference(_now);
+    this.countUp = _now.difference(current);
     this.percentage = round2Decimals(100 *
         (this.countUp.inSeconds /
             (this.countDown.inSeconds + this.countUp.inSeconds)));

@@ -1,3 +1,5 @@
+// import 'package:prayer_calc/src/classes/SunnahTimes.dart';
+import 'package:prayer_calc/src/classes/Qibla.dart';
 import 'package:prayer_calc/src/components/Sunnah.dart';
 import 'package:prayer_calc/src/components/Prayers.dart';
 import 'package:prayer_calc/src/components/Durations.dart';
@@ -18,7 +20,9 @@ class PrayerCalc {
   Prayers previous;
   PrayerCalc prayers;
   Sunnah sunnah;
+  // SunnahTimes sunnah;
   Durations durations;
+  double qibla;
 
   PrayerCalc(
     int timezone,
@@ -75,12 +79,12 @@ class PrayerCalc {
     params.fajrAngle = angle;
     params.ishaAngle = ishaAngle != null ? ishaAngle : angle;
 
+    // print(date.toLocal());
+
     Prayers toPrayers(PrayerTimes prayerTimes) {
       Prayers prayers = new Prayers();
-      int summerTime = (isDSTCalc(prayerTimes.date) && summerTimeCalc) ? 1 : 0;
-      print(timezone);
-
-      print(summerTimeCalc);
+      int summerTime =
+          (isDSTCalc(prayerTimes.date.toLocal()) && summerTimeCalc) ? 1 : 0;
 
       // (toLocal?)
       prayers.dawn =
@@ -98,6 +102,8 @@ class PrayerCalc {
       return prayers;
     }
 
+    // print(PrayerTimes(coordinates, dayCurrent, params).fajr);
+    // ***** PRAYERS CURRENT, NEXT, PREVIOUS
     Prayers prayersCurrent =
         toPrayers(PrayerTimes(coordinates, dayCurrent, params));
     Prayers prayersNext = toPrayers(PrayerTimes(coordinates, dayNext, params));
@@ -110,101 +116,19 @@ class PrayerCalc {
     Prayers prayersYesterday =
         toPrayers(PrayerTimes(coordinates, dayYesterday, params));
 
-    // ***** PRAYERS CURRENT, NEXT, PREVIOUS
-    // Prayers prayersCurrent = prayerCalc(
-    //   timezone: timezone,
-    //   lat: lat,
-    //   long: long,
-    //   altitude: altitude,
-    //   angle: angle,
-    //   date: dayCurrent,
-    //   dayOfYear: dayOfYearCurrent,
-    //   asrMethod: asrMethod,
-    //   ishaAngle: ishaAngle,
-    //   summerTimeCalc: summerTimeCalc ?? true,
-    //   showSeconds: showSeconds,
-    // );
-
-    // Prayers prayersNext = prayerCalc(
-    //   timezone: timezone,
-    //   lat: lat,
-    //   long: long,
-    //   altitude: altitude,
-    //   angle: angle,
-    //   date: dayNext,
-    //   dayOfYear: dayOfYearNext,
-    //   asrMethod: asrMethod,
-    //   ishaAngle: ishaAngle,
-    //   summerTimeCalc: summerTimeCalc ?? true,
-    //   showSeconds: showSeconds,
-    // );
-
-    // Prayers prayersPrevious = prayerCalc(
-    //   timezone: timezone,
-    //   lat: lat,
-    //   long: long,
-    //   altitude: altitude,
-    //   angle: angle,
-    //   date: dayPrevious,
-    //   dayOfYear: dayOfYearPrevious,
-    //   asrMethod: asrMethod,
-    //   ishaAngle: ishaAngle,
-    //   summerTimeCalc: summerTimeCalc ?? true,
-    //   showSeconds: showSeconds,
-    // );
-
-    // // ***** PRAYERS TODAY, TOMORROW, YESTERDAY
-    // Prayers prayersToday = prayerCalc(
-    //   timezone: timezone,
-    //   lat: lat,
-    //   long: long,
-    //   altitude: altitude,
-    //   angle: angle,
-    //   date: dayToday,
-    //   dayOfYear: dayOfYearToday,
-    //   asrMethod: asrMethod,
-    //   ishaAngle: ishaAngle,
-    //   summerTimeCalc: summerTimeCalc ?? true,
-    //   showSeconds: showSeconds,
-    // );
-
-    // Prayers prayersTomorrow = prayerCalc(
-    //   timezone: timezone,
-    //   lat: lat,
-    //   long: long,
-    //   altitude: altitude,
-    //   angle: angle,
-    //   date: dayTomorrow,
-    //   dayOfYear: dayOfYearTomorrow,
-    //   asrMethod: asrMethod,
-    //   ishaAngle: ishaAngle,
-    //   summerTimeCalc: summerTimeCalc ?? true,
-    //   showSeconds: showSeconds,
-    // );
-
-    // Prayers prayersYesterday = prayerCalc(
-    //   timezone: timezone,
-    //   lat: lat,
-    //   long: long,
-    //   altitude: altitude,
-    //   angle: angle,
-    //   date: dayYesterday,
-    //   dayOfYear: dayOfYearYesterday,
-    //   asrMethod: asrMethod,
-    //   ishaAngle: ishaAngle,
-    //   summerTimeCalc: summerTimeCalc ?? true,
-    //   showSeconds: showSeconds,
-    // );
+    int _summerTime = (isDSTCalc(now.toLocal()) && summerTimeCalc) ? 1 : 0;
 
     // define components
     this.prayers =
         PrayerCalc.prayers(prayersCurrent, prayersNext, prayersPrevious);
 
     this.sunnah = Sunnah(now, prayersCurrent, prayersNext, prayersPrevious);
+    // this.sunnah = SunnahTimes(PrayerTimes(coordinates, dayCurrent, params));
 
-    this.durations =
-        Durations(now, prayersToday, prayersTomorrow, prayersYesterday);
+    this.durations = Durations(now.add(Duration(hours: timezone + _summerTime)),
+        prayersToday, prayersTomorrow, prayersYesterday);
 
+    this.qibla = Qibla().qibla(new Coordinates(lat, lng));
     //end
   }
 

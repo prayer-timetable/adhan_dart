@@ -1,7 +1,7 @@
 import 'package:prayer_calc/src/components/Sunnah.dart';
 import 'package:prayer_calc/src/components/Prayers.dart';
 import 'package:prayer_calc/src/components/Durations.dart';
-import 'package:prayer_calc/src/func/prayerCalcOrig.dart';
+import 'package:prayer_calc/src/func/prayerCalcAlt.dart';
 
 class PrayerCalc {
   // PrayersStructure prayers;
