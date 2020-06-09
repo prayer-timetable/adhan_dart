@@ -21,7 +21,6 @@ PrayerCalc sarajevo = new PrayerCalc(
   timezoneS,
   latS,
   longS,
-  altitudeS,
   angleS,
   // 19,
   // year: 2021,
@@ -30,8 +29,8 @@ PrayerCalc sarajevo = new PrayerCalc(
   // ishaAngle: iangleS,
   // ishaAngle: 17,
 );
-PrayerCalc icci = new PrayerCalc(timezoneI, latI, longI, altitudeI, angleI,
-    ishaAngle: iangleI);
+PrayerCalc icci =
+    new PrayerCalc(timezoneI, latI, longI, angleI, ishaAngle: iangleI);
 
 // optional parameters:
 // int year, int month, int day, int asrMethod, double ishaAngle, bool summerTimeCalc
@@ -47,8 +46,8 @@ PrayerCalc test = new PrayerCalc(
   timezoneI,
   latI,
   longI,
-  altitudeI,
   angleI,
+  altitude: altitudeI,
   ishaAngle: 15,
   asrMethod: 2,
   summerTimeCalc: false,

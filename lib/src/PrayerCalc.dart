@@ -29,8 +29,8 @@ class PrayerCalc {
     int timezone,
     double lat,
     double lng,
-    double altitude,
     double angle, {
+    double altitude,
     int year,
     int month,
     int day,
