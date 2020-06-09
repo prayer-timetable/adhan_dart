@@ -91,7 +91,7 @@ Add to your pubspec.yaml file:
       double lng = 18.4131;
       double angle = 14.6;
 
-      location = new PrayerCalc(timezone, lat, lng, angle);
+      PrayerCalc location = new PrayerCalc(timezone, lat, lng, angle);
 
       // current day fajr
       print('${location.prayers.current.dawn');
