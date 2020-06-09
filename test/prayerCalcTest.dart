@@ -23,7 +23,7 @@ main() {
   params.ishaAngle = angleI;
   params.fajrAngle = angleF;
 
-  var prayerTimes = new PrayerTimes(coordinates, date, params);
+  var prayerTimes = new PrayerTimes(coordinates, date, params, precision: true);
 
   var fajrTime = prayerTimes.fajr.toLocal();
   print(prayerTimes.fajr.timeZoneName);

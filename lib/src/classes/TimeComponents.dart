@@ -5,11 +5,12 @@ class TimeComponents {
   int minutes;
   int seconds;
 
-  TimeComponents(number) {
+  TimeComponents(double number) {
     this.hours = (number).floor();
     this.minutes = ((number - this.hours) * 60).floor();
     this.seconds =
         ((number - (this.hours + this.minutes / 60)) * 60 * 60).floor();
+    // print(seconds);
     // return this;
   }
 

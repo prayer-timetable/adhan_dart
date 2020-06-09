@@ -41,7 +41,7 @@ class PrayerCalc {
     double ishaAngle,
     bool summerTimeCalc: true,
     DateTime time,
-    bool showSeconds,
+    bool precision,
   }) {
     DateTime timestamp = DateTime.now().toUtc();
 
@@ -106,17 +106,18 @@ class PrayerCalc {
 
     // print(PrayerTimes(coordinates, dayCurrent, params).fajr);
     // ***** PRAYERS CURRENT, NEXT, PREVIOUS
-    Prayers prayersCurrent =
-        toPrayers(PrayerTimes(coordinates, dayCurrent, params));
-    Prayers prayersNext = toPrayers(PrayerTimes(coordinates, dayNext, params));
-    Prayers prayersPrevious =
-        toPrayers(PrayerTimes(coordinates, dayPrevious, params));
-    Prayers prayersToday =
-        toPrayers(PrayerTimes(coordinates, dayToday, params));
-    Prayers prayersTomorrow =
-        toPrayers(PrayerTimes(coordinates, dayTomorrow, params));
-    Prayers prayersYesterday =
-        toPrayers(PrayerTimes(coordinates, dayYesterday, params));
+    Prayers prayersCurrent = toPrayers(
+        PrayerTimes(coordinates, dayCurrent, params, precision: precision));
+    Prayers prayersNext = toPrayers(
+        PrayerTimes(coordinates, dayNext, params, precision: precision));
+    Prayers prayersPrevious = toPrayers(
+        PrayerTimes(coordinates, dayPrevious, params, precision: precision));
+    Prayers prayersToday = toPrayers(
+        PrayerTimes(coordinates, dayToday, params, precision: precision));
+    Prayers prayersTomorrow = toPrayers(
+        PrayerTimes(coordinates, dayTomorrow, params, precision: precision));
+    Prayers prayersYesterday = toPrayers(
+        PrayerTimes(coordinates, dayYesterday, params, precision: precision));
 
     int _summerTime = (isDSTCalc(now.toLocal()) && summerTimeCalc) ? 1 : 0;
 
@@ -125,7 +126,7 @@ class PrayerCalc {
         PrayerCalc.prayers(prayersCurrent, prayersNext, prayersPrevious);
 
     this.sunnah = Sunnah(now, prayersCurrent, prayersNext, prayersPrevious);
-    // this.sunnah = SunnahTimes(PrayerTimes(coordinates, dayCurrent, params));
+    // this.sunnah = SunnahTimes(PrayerTimes(coordinates, dayCurrent, params, precision: precision));
 
     this.durations = Durations(now.add(Duration(hours: timezone + _summerTime)),
         prayersToday, prayersTomorrow, prayersYesterday);

@@ -21,7 +21,8 @@ class PrayerTimes {
   DateTime isha;
 
   PrayerTimes(Coordinates coordinates, DateTime date,
-      CalculationParameters calculationParameters) {
+      CalculationParameters calculationParameters,
+      {precision: true}) {
     this.coordinates = coordinates;
     this.date = date;
     this.calculationParameters = calculationParameters;
@@ -142,14 +143,20 @@ class PrayerTimes {
     int ishaAdjustment = (calculationParameters.adjustments["isha"] ?? 0) +
         (calculationParameters.methodAdjustments["isha"] ?? 0);
 
-    this.fajr = roundedMinute(dateByAddingMinutes(fajrTime, fajrAdjustment));
-    this.sunrise =
-        roundedMinute(dateByAddingMinutes(sunriseTime, sunriseAdjustment));
-    this.dhuhr = roundedMinute(dateByAddingMinutes(dhuhrTime, dhuhrAdjustment));
-    this.asr = roundedMinute(dateByAddingMinutes(asrTime, asrAdjustment));
-    this.maghrib =
-        roundedMinute(dateByAddingMinutes(maghribTime, maghribAdjustment));
-    this.isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment));
+    this.fajr = roundedMinute(dateByAddingMinutes(fajrTime, fajrAdjustment),
+        precision: precision);
+    this.sunrise = roundedMinute(
+        dateByAddingMinutes(sunriseTime, sunriseAdjustment),
+        precision: precision);
+    this.dhuhr = roundedMinute(dateByAddingMinutes(dhuhrTime, dhuhrAdjustment),
+        precision: precision);
+    this.asr = roundedMinute(dateByAddingMinutes(asrTime, asrAdjustment),
+        precision: precision);
+    this.maghrib = roundedMinute(
+        dateByAddingMinutes(maghribTime, maghribAdjustment),
+        precision: precision);
+    this.isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment),
+        precision: precision);
   }
 
   timeForPrayer(prayer) {

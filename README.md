@@ -10,68 +10,78 @@ Library for calculating muslim prayer times based on excellent [Adhan JavaScript
 
 This class returns 5 daily prayers plus Sunrise. Takes the following input parameters:
 
-- _int_ timezone,
-- _double_ latitude,
-- _double_ longitude,
-- _double_ angle (for both Dusk and Dawn)
+- _int_ **timezone**,
+- _double_ **latitude**,
+- _double_ **longitude**,
+- _double_ **angle**
 
 Optional parameters:
 
-- _int_ year,
-- _int_ month,
-- _int_ day,
-- _int_ hour,
-- _int_ minute,
-- _int_ second,
-- _int_ asrMethod,
-- _double_ ishaAngle,
-- _bool_ summerTimeCalc: true,
-- _DateTime_ time,
-- _bool_ showSeconds,
-- _double_ altitude,
+- _int_ **year**,
+- _int_ **month**,
+- _int_ **day**,
+- _int_ **hour**,
+- _int_ **minute**,
+- _int_ **second**,
+- _int_ **asrMethod**: 1,
+- _double_ **ishaAngle**,
+- _bool_ **summerTimeCalc**: true,
+- _DateTime_ **time**,
+- _double_ **altitude**,
+- _bool_ **precision**: true,
 
-If no date is used, the library uses current date and time. It returns **_prayers_**, **_durations_**, **_sunnah_** and **_qibla_**.
+**Some notes**:
+
+- if no date is used, the library uses current date and time
+- **asrMethod** defaults to 1 (_Shafi_), 2 would mean _Hanafi_
+- **ishaAngle** would default to _angle_, in other words if ishaAngle is not used, _angle_ value would be used for both dusk and dawn
+- **summerTimeCalc** is true by default, optionally it can be forced to false (no hour adjustments)
+- **time** is used for calculation of **now** as per below, otherwise current time is used
+- **altitude** currently not used
+- **precision** enables the display of seconds, otherwise if false, output times are rounded to nearest minute
+
+This class returns **_prayers_**, **_durations_**, **_sunnah_** and **_qibla_** classes.
 
 ## Prayers
 
 This class returns the following:
 
-- _DateTime_ now - current time at the location
-- _DateTime_ current - current prayer time
-- _DateTime_ next - next prayer time
-- _DateTime_ previous - previous prayer time
-- _bool_ isAfterIsha - is the current time after isha and before the midnight
-- _int_ currentId - id of the current prayer/time (0 - 5)
+- _DateTime_ **now** - current time at the location
+- _DateTime_ **current** - current prayer time
+- _DateTime_ **next** - next prayer time
+- _DateTime_ **previous** - previous prayer time
+- _bool_ **isAfterIsha** - is the current time after isha and before the midnight
+- _int_ **currentId** - id of the current prayer/time (0 - 5)
 
 Each of the **current**, **next** and **previous** returns 6 prayer times (ie. current.sunrise):
 
-- _DateTime_ dawn - fajr prayer time
-- _DateTime_ sunrise - shurooq time
-- _DateTime_ midday - dhuhr prayer time
-- _DateTime_ afternoon - asr prayer time
-- _DateTime_ sunset - maghrib prayer time
-- _DateTime_ dusk - isha prayer time
+- _DateTime_ **dawn** - fajr prayer time
+- _DateTime_ **sunrise** - shurooq time
+- _DateTime_ **midday** - dhuhr prayer time
+- _DateTime_ **afternoon** - asr prayer time
+- _DateTime_ **sunset** - maghrib prayer time
+- _DateTime_ **dusk** - isha prayer time
 
 ## Durations
 
 This class calculates durations to and from the prayers, taking into account next day Dawn for Isha prayer, as well as Previous day Isha when calculating Dawn for day after midnight. It also determines current, next and previous prayers based on current time. It returns the following:
 
-- _Duration_ countDown - time until the next prayer
-- _Duration_ countUp - time passed since the current prayer begun
-- _double_ percentage: percentage of time passed between current and next prayer
+- _Duration_ **countDown** - time until the next prayer
+- _Duration_ **countUp** - time passed since the current prayer begun
+- _double_ **percentage**: percentage of time passed between current and next prayer
 
 ## Sunnah
 
 This class calculates times that apply to certain sunnah-defined times. It provides the following:
 
-- _DateTime_ midnight - mid-point between the Sunset-Maghrib and Dawn-Fajr
-- _DateTime_ lastThird - as above, time indicating the beginning of the last third of the night
+- _DateTime_ **midnight** - mid-point between the Sunset-Maghrib and Dawn-Fajr
+- _DateTime_ **lastThird** - as above, time indicating the beginning of the last third of the night
 
 ## Qibla
 
 Class returning single value:
 
-- _double_ qibla - direction (bearing) to Qibla, in degrees
+- _double_ **qibla** - direction (bearing) to Qibla, in degrees
 
 ## Installation
 
