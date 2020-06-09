@@ -1,8 +1,8 @@
 # Dart Prayer Calc Library
 
-Library for calculating muslim prayer times based on work published here:
+Library for calculating muslim prayer times based on excellent [Adhan JavaScript](https://github.com/batoulapps/adhan-js). Ported to Dart, preserving the calculation logic.
 
-https://www.academia.edu/35801795/Prayer_Time_Algorithm_for_Software_Development
+> All astronomical calculations are high precision equations directly from the book [“Astronomical Algorithms”](http://www.willbell.com/math/mc1.htm) by Jean Meeus. This book is recommended by the Astronomical Applications Department of the U.S. Naval Observatory and the Earth System Research Laboratory of the National Oceanic and Atmospheric Administration.
 
 # Dart Classes
 
