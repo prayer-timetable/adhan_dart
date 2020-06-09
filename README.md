@@ -8,7 +8,7 @@ https://www.academia.edu/35801795/Prayer_Time_Algorithm_for_Software_Development
 
 ## PrayerCalc
 
-This class returns 5 daily prayers plus Sunrise. Takes following input parameters:
+This class returns 5 daily prayers plus Sunrise. Takes the following input parameters:
 
 - _int_ timezone,
 - _double_ latitude,
@@ -32,16 +32,30 @@ Optional parameters:
 
 If no date is used, the library uses current date and time. It returns **_prayers_**, **_durations_**, **_sunnah_** and **_qibla_**.
 
-## Durations
+## Prayers
 
-This class calculates durations to and from the prayers, taking into account next day Dawn for Isha prayer, as well as Previous day Isha when calculating Dawn for day after midnight. It also determines current, next and previous prayers based on current time. It returns the following:
+This class returns the following:
 
-- _DateTime_ now
+- _DateTime_ now - current time at the location
 - _DateTime_ current - current prayer time
 - _DateTime_ next - next prayer time
 - _DateTime_ previous - previous prayer time
 - _bool_ isAfterIsha - is the current time after isha and before the midnight
-- _int_ currentId - id of the current prayer (0 - 5)
+- _int_ currentId - id of the current prayer/time (0 - 5)
+
+Each of the **current**, **next** and **previous** returns 6 prayer times (ie. current.sunrise):
+
+- _DateTime_ dawn - fajr prayer time
+- _DateTime_ sunrise - shurooq time
+- _DateTime_ midday - dhuhr prayer time
+- _DateTime_ afternoon - asr prayer time
+- _DateTime_ sunset - maghrib prayer time
+- _DateTime_ dusk - isha prayer time
+
+## Durations
+
+This class calculates durations to and from the prayers, taking into account next day Dawn for Isha prayer, as well as Previous day Isha when calculating Dawn for day after midnight. It also determines current, next and previous prayers based on current time. It returns the following:
+
 - _Duration_ countDown - time until the next prayer
 - _Duration_ countUp - time passed since the current prayer begun
 - _double_ percentage: percentage of time passed between current and next prayer
