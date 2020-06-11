@@ -1,4 +1,4 @@
-import 'package:adhan/src/classes/Astronomical.dart';
+import 'package:adhan/src/Astronomical.dart';
 
 dateByAddingDays(DateTime date, int days) {
   return date.add(Duration(days: days));
@@ -9,20 +9,13 @@ dateByAddingMinutes(date, minutes) {
 }
 
 dateByAddingSeconds(DateTime date, int seconds) {
-  // TODO??? 1000*
-  // return new Date(date.getTime() + (seconds * 1000));
   return date.add(Duration(seconds: seconds));
 }
 
 roundedMinute(DateTime date, {bool precision: true}) {
-  // print(date);
-
-  // const seconds = date.getUTCSeconds();
   // TODO seconds should be between 0-59
   int seconds = date.toUtc().second % 60;
-  // int seconds = date.toUtc().second;
   int offset = seconds >= 30 ? 60 - seconds : -1 * seconds;
-  // print(offset);
   if (precision) return date;
 
   return dateByAddingSeconds(date, offset);

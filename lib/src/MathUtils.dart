@@ -9,13 +9,10 @@ double radiansToDegrees(double radians) {
 }
 
 double normalizeToScale(double number, double max) {
-  // print(number);
-  // print(max);
   return number - (max * ((number / max).floor()));
 }
 
 double unwindAngle(double angle) {
-  // print(angle);
   return normalizeToScale(angle, 360.0);
 }
 

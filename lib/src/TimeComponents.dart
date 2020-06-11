@@ -10,8 +10,6 @@ class TimeComponents {
     this.minutes = ((number - this.hours) * 60).floor();
     this.seconds =
         ((number - (this.hours + this.minutes / 60)) * 60 * 60).floor();
-    // print(seconds);
-    // return this;
   }
 
   DateTime utcDate(year, month, date) {
