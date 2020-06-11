@@ -4,7 +4,7 @@ import 'package:adhan/src/classes/Coordinates.dart';
 import 'package:adhan/src/classes/MathUtils.dart';
 
 class Qibla {
-  double qibla(coordinates) {
+  static double qibla(coordinates) {
     Coordinates makkah = new Coordinates(21.4225241, 39.8261818);
 
     // Equation from "Spherical Trigonometry For the use of colleges and schools" page 50

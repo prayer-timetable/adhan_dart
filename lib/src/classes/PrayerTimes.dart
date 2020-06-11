@@ -20,21 +20,23 @@ class PrayerTimes {
   DateTime maghrib;
   DateTime isha;
 
+  // TODO: added precision
+  // rounded nightfraction
   PrayerTimes(Coordinates coordinates, DateTime date,
       CalculationParameters calculationParameters,
-      {precision: true}) {
+      {precision: false}) {
     this.coordinates = coordinates;
     this.date = date;
     this.calculationParameters = calculationParameters;
 
-    var solarTime = new SolarTime(date, coordinates);
+    SolarTime solarTime = new SolarTime(date, coordinates);
 
     DateTime fajrTime;
     DateTime asrTime;
     DateTime maghribTime;
     DateTime ishaTime;
 
-    var nightFraction;
+    double nightFraction;
 
     DateTime dhuhrTime = new TimeComponents(solarTime.transit)
         .utcDate(date.year, date.month, date.day);
@@ -62,7 +64,7 @@ class PrayerTimes {
     if (calculationParameters.method == "MoonsightingCommittee" &&
         coordinates.latitude >= 55) {
       nightFraction = night / 7;
-      fajrTime = dateByAddingSeconds(sunriseTime, -nightFraction);
+      fajrTime = dateByAddingSeconds(sunriseTime, -nightFraction.round());
     }
 
     DateTime safeFajr() {
@@ -95,7 +97,7 @@ class PrayerTimes {
       if (calculationParameters.method == "MoonsightingCommittee" &&
           coordinates.latitude >= 55) {
         nightFraction = night / 7;
-        ishaTime = dateByAddingSeconds(sunsetTime, nightFraction);
+        ishaTime = dateByAddingSeconds(sunsetTime, nightFraction.round());
       }
 
       DateTime safeIsha() {
@@ -159,7 +161,7 @@ class PrayerTimes {
         precision: precision);
   }
 
-  timeForPrayer(prayer) {
+  DateTime timeForPrayer(String prayer) {
     if (prayer == Prayer.Fajr) {
       return this.fajr;
     } else if (prayer == Prayer.Sunrise) {
@@ -177,42 +179,42 @@ class PrayerTimes {
     }
   }
 
-  currentPrayer(date) {
+  currentPrayer({DateTime date}) {
     if (date == null) {
       date = DateTime.now();
     }
-    if (date >= this.isha) {
+    if (date.isAfter(this.isha)) {
       return Prayer.Isha;
-    } else if (date >= this.maghrib) {
+    } else if (date.isAfter(this.maghrib)) {
       return Prayer.Maghrib;
-    } else if (date >= this.asr) {
+    } else if (date.isAfter(this.asr)) {
       return Prayer.Asr;
-    } else if (date >= this.dhuhr) {
+    } else if (date.isAfter(this.dhuhr)) {
       return Prayer.Dhuhr;
-    } else if (date >= this.sunrise) {
+    } else if (date.isAfter(this.sunrise)) {
       return Prayer.Sunrise;
-    } else if (date >= this.fajr) {
+    } else if (date.isAfter(this.fajr)) {
       return Prayer.Fajr;
     } else {
       return Prayer.None;
     }
   }
 
-  nextPrayer(date) {
+  nextPrayer({DateTime date}) {
     if (date == null) {
       date = DateTime.now();
     }
-    if (date >= this.isha) {
+    if (date.isAfter(this.isha)) {
       return Prayer.None;
-    } else if (date >= this.maghrib) {
+    } else if (date.isAfter(this.maghrib)) {
       return Prayer.Isha;
-    } else if (date >= this.asr) {
+    } else if (date.isAfter(this.asr)) {
       return Prayer.Maghrib;
-    } else if (date >= this.dhuhr) {
+    } else if (date.isAfter(this.dhuhr)) {
       return Prayer.Asr;
-    } else if (date >= this.sunrise) {
+    } else if (date.isAfter(this.sunrise)) {
       return Prayer.Dhuhr;
-    } else if (date >= this.fajr) {
+    } else if (date.isAfter(this.fajr)) {
       return Prayer.Sunrise;
     } else {
       return Prayer.Fajr;
