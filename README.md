@@ -1,4 +1,4 @@
-# Adhan JavaScript
+# Adhan Dart
 
 Adhan Dart is a port of excellent [Adhan JavaScript](https://github.com/batoulapps/adhan-js). Ported to Dart, preserving the calculation logic. Adapted to use Dart's superior DateTime class for quick and convenient time calculations. No extra dependencies, except for _timezone_ package.
 
