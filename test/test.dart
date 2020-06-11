@@ -1,6 +1,6 @@
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:adhan/src/Adhan.dart';
+import 'package:adhan/adhan.dart';
 
 main() {
   tz.initializeTimeZones();

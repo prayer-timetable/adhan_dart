@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:adhan/src/classes/Coordinates.dart';
-import 'package:adhan/src/classes/MathUtils.dart';
+import 'package:adhan/src/Coordinates.dart';
+import 'package:adhan/src/MathUtils.dart';
 
 class Qibla {
   static double qibla(coordinates) {

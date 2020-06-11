@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:adhan/src/classes/MathUtils.dart';
-import 'package:adhan/src/classes/DateUtils.dart';
+import 'package:adhan/src/MathUtils.dart';
+import 'package:adhan/src/DateUtils.dart';
 
 class Astronomical {
   /* The geometric mean longitude of the sun in degrees. */
