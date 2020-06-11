@@ -1,12 +1,12 @@
-import 'package:prayer_calc/src/classes/SolarTime.dart';
-import 'package:prayer_calc/src/classes/TimeComponents.dart';
-import 'package:prayer_calc/src/classes/Prayer.dart';
-import 'package:prayer_calc/src/classes/Astronomical.dart';
-import 'package:prayer_calc/src/classes/DateUtils.dart';
-import 'package:prayer_calc/src/classes/Madhab.dart';
+import 'package:adhan/src/classes/SolarTime.dart';
+import 'package:adhan/src/classes/TimeComponents.dart';
+import 'package:adhan/src/classes/Prayer.dart';
+import 'package:adhan/src/classes/Astronomical.dart';
+import 'package:adhan/src/classes/DateUtils.dart';
+import 'package:adhan/src/classes/Madhab.dart';
 
-import 'package:prayer_calc/src/classes/Coordinates.dart';
-import 'package:prayer_calc/src/classes/CalculationParameters.dart';
+import 'package:adhan/src/classes/Coordinates.dart';
+import 'package:adhan/src/classes/CalculationParameters.dart';
 
 class PrayerTimes {
   Coordinates coordinates;

@@ -1,5 +1,5 @@
-import 'package:prayer_calc/src/classes/PrayerTimes.dart';
-import 'package:prayer_calc/src/classes/DateUtils.dart';
+import 'package:adhan/src/classes/PrayerTimes.dart';
+import 'package:adhan/src/classes/DateUtils.dart';
 
 class SunnahTimes {
   DateTime midnight;

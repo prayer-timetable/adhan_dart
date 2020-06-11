@@ -1,4 +1,4 @@
-import 'package:prayer_calc/src/classes/Astronomical.dart';
+import 'package:adhan/src/classes/Astronomical.dart';
 
 dateByAddingDays(DateTime date, int days) {
   return date.add(Duration(days: days));
