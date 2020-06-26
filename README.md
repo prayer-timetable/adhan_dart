@@ -1,6 +1,6 @@
 # Adhan Dart
 
-Adhan Dart is a port of excellent [Adhan JavaScript](https://github.com/batoulapps/adhan-js). Ported to Dart, preserving the calculation logic. Adapted to use Dart's superior DateTime class for quick and convenient time calculations. No extra dependencies, except for _timezone_ package.
+Adhan Dart is a port of excellent [Adhan JavaScript](https://github.com/batoulapps/adhan-js). Ported to Dart, preserving the calculation logic. Adapted to use Dart's superior DateTime class for quick and convenient time calculations. No extra dependencies (_timezone_ package used for tests, in your code you can use timezone offset instead).
 
 Adhan Dart is a well tested and well documented library for calculating Islamic prayer times in Dart.
 
@@ -15,7 +15,9 @@ Adhan was designed to work be easy to import to any Dart or Flutter project.
 Insert under dependencies in your pubspec.yaml file:
 
 ```
-  timezone: ^1.0.0
+  adhan_dart:
+    git:
+      url: git://github.com/prayer-timetable/adhan_dart.git
 ```
 
 ### Import
@@ -47,12 +49,12 @@ Coordinates coordinates = new Coordinates(35.78056, -78.6389);
 #### Date
 
 The date parameter passed in should be an instance of the Dart `DateTime`
-object. The year, month, and day values can be be populated. The year, month and day values should be for the date that you want prayer times for. These date values are expected to be for the
+object. The year, month, and day values can be populated. The year, month and day values should be for the date that you want prayer times for. These date values are expected to be for the
 Gregorian calendar.
 
 ```dart
-DateTime date = new DateTime.now();
-DateTime date = new DateTime(2015, 11, 1);
+DateTime date = new DateTime.now(); // this is default
+DateTime date = new DateTime(2015, 11, 1); // set specific date
 ```
 
 #### Calculation parameters
