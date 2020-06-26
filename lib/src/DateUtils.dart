@@ -13,7 +13,6 @@ dateByAddingSeconds(DateTime date, int seconds) {
 }
 
 roundedMinute(DateTime date, {bool precision: true}) {
-  // TODO seconds should be between 0-59
   int seconds = date.toUtc().second % 60;
   int offset = seconds >= 30 ? 60 - seconds : -1 * seconds;
   if (precision) return date;

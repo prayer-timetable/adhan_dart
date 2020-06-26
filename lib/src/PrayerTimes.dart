@@ -29,6 +29,8 @@ class PrayerTimes {
     this.date = date;
     this.calculationParameters = calculationParameters;
 
+    // todo
+    // print(calculationParameters.ishaAngle);
     SolarTime solarTime = new SolarTime(date, coordinates);
 
     DateTime fajrTime;

@@ -18,7 +18,7 @@ class CalculationParameters {
     this.method = methodName ?? "Other";
     this.fajrAngle = fajrAngle ?? 0.0;
     this.ishaAngle = ishaAngle ?? 0.0;
-    this.ishaAngle = ishaInterval ?? 0.0;
+    this.ishaInterval = ishaInterval ?? 0.0;
     this.maghribAngle = maghribAngle;
     this.madhab = Madhab.Shafi;
     this.highLatitudeRule = HighLatitudeRule.MiddleOfTheNight;
