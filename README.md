@@ -23,7 +23,7 @@ Insert under dependencies in your pubspec.yaml file:
 ### Import
 
 ```
-import 'package:adhan/adhan.dart';
+import 'package:adhan_dart/adhan.dart';
 ```
 
 ## Usage

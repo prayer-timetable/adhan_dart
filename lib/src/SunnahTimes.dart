@@ -1,5 +1,5 @@
-import 'package:adhan/src/PrayerTimes.dart';
-import 'package:adhan/src/DateUtils.dart';
+import 'package:adhan_dart/src/PrayerTimes.dart';
+import 'package:adhan_dart/src/DateUtils.dart';
 
 class SunnahTimes {
   DateTime middleOfTheNight;

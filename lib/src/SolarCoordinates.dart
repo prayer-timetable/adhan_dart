@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:adhan/src/Astronomical.dart';
-import 'package:adhan/src/MathUtils.dart';
+import 'package:adhan_dart/src/Astronomical.dart';
+import 'package:adhan_dart/src/MathUtils.dart';
 
 class SolarCoordinates {
   double declination;

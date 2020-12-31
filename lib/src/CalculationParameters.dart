@@ -1,5 +1,5 @@
-import 'package:adhan/src/Madhab.dart';
-import 'package:adhan/src/HighLatitudeRule.dart';
+import 'package:adhan_dart/src/Madhab.dart';
+import 'package:adhan_dart/src/HighLatitudeRule.dart';
 
 class CalculationParameters {
   String method;

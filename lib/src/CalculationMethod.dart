@@ -1,4 +1,4 @@
-import 'package:adhan/src/CalculationParameters.dart';
+import 'package:adhan_dart/src/CalculationParameters.dart';
 
 class CalculationMethod {
   // Muslim World League

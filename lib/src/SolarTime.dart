@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:adhan/src/Astronomical.dart';
-import 'package:adhan/src/MathUtils.dart';
-import 'package:adhan/src/SolarCoordinates.dart';
-import 'package:adhan/src/Coordinates.dart';
+import 'package:adhan_dart/src/Astronomical.dart';
+import 'package:adhan_dart/src/MathUtils.dart';
+import 'package:adhan_dart/src/SolarCoordinates.dart';
+import 'package:adhan_dart/src/Coordinates.dart';
 
 class SolarTime {
   Coordinates observer;
