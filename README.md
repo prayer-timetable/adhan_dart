@@ -15,6 +15,12 @@ Adhan was designed to work be easy to import to any Dart or Flutter project.
 Insert under dependencies in your pubspec.yaml file:
 
 ```
+  adhan_dart: ^1.0.1
+```
+
+Or use the latest dev version:
+
+```
   adhan_dart:
     git:
       url: git://github.com/prayer-timetable/adhan_dart.git
