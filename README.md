@@ -29,7 +29,7 @@ Or use the latest dev version:
 ### Import
 
 ```
-import 'package:adhan_dart/adhan.dart';
+import 'package:adhan_dart/adhan_dart.dart';
 ```
 
 ## Usage
