@@ -1,5 +1,5 @@
 name: adhan_dart
-version: 1.0.0
+version: 1.0.1
 description: >-
   Library to calculate prayer times for muslims.
   Based on precise astronomical formula.
@@ -8,6 +8,6 @@ documentation: https://github.com/prayer-timetable/adhan_dart/
 environment:
   sdk: '>=2.2.0 <3.0.0'
 dependencies:
-  timezone: ^0.5.7
 
 dev_dependencies:
+  timezone: ^0.6.1
