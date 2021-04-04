@@ -1,3 +1,8 @@
+# Dart Example
+
+Example dart app, default values from original Adhanjs.
+
+```
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:adhan_dart/adhan_dart.dart';
@@ -63,4 +68,4 @@ main() {
   print('\n***** Qibla Direction');
   print('qibla:  \t$qiblaDirection');
 }
-// main() => timetableTest();
+```
