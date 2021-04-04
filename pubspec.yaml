@@ -6,8 +6,8 @@ description: >-
 homepage: https://github.com/prayer-timetable/adhan_dart/
 documentation: https://github.com/prayer-timetable/adhan_dart/
 environment:
-  sdk: '>=2.2.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 dependencies:
 
 dev_dependencies:
-  timezone: ^0.6.1
+  timezone: ^0.7.0

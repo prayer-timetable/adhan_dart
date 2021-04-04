@@ -166,12 +166,12 @@ class Astronomical {
     double L = longitude;
     double Theta0 = siderealTime;
     double a2 = rightAscension;
-    double a1 = previousRightAscension;
+    double? a1 = previousRightAscension;
     double a3 = nextRightAscension;
     /* Equation from page Astronomical Algorithms 102 */
     double Lw = L * -1;
     double Theta = unwindAngle((Theta0 + (360.985647 * m0)));
-    double a = unwindAngle(Astronomical.interpolateAngles(a2, a1, a3, m0));
+    double a = unwindAngle(Astronomical.interpolateAngles(a2, a1, a3, m0)!);
     double H = quadrantShiftAngle(Theta - Lw - a);
     double dm = H / -360;
     return (m0 + dm) * 24;
@@ -189,14 +189,14 @@ class Astronomical {
       declination,
       previousDeclination,
       nextDeclination) {
-    double m0 = approximateTransit;
+    double? m0 = approximateTransit;
     double h0 = angle;
     double Theta0 = siderealTime;
     double a2 = rightAscension;
-    double a1 = previousRightAscension;
+    double? a1 = previousRightAscension;
     double a3 = nextRightAscension;
     double d2 = declination;
-    double d1 = previousDeclination;
+    double? d1 = previousDeclination;
     double d3 = nextDeclination;
 
     /* Equation from page Astronomical Algorithms 102 */
@@ -211,10 +211,10 @@ class Astronomical {
     double H0 =
         (term1 / term2).abs() > 1 ? 1.0 : radiansToDegrees(acos(term1 / term2));
 
-    double m = afterTransit ? m0 + (H0 / 360) : m0 - (H0 / 360);
+    double m = afterTransit ? m0! + (H0 / 360) : m0! - (H0 / 360);
     double Theta = unwindAngle((Theta0 + (360.985647 * m)));
-    double a = unwindAngle(Astronomical.interpolateAngles(a2, a1, a3, m));
-    double delta = Astronomical.interpolate(d2, d1, d3, m);
+    double a = unwindAngle(Astronomical.interpolateAngles(a2, a1, a3, m)!);
+    double delta = Astronomical.interpolate(d2, d1, d3, m)!;
     double H = (Theta - Lw - a);
     double h =
         Astronomical.altitudeOfCelestialBody(coordinates.latitude, delta, H);
@@ -231,7 +231,7 @@ class Astronomical {
         previous and next values and a factor
         equal to the fraction of the interpolated
         point's time over the time between values. */
-  static double interpolate(y2, y1, y3, n) {
+  static double? interpolate(y2, y1, y3, n) {
     /* Equation from Astronomical Algorithms page 24 */
     double a = y2 - y1;
     double b = y3 - y2;
@@ -241,7 +241,7 @@ class Astronomical {
 
   /* Interpolation of three angles, accounting for
         angle unwinding. */
-  static double interpolateAngles(y2, y1, y3, n) {
+  static double? interpolateAngles(y2, y1, y3, n) {
     /* Equation from Astronomical Algorithms page 24 */
     double a = unwindAngle(y2 - y1);
     double b = unwindAngle(y3 - y2);

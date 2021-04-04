@@ -6,15 +6,15 @@ import 'package:adhan_dart/src/SolarCoordinates.dart';
 import 'package:adhan_dart/src/Coordinates.dart';
 
 class SolarTime {
-  Coordinates observer;
-  SolarCoordinates solar;
-  SolarCoordinates prevSolar;
-  SolarCoordinates nextSolar;
+  late Coordinates observer;
+  late SolarCoordinates solar;
+  late SolarCoordinates prevSolar;
+  late SolarCoordinates nextSolar;
 
-  double approxTransit;
-  double transit;
-  double sunrise;
-  double sunset;
+  double? approxTransit;
+  late double transit;
+  late double sunrise;
+  late double sunset;
 
   SolarTime(date, coordinates) {
     double julianDay =
@@ -84,7 +84,7 @@ class SolarTime {
 
   double afternoon(shadowLength) {
     // TODO source shadow angle calculation
-    double tangent = (this.observer.latitude - this.solar.declination).abs();
+    double tangent = (this.observer.latitude - this.solar.declination!).abs();
     double inverse = shadowLength + tan(degreesToRadians(tangent));
     double angle = radiansToDegrees(atan(1.0 / inverse));
     return this.hourAngle(angle, true);

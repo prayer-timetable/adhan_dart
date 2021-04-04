@@ -1,4 +1,5 @@
 import 'package:adhan_dart/adhan_dart.dart';
+import 'package:adhan_dart/src/DateUtils.dart';
 
 main() {
   Coordinates coordinates =
@@ -8,10 +9,12 @@ main() {
       PrayerTimes(coordinates, DateTime.now(), calculationParameters);
 
   int timezoneAdj = (5.5 * 60).toInt();
+  int currentDayOfYear = dayOfYear(DateTime.now());
 
-  print(prayerTimes.fajr.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.dhuhr.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.asr.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.maghrib.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.isha.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.fajr!.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.dhuhr!.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.asr!.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.maghrib!.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.isha!.add(Duration(minutes: timezoneAdj)));
+  print(currentDayOfYear);
 }

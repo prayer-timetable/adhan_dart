@@ -4,9 +4,9 @@ import 'package:adhan_dart/src/Astronomical.dart';
 import 'package:adhan_dart/src/MathUtils.dart';
 
 class SolarCoordinates {
-  double declination;
-  double rightAscension;
-  double apparentSiderealTime;
+  double? declination;
+  double? rightAscension;
+  late double apparentSiderealTime;
 
   SolarCoordinates(double julianDay) {
     double T = Astronomical.julianCentury(julianDay);

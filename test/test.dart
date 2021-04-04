@@ -16,20 +16,20 @@ main() {
   PrayerTimes prayerTimes = new PrayerTimes(coordinates, date, params);
 
   // Prayer times
-  DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr, location);
-  DateTime sunriseTime = tz.TZDateTime.from(prayerTimes.sunrise, location);
-  DateTime dhuhrTime = tz.TZDateTime.from(prayerTimes.dhuhr, location);
-  DateTime asrTime = tz.TZDateTime.from(prayerTimes.asr, location);
-  DateTime maghribTime = tz.TZDateTime.from(prayerTimes.maghrib, location);
-  DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha, location);
+  DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr!, location);
+  DateTime sunriseTime = tz.TZDateTime.from(prayerTimes.sunrise!, location);
+  DateTime dhuhrTime = tz.TZDateTime.from(prayerTimes.dhuhr!, location);
+  DateTime asrTime = tz.TZDateTime.from(prayerTimes.asr!, location);
+  DateTime maghribTime = tz.TZDateTime.from(prayerTimes.maghrib!, location);
+  DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha!, location);
 
   // Convenience Utilities
   String current = prayerTimes.currentPrayer(); // date: date
   DateTime currentPrayerTime =
-      tz.TZDateTime.from(prayerTimes.timeForPrayer(current), location);
+      tz.TZDateTime.from(prayerTimes.timeForPrayer(current)!, location);
   String next = prayerTimes.nextPrayer();
   DateTime nextPrayerTime =
-      tz.TZDateTime.from(prayerTimes.timeForPrayer(next), location);
+      tz.TZDateTime.from(prayerTimes.timeForPrayer(next)!, location);
 
   // Sunnah Times
   SunnahTimes sunnahTimes = new SunnahTimes(prayerTimes);

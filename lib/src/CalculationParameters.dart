@@ -2,22 +2,22 @@ import 'package:adhan_dart/src/Madhab.dart';
 import 'package:adhan_dart/src/HighLatitudeRule.dart';
 
 class CalculationParameters {
-  String method;
-  double fajrAngle;
-  double ishaAngle;
-  double ishaInterval;
-  double maghribAngle;
-  String madhab;
+  String? method;
+  late double fajrAngle;
+  late double ishaAngle;
+  double? ishaInterval;
+  double? maghribAngle;
+  String? madhab;
 
-  String highLatitudeRule;
-  Map adjustments;
-  Map methodAdjustments;
+  String? highLatitudeRule;
+  late Map adjustments;
+  late Map methodAdjustments;
 
   CalculationParameters(String methodName, double fajrAngle, double ishaAngle,
-      {double ishaInterval, double maghribAngle}) {
-    this.method = methodName ?? "Other";
-    this.fajrAngle = fajrAngle ?? 0.0;
-    this.ishaAngle = ishaAngle ?? 0.0;
+      {double? ishaInterval, double? maghribAngle}) {
+    this.method = methodName;
+    this.fajrAngle = fajrAngle;
+    this.ishaAngle = ishaAngle;
     this.ishaInterval = ishaInterval ?? 0.0;
     this.maghribAngle = maghribAngle;
     this.madhab = Madhab.Shafi;

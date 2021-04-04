@@ -1,4 +1,4 @@
-import 'package:adhan_dart/src/Astronomical.dart';
+// import 'package:adhan_dart/src/Astronomical.dart';
 
 dateByAddingDays(DateTime date, int days) {
   return date.add(Duration(days: days));
@@ -20,15 +20,10 @@ roundedMinute(DateTime date, {bool precision: true}) {
   return dateByAddingSeconds(date, offset);
 }
 
-dayOfYear(date) {
-  int returnedDayOfYear = 0;
-  int feb = Astronomical.isLeapYear(date.year) ? 29 : 28;
-  List<int> months = [31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  for (var i = 0; i < (date.month - 1); i++) {
-    returnedDayOfYear += months[i];
-  }
+dayOfYear(DateTime date) {
+  Duration diff = date.difference(new DateTime(date.year, 1, 1, 0, 0));
 
-  returnedDayOfYear += date.getDate();
+  int returnedDayOfYear = diff.inDays;
 
   return returnedDayOfYear;
 }
