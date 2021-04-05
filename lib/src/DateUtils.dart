@@ -12,7 +12,7 @@ dateByAddingSeconds(DateTime date, int seconds) {
   return date.add(Duration(seconds: seconds));
 }
 
-roundedMinute(DateTime date, {bool precision: true}) {
+roundedMinute(DateTime date, {bool precision = true}) {
   int seconds = date.toUtc().second % 60;
   int offset = seconds >= 30 ? 60 - seconds : -1 * seconds;
   if (precision) return date;
@@ -21,9 +21,9 @@ roundedMinute(DateTime date, {bool precision: true}) {
 }
 
 dayOfYear(DateTime date) {
-  Duration diff = date.difference(new DateTime(date.year, 1, 1, 0, 0));
+  Duration diff = date.difference(DateTime(date.year, 1, 1, 0, 0));
 
-  int returnedDayOfYear = diff.inDays;
+  int returnedDayOfYear = diff.inDays + 1; // 1st Jan should be day 1
 
   return returnedDayOfYear;
 }

@@ -10,6 +10,7 @@ main() {
 
   int timezoneAdj = (5.5 * 60).toInt();
   int currentDayOfYear = dayOfYear(DateTime.now());
+  int firstJan = dayOfYear(DateTime(2021, 1, 1));
 
   print(prayerTimes.fajr!.add(Duration(minutes: timezoneAdj)));
   print(prayerTimes.dhuhr!.add(Duration(minutes: timezoneAdj)));
@@ -17,4 +18,5 @@ main() {
   print(prayerTimes.maghrib!.add(Duration(minutes: timezoneAdj)));
   print(prayerTimes.isha!.add(Duration(minutes: timezoneAdj)));
   print(currentDayOfYear);
+  print(firstJan);
 }
