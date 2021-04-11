@@ -7,9 +7,7 @@ main() {
   final location = tz.getLocation('America/New_York');
 
   // Definitions
-  // DateTime date = DateTime(2021, 04, 11, 17);
   DateTime date = tz.TZDateTime.from(DateTime.now(), location);
-  // Coordinates coordinates = Coordinates(35.78056, -78.6389);
   Coordinates coordinates = Coordinates(35.78056, -78.6389);
 
   // Parameters

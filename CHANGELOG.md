@@ -11,3 +11,5 @@
 1.0.5: Example added.
 
 1.0.6: Fix for day of year.
+
+1.0.7: Next and previous prayer do not return null even in the case of before fajr/after isha.

@@ -1,5 +1,5 @@
 name: adhan_dart
-version: 1.0.6
+version: 1.0.7
 description: >-
   Library to calculate prayer times for muslims.
   Based on precise astronomical formula.

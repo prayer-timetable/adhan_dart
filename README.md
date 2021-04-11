@@ -8,6 +8,12 @@ All astronomical calculations are high precision equations directly from the boo
 
 Implementations of Adhan (JavaScript only for now) in other languages can be found in the original repo [Adhan](https://github.com/batoulapps/Adhan).
 
+## Another Adhan package?
+
+There are other 'adhan' packages available in this repository. This one is like-for-like port of tried and tested JS repo mentioned above. Several aspects are adjusted to take advantage of Dart's features and some functionality added in the process. For example, `prayerTimes.currentPrayer()` will not return null in case the time is after midnight and before fajr; rather it will return 'ishabefore', isha prayer of the day before. Likewise `prayerTimes.nextPrayer()` will return 'fajrafter' - meaning fajr prayer for the day after.
+
+Another addition is 'precise: true' parameter for prayer calculations. On absence of this parameter, the time returned will be rounded to the nearest minute; having precision as a parameter will return second-precision DateTime value. For example: `PrayerTimes prayerTimes = PrayerTimes(coordinates, date, params, precision: true);`.
+
 ## Installation
 
 Adhan was designed to work be easy to import to any Dart or Flutter project.
@@ -15,7 +21,7 @@ Adhan was designed to work be easy to import to any Dart or Flutter project.
 Insert under dependencies in your pubspec.yaml file:
 
 ```
-  adhan_dart: ^1.0.6
+  adhan_dart: ^1.0.7
 ```
 
 Or use the latest dev version:
@@ -38,7 +44,7 @@ To get prayer times initialize a new `PrayerTimes` object passing in coordinates
 date, and calculation parameters.
 
 ```dart
-PrayerTimes prayerTimes = new PrayerTimes(coordinates, date, params);
+PrayerTimes prayerTimes = new PrayerTimes(coordinates, date, params, precision: true);
 ```
 
 ### Initialization parameters
