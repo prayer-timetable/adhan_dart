@@ -7,13 +7,16 @@ main() {
   final location = tz.getLocation('America/New_York');
 
   // Definitions
+  // DateTime date = DateTime(2021, 04, 11, 17);
   DateTime date = tz.TZDateTime.from(DateTime.now(), location);
+  // Coordinates coordinates = Coordinates(35.78056, -78.6389);
   Coordinates coordinates = Coordinates(35.78056, -78.6389);
 
   // Parameters
   CalculationParameters params = CalculationMethod.MuslimWorldLeague();
   params.madhab = Madhab.Hanafi;
-  PrayerTimes prayerTimes = PrayerTimes(coordinates, date, params);
+  PrayerTimes prayerTimes =
+      PrayerTimes(coordinates, date, params, precision: true);
 
   // Prayer times
   DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr!, location);
@@ -23,13 +26,16 @@ main() {
   DateTime maghribTime = tz.TZDateTime.from(prayerTimes.maghrib!, location);
   DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha!, location);
 
+  DateTime ishabeforeTime =
+      tz.TZDateTime.from(prayerTimes.ishabefore!, location);
+  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrafter!, location);
+
   // Convenience Utilities
-  String current = prayerTimes.currentPrayer(); // date: date
-  DateTime currentPrayerTime =
-      tz.TZDateTime.from(prayerTimes.timeForPrayer(current)!, location);
+  String current =
+      prayerTimes.currentPrayer(date: DateTime.now()); // date: date
+  DateTime? currentPrayerTime = prayerTimes.timeForPrayer(current);
   String next = prayerTimes.nextPrayer();
-  DateTime nextPrayerTime =
-      tz.TZDateTime.from(prayerTimes.timeForPrayer(next)!, location);
+  DateTime? nextPrayerTime = prayerTimes.timeForPrayer(next);
 
   // Sunnah Times
   SunnahTimes sunnahTimes = SunnahTimes(prayerTimes);
@@ -51,6 +57,9 @@ main() {
   print('asrTime:\t$asrTime');
   print('maghribTime:\t$maghribTime');
   print('ishaTime:\t$ishaTime');
+
+  print('ishabeforeTime:\t$ishabeforeTime');
+  print('fajrafterTime:\t$fajrafterTime');
 
   print('\n***** Convenience Utilities');
   print('current:\t$current\t$currentPrayerTime');

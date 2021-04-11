@@ -24,7 +24,8 @@ main() {
   DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha!, location);
 
   // Convenience Utilities
-  String current = prayerTimes.currentPrayer(); // date: date
+  String current =
+      prayerTimes.currentPrayer(date: DateTime.now()); // date: date
   DateTime currentPrayerTime =
       tz.TZDateTime.from(prayerTimes.timeForPrayer(current)!, location);
   String next = prayerTimes.nextPrayer();

@@ -19,6 +19,8 @@ class PrayerTimes {
   DateTime? asr;
   DateTime? maghrib;
   DateTime? isha;
+  DateTime? ishabefore;
+  DateTime? fajrafter;
 
   // TODO: added precision
   // rounded nightfraction
@@ -29,14 +31,20 @@ class PrayerTimes {
     this.date = date;
     this.calculationParameters = calculationParameters;
 
+    DateTime dateBefore = date.subtract(Duration(days: 1));
+    DateTime dateAfter = date.add(Duration(days: 1));
     // todo
     // print(calculationParameters.ishaAngle);
     SolarTime solarTime = new SolarTime(date, coordinates);
+    SolarTime solarTimeBefore = new SolarTime(dateBefore, coordinates);
+    SolarTime solarTimeAfter = new SolarTime(dateAfter, coordinates);
 
     DateTime fajrTime;
     DateTime asrTime;
     DateTime maghribTime;
     DateTime ishaTime;
+    DateTime ishabeforeTime;
+    DateTime fajrafterTime;
 
     double? nightFraction;
 
@@ -46,6 +54,11 @@ class PrayerTimes {
         .utcDate(date.year, date.month, date.day);
     DateTime sunsetTime = new TimeComponents(solarTime.sunset)
         .utcDate(date.year, date.month, date.day);
+
+    DateTime sunriseafterTime = new TimeComponents(solarTimeAfter.sunrise)
+        .utcDate(dateAfter.year, dateAfter.month, dateAfter.day);
+    DateTime sunsetbeforeTime = new TimeComponents(solarTimeBefore.sunset)
+        .utcDate(dateBefore.year, dateBefore.month, dateBefore.day);
 
     asrTime = new TimeComponents(
             solarTime.afternoon(shadowLength(calculationParameters.madhab)))
@@ -62,14 +75,31 @@ class PrayerTimes {
             solarTime.hourAngle(-1 * calculationParameters.fajrAngle, false))
         .utcDate(date.year, date.month, date.day);
 
+    fajrafterTime = new TimeComponents(solarTimeAfter.hourAngle(
+            -1 * calculationParameters.fajrAngle, false))
+        .utcDate(dateAfter.year, dateAfter.month, dateAfter.day);
+
     // special case for moonsighting committee above latitude 55
     if (calculationParameters.method == "MoonsightingCommittee" &&
         coordinates.latitude >= 55) {
       nightFraction = night / 7;
       fajrTime = dateByAddingSeconds(sunriseTime, -nightFraction.round());
+      fajrafterTime =
+          dateByAddingSeconds(sunriseafterTime, -nightFraction.round());
     }
 
     DateTime safeFajr() {
+      if (calculationParameters.method == "MoonsightingCommittee") {
+        return Astronomical.seasonAdjustedMorningTwilight(
+            coordinates.latitude, dayOfYear(date), date.year, sunriseTime);
+      } else {
+        var portion = calculationParameters.nightPortions()["fajr"];
+        nightFraction = portion * night;
+        return dateByAddingSeconds(sunriseTime, -nightFraction!.round());
+      }
+    }
+
+    DateTime safeFajrAfter() {
       if (calculationParameters.method == "MoonsightingCommittee") {
         return Astronomical.seasonAdjustedMorningTwilight(
             coordinates.latitude, dayOfYear(date), date.year, sunriseTime);
@@ -86,23 +116,46 @@ class PrayerTimes {
       fajrTime = safeFajr();
     }
 
+    if (fajrafterTime == null ||
+        fajrafterTime.millisecondsSinceEpoch == double.nan ||
+        safeFajr().isAfter(fajrafterTime)) {
+      fajrafterTime = safeFajr();
+    }
+
     if (calculationParameters.ishaInterval != null &&
         calculationParameters.ishaInterval! > 0) {
       ishaTime =
           dateByAddingMinutes(sunsetTime, calculationParameters.ishaInterval);
+      ishabeforeTime = dateByAddingMinutes(
+          sunsetbeforeTime, calculationParameters.ishaInterval);
     } else {
       ishaTime = new TimeComponents(
               solarTime.hourAngle(-1 * calculationParameters.ishaAngle, true))
           .utcDate(date.year, date.month, date.day);
-
+      ishabeforeTime = new TimeComponents(solarTimeBefore.hourAngle(
+              -1 * calculationParameters.ishaAngle, true))
+          .utcDate(dateBefore.year, dateBefore.month, dateBefore.day);
       // special case for moonsighting committee above latitude 55
       if (calculationParameters.method == "MoonsightingCommittee" &&
           coordinates.latitude >= 55) {
         nightFraction = night / 7;
         ishaTime = dateByAddingSeconds(sunsetTime, nightFraction!.round());
+        ishabeforeTime =
+            dateByAddingSeconds(sunsetbeforeTime, nightFraction!.round());
       }
 
       DateTime safeIsha() {
+        if (calculationParameters.method == "MoonsightingCommittee") {
+          return Astronomical.seasonAdjustedEveningTwilight(
+              coordinates.latitude, dayOfYear(date), date.year, sunsetTime);
+        } else {
+          var portion = calculationParameters.nightPortions()["isha"];
+          nightFraction = portion * night;
+          return dateByAddingSeconds(sunsetTime, nightFraction!.round());
+        }
+      }
+
+      DateTime safeIshaBefore() {
         if (calculationParameters.method == "MoonsightingCommittee") {
           return Astronomical.seasonAdjustedEveningTwilight(
               coordinates.latitude, dayOfYear(date), date.year, sunsetTime);
@@ -117,6 +170,12 @@ class PrayerTimes {
           ishaTime.millisecondsSinceEpoch == double.nan ||
           safeIsha().isBefore(ishaTime)) {
         ishaTime = safeIsha();
+      }
+
+      if (ishabeforeTime == null ||
+          ishabeforeTime.millisecondsSinceEpoch == double.nan ||
+          safeIshaBefore().isBefore(ishabeforeTime)) {
+        ishabeforeTime = safeIshaBefore();
       }
     }
 
@@ -161,6 +220,13 @@ class PrayerTimes {
         precision: precision);
     this.isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment),
         precision: precision);
+
+    this.fajrafter = roundedMinute(
+        dateByAddingMinutes(fajrafterTime, fajrAdjustment),
+        precision: precision);
+    this.ishabefore = roundedMinute(
+        dateByAddingMinutes(ishabeforeTime, ishaAdjustment),
+        precision: precision);
   }
 
   DateTime? timeForPrayer(String prayer) {
@@ -176,15 +242,19 @@ class PrayerTimes {
       return this.maghrib;
     } else if (prayer == Prayer.Isha) {
       return this.isha;
+    } else if (prayer == Prayer.IshaBefore) {
+      return this.ishabefore;
+    } else if (prayer == Prayer.FajrAfter) {
+      return this.fajrafter;
     } else {
       return null;
     }
   }
 
-  currentPrayer({DateTime? date}) {
-    if (date == null) {
-      date = DateTime.now();
-    }
+  currentPrayer({required DateTime date}) {
+    // if (date == null) {
+    //   date = DateTime.now();
+    // }
     if (date.isAfter(this.isha!)) {
       return Prayer.Isha;
     } else if (date.isAfter(this.maghrib!)) {
@@ -198,7 +268,7 @@ class PrayerTimes {
     } else if (date.isAfter(this.fajr!)) {
       return Prayer.Fajr;
     } else {
-      return Prayer.None;
+      return Prayer.IshaBefore;
     }
   }
 
@@ -207,7 +277,7 @@ class PrayerTimes {
       date = DateTime.now();
     }
     if (date.isAfter(this.isha!)) {
-      return Prayer.None;
+      return Prayer.FajrAfter;
     } else if (date.isAfter(this.maghrib!)) {
       return Prayer.Isha;
     } else if (date.isAfter(this.asr!)) {
