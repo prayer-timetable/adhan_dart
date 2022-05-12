@@ -5,7 +5,7 @@ class CalculationParameters {
   String? method;
   late double fajrAngle;
   late double ishaAngle;
-  double? ishaInterval;
+  int? ishaInterval;
   double? maghribAngle;
   String? madhab;
 
@@ -14,11 +14,11 @@ class CalculationParameters {
   late Map methodAdjustments;
 
   CalculationParameters(String methodName, double fajrAngle, double ishaAngle,
-      {double? ishaInterval, double? maghribAngle}) {
+      {int? ishaInterval, double? maghribAngle}) {
     this.method = methodName;
     this.fajrAngle = fajrAngle;
     this.ishaAngle = ishaAngle;
-    this.ishaInterval = ishaInterval ?? 0.0;
+    this.ishaInterval = ishaInterval ?? 0;
     this.maghribAngle = maghribAngle;
     this.madhab = Madhab.Shafi;
     this.highLatitudeRule = HighLatitudeRule.MiddleOfTheNight;
