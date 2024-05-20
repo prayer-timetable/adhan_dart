@@ -17,3 +17,5 @@
 1.0.8: Bug fix for UmmAlQura and Qatar calculation methods.
 
 1.1.0: Exposed highLatitudeRule, madhab, adjustments, methodAdjustment to CalculationParameters. Updated timezone package. New lint rules, fixed some static methods naming convention. Turkey is now Turkiye.
+
+1.1.1: Fixed documentation, calculation parameters bug fix.

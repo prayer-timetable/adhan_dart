@@ -19,7 +19,7 @@ class CalculationParameters {
       String? highLatitudeRule,
       String? madhab,
       Map? adjustments,
-      Map? methodAdjustment}) {
+      Map? methodAdjustments}) {
     method = methodName;
     this.fajrAngle = fajrAngle;
     this.ishaAngle = ishaAngle;
@@ -28,7 +28,14 @@ class CalculationParameters {
     this.madhab = Madhab.shafi;
     this.highLatitudeRule = HighLatitudeRule.middleOfTheNight;
     this.adjustments = {'fajr': 0, 'sunrise': 0, 'dhuhr': 0, 'asr': 0, 'maghrib': 0, 'isha': 0};
-    methodAdjustments = {'fajr': 0, 'sunrise': 0, 'dhuhr': 0, 'asr': 0, 'maghrib': 0, 'isha': 0};
+    this.methodAdjustments = {
+      'fajr': 0,
+      'sunrise': 0,
+      'dhuhr': 0,
+      'asr': 0,
+      'maghrib': 0,
+      'isha': 0
+    };
   }
 
   nightPortions() {
