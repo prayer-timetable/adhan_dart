@@ -9,7 +9,9 @@ class SunnahTimes {
     DateTime date = prayerTimes.date;
     DateTime nextDay = dateByAddingDays(date, 1);
     PrayerTimes nextDayPrayerTimes = PrayerTimes(
-        prayerTimes.coordinates, nextDay, prayerTimes.calculationParameters,
+        coordinates: prayerTimes.coordinates,
+        date: nextDay,
+        calculationParameters: prayerTimes.calculationParameters,
         precision: precision);
 
     Duration nightDuration = (nextDayPrayerTimes.fajr!.difference(prayerTimes.maghrib!));

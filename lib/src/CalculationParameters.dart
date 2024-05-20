@@ -55,7 +55,7 @@ class CalculationParameters {
       CalculationParameters(
         method: method ?? this.method,
         fajrAngle: fajrAngle ?? this.fajrAngle,
-        ishaAngle: ishaAngle ?? this.ishaAngle ?? this.fajrAngle,
+        ishaAngle: ishaAngle ?? this.ishaAngle,
 
         // maghribAngle: maghribAngle ?? this.maghribAngle,
         madhab: madhab ?? this.madhab,
@@ -71,7 +71,7 @@ class CalculationParameters {
       case HighLatitudeRule.seventhOfTheNight:
         return {'fajr': 1 / 7, 'isha': 1 / 7};
       case HighLatitudeRule.twilightAngle:
-        return {'fajr': fajrAngle / 60, 'isha': ishaAngle ?? fajrAngle / 60};
+        return {'fajr': fajrAngle / 60, 'isha': ishaAngle / 60};
       default:
         throw ('Invalid high latitude rule found when attempting to compute night portions: $highLatitudeRule');
     }

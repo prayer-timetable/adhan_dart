@@ -44,7 +44,7 @@ To get prayer times initialize a new `PrayerTimes` object passing in coordinates
 date, and calculation parameters.
 
 ```dart
-PrayerTimes prayerTimes = new PrayerTimes(coordinates, date, params, precision: true);
+PrayerTimes prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params, precision: true);
 ```
 
 ### Initialization parameters
@@ -55,7 +55,7 @@ Create a `Coordinates` object with the latitude and longitude for the location
 you want prayer times for.
 
 ```dart
-Coordinates coordinates = new Coordinates(35.78056, -78.6389);
+Coordinates coordinates = Coordinates(35.78056, -78.6389);
 ```
 
 #### Date
@@ -65,8 +65,8 @@ object. The year, month, and day values can be populated. The year, month and da
 Gregorian calendar.
 
 ```dart
-DateTime date = new DateTime.now(); // this is default
-DateTime date = new DateTime(2015, 11, 1); // set specific date
+DateTime date = DateTime.now(); // this is default
+DateTime date = DateTime(2015, 11, 1); // set specific date
 ```
 
 #### Calculation parameters
@@ -141,12 +141,12 @@ tz.TZDateTime.from(prayerTimes.fajr, timezone);
 ### Full Example
 
 ```dart
-DateTime date = new tz.TZDateTime.from(DateTime.now(), timezone);
+DateTime date = tz.TZDateTime.from(DateTime.now(), timezone);
 final timezone = tz.getLocation('America/New_York');
-Coordinates coordinates = new Coordinates(35.78056, -78.6389);
+Coordinates coordinates = Coordinates(35.78056, -78.6389);
 CalculationParameters params = CalculationMethod.MuslimWorldLeague();
 params.madhab = Madhab.Hanafi;
-PrayerTimes prayerTimes = new PrayerTimes(coordinates, date, params);
+PrayerTimes prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params, precision: true);
 
 DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr, timezone);
 DateTime sunriseTime = tz.TZDateTime.from(prayerTimes.sunrise, timezone);
@@ -162,7 +162,7 @@ The `PrayerTimes` object has functions for getting the current prayer and the ne
 easier to dynamically show countdowns until the next prayer.
 
 ```dart
-var prayerTimes = new PrayerTimes(coordinates, date, params);
+var prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params, precision: true)
 
 var current = prayerTimes.currentPrayer();
 var next = prayerTimes.nextPrayer();
@@ -175,7 +175,7 @@ The Adhan library can also calulate Sunnah times. Given an instance of `PrayerTi
 
 ```dart
 final timezone = tz.getLocation('America/New_York');
-SunnahTimes sunnahTimes = new SunnahTimes(prayerTimes);
+SunnahTimes sunnahTimes = SunnahTimes(prayerTimes);
 DateTime middleOfTheNight =
     tz.TZDateTime.from(sunnahTimes.middleOfTheNight, timezone);
 DateTime lastThirdOfTheNight =
@@ -187,7 +187,7 @@ DateTime lastThirdOfTheNight =
 Get the direction, in degrees from North, of the Qibla from a given set of coordinates.
 
 ```dart
-var coordinates = new Coordinates(35.78056, -78.6389);
+var coordinates = Coordinates(35.78056, -78.6389);
 var qiblaDirection = Qibla.qibla(coordinates);
 ```
 

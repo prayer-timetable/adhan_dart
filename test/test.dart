@@ -18,7 +18,8 @@ main() {
   CalculationParameters params = CalculationMethod.muslimWorldLeague();
   params.madhab = Madhab.hanafi;
   params.highLatitudeRule = HighLatitudeRule.seventhOfTheNight;
-  PrayerTimes prayerTimes = PrayerTimes(coordinates, date, params, precision: true);
+  PrayerTimes prayerTimes = PrayerTimes(
+      coordinates: coordinates, date: date, calculationParameters: params, precision: true);
 
   // Prayer times
   DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr!, location);

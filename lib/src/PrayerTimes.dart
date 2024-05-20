@@ -1,3 +1,4 @@
+import 'package:adhan_dart/adhan_dart.dart';
 import 'package:adhan_dart/src/SolarTime.dart';
 import 'package:adhan_dart/src/TimeComponents.dart';
 import 'package:adhan_dart/src/Prayer.dart';
@@ -9,9 +10,9 @@ import 'package:adhan_dart/src/Coordinates.dart';
 import 'package:adhan_dart/src/CalculationParameters.dart';
 
 class PrayerTimes {
-  late Coordinates coordinates;
-  late DateTime date;
-  late CalculationParameters calculationParameters;
+  DateTime date = DateTime.now();
+  Coordinates coordinates = Coordinates(0, 0);
+  CalculationParameters calculationParameters = CalculationMethod.muslimWorldLeague();
 
   DateTime? fajr;
   DateTime? sunrise;
@@ -24,8 +25,11 @@ class PrayerTimes {
 
   // TODO: added precision
   // rounded nightfraction
-  PrayerTimes(Coordinates coordinates, DateTime date, CalculationParameters calculationParameters,
-      {precision = false}) {
+  PrayerTimes(
+      {required Coordinates coordinates,
+      required DateTime date,
+      required CalculationParameters calculationParameters,
+      precision = false}) {
     this.coordinates = coordinates;
     this.date = date;
     this.calculationParameters = calculationParameters;
