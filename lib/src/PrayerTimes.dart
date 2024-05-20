@@ -1,13 +1,8 @@
 import 'package:adhan_dart/adhan_dart.dart';
 import 'package:adhan_dart/src/SolarTime.dart';
 import 'package:adhan_dart/src/TimeComponents.dart';
-import 'package:adhan_dart/src/Prayer.dart';
 import 'package:adhan_dart/src/Astronomical.dart';
 import 'package:adhan_dart/src/DateUtils.dart';
-import 'package:adhan_dart/src/Madhab.dart';
-
-import 'package:adhan_dart/src/Coordinates.dart';
-import 'package:adhan_dart/src/CalculationParameters.dart';
 
 class PrayerTimes {
   DateTime date = DateTime.now();
@@ -25,13 +20,14 @@ class PrayerTimes {
 
   // TODO: added precision
   // rounded nightfraction
-  PrayerTimes(
-      {required Coordinates coordinates,
-      required DateTime date,
-      required CalculationParameters calculationParameters,
-      precision = false}) {
-    this.coordinates = coordinates;
+  PrayerTimes({
+    required DateTime date,
+    required Coordinates coordinates,
+    required CalculationParameters calculationParameters,
+    precision = false,
+  }) {
     this.date = date;
+    this.coordinates = coordinates;
     this.calculationParameters = calculationParameters;
 
     DateTime dateBefore = date.subtract(const Duration(days: 1));

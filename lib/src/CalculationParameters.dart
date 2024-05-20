@@ -28,17 +28,12 @@ class CalculationParameters {
     this.ishaAngle = ishaAngle;
     this.ishaInterval = ishaInterval ?? 0;
     this.maghribAngle = maghribAngle;
-    this.madhab = Madhab.shafi;
-    this.highLatitudeRule = HighLatitudeRule.middleOfTheNight;
-    this.adjustments = {'fajr': 0, 'sunrise': 0, 'dhuhr': 0, 'asr': 0, 'maghrib': 0, 'isha': 0};
-    this.methodAdjustments = {
-      'fajr': 0,
-      'sunrise': 0,
-      'dhuhr': 0,
-      'asr': 0,
-      'maghrib': 0,
-      'isha': 0
-    };
+    this.madhab = madhab ?? Madhab.shafi;
+    this.highLatitudeRule = highLatitudeRule ?? HighLatitudeRule.middleOfTheNight;
+    this.adjustments =
+        adjustments ?? {'fajr': 0, 'sunrise': 0, 'dhuhr': 0, 'asr': 0, 'maghrib': 0, 'isha': 0};
+    this.methodAdjustments = methodAdjustments ??
+        {'fajr': 0, 'sunrise': 0, 'dhuhr': 0, 'asr': 0, 'maghrib': 0, 'isha': 0};
   }
 
   CalculationParameters copyWith({
