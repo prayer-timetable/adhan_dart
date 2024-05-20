@@ -15,3 +15,5 @@
 1.0.7: Next and previous prayer do not return null even in the case of before fajr/after isha.
 
 1.0.8: Bug fix for UmmAlQura and Qatar calculation methods.
+
+1.1.0: Exposed highLatitudeRule, madhab, adjustments, methodAdjustment to CalculationParameters. Updated timezone package. New lint rules, fixed some static methods naming convention. Turkey is now Turkiye.
