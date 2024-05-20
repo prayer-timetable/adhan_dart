@@ -14,42 +14,33 @@ class CalculationParameters {
   late Map methodAdjustments;
 
   CalculationParameters(String methodName, double fajrAngle, double ishaAngle,
-      {int? ishaInterval, double? maghribAngle}) {
-    this.method = methodName;
+      {int? ishaInterval,
+      double? maghribAngle,
+      String? highLatitudeRule,
+      String? madhab,
+      Map? adjustments,
+      Map? methodAdjustment}) {
+    method = methodName;
     this.fajrAngle = fajrAngle;
     this.ishaAngle = ishaAngle;
     this.ishaInterval = ishaInterval ?? 0;
     this.maghribAngle = maghribAngle;
-    this.madhab = Madhab.Shafi;
-    this.highLatitudeRule = HighLatitudeRule.MiddleOfTheNight;
-    this.adjustments = {
-      'fajr': 0,
-      'sunrise': 0,
-      'dhuhr': 0,
-      'asr': 0,
-      'maghrib': 0,
-      'isha': 0
-    };
-    this.methodAdjustments = {
-      'fajr': 0,
-      'sunrise': 0,
-      'dhuhr': 0,
-      'asr': 0,
-      'maghrib': 0,
-      'isha': 0
-    };
+    this.madhab = Madhab.shafi;
+    this.highLatitudeRule = HighLatitudeRule.middleOfTheNight;
+    this.adjustments = {'fajr': 0, 'sunrise': 0, 'dhuhr': 0, 'asr': 0, 'maghrib': 0, 'isha': 0};
+    methodAdjustments = {'fajr': 0, 'sunrise': 0, 'dhuhr': 0, 'asr': 0, 'maghrib': 0, 'isha': 0};
   }
 
   nightPortions() {
-    switch (this.highLatitudeRule) {
-      case HighLatitudeRule.MiddleOfTheNight:
+    switch (highLatitudeRule) {
+      case HighLatitudeRule.middleOfTheNight:
         return {'fajr': 1 / 2, 'isha': 1 / 2};
-      case HighLatitudeRule.SeventhOfTheNight:
+      case HighLatitudeRule.seventhOfTheNight:
         return {'fajr': 1 / 7, 'isha': 1 / 7};
-      case HighLatitudeRule.TwilightAngle:
-        return {'fajr': this.fajrAngle / 60, 'isha': this.ishaAngle / 60};
+      case HighLatitudeRule.twilightAngle:
+        return {'fajr': fajrAngle / 60, 'isha': ishaAngle / 60};
       default:
-        throw ('Invalid high latitude rule found when attempting to compute night portions: ${this.highLatitudeRule}');
+        throw ('Invalid high latitude rule found when attempting to compute night portions: $highLatitudeRule');
     }
   }
 }

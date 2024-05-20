@@ -6,14 +6,12 @@ class TimeComponents {
   late int seconds;
 
   TimeComponents(double number) {
-    this.hours = (number).floor();
-    this.minutes = ((number - this.hours) * 60).floor();
-    this.seconds =
-        ((number - (this.hours + this.minutes / 60)) * 60 * 60).floor();
+    hours = (number).floor();
+    minutes = ((number - hours) * 60).floor();
+    seconds = ((number - (hours + minutes / 60)) * 60 * 60).floor();
   }
 
   DateTime utcDate(year, month, date) {
-    return new DateTime.utc(
-        year, month, date, this.hours, this.minutes, this.seconds);
+    return DateTime.utc(year, month, date, hours, minutes, seconds);
   }
 }

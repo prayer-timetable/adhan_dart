@@ -17,76 +17,70 @@ class SolarTime {
   late double sunset;
 
   SolarTime(date, coordinates) {
-    double julianDay =
-        Astronomical.julianDay(date.year, date.month, date.day, 0);
+    double julianDay = Astronomical.julianDay(date.year, date.month, date.day, 0);
 
-    this.observer = coordinates;
-    this.solar = new SolarCoordinates(julianDay);
+    observer = coordinates;
+    solar = SolarCoordinates(julianDay);
 
-    this.prevSolar = new SolarCoordinates(julianDay - 1);
-    this.nextSolar = new SolarCoordinates(julianDay + 1);
+    prevSolar = SolarCoordinates(julianDay - 1);
+    nextSolar = SolarCoordinates(julianDay + 1);
 
-    double m0 = Astronomical.approximateTransit(coordinates.longitude,
-        this.solar.apparentSiderealTime, this.solar.rightAscension);
+    double m0 = Astronomical.approximateTransit(
+        coordinates.longitude, solar.apparentSiderealTime, solar.rightAscension);
     const solarAltitude = -50.0 / 60.0;
 
-    this.approxTransit = m0;
+    approxTransit = m0;
 
-    this.transit = Astronomical.correctedTransit(
-        m0,
-        coordinates.longitude,
-        this.solar.apparentSiderealTime,
-        this.solar.rightAscension,
-        this.prevSolar.rightAscension,
-        this.nextSolar.rightAscension);
+    transit = Astronomical.correctedTransit(m0, coordinates.longitude, solar.apparentSiderealTime,
+        solar.rightAscension, prevSolar.rightAscension, nextSolar.rightAscension);
 
-    this.sunrise = Astronomical.correctedHourAngle(
+    sunrise = Astronomical.correctedHourAngle(
         m0,
         solarAltitude,
         coordinates,
         false,
-        this.solar.apparentSiderealTime,
-        this.solar.rightAscension,
-        this.prevSolar.rightAscension,
-        this.nextSolar.rightAscension,
-        this.solar.declination,
-        this.prevSolar.declination,
-        this.nextSolar.declination);
+        solar.apparentSiderealTime,
+        solar.rightAscension,
+        prevSolar.rightAscension,
+        nextSolar.rightAscension,
+        solar.declination,
+        prevSolar.declination,
+        nextSolar.declination);
 
-    this.sunset = Astronomical.correctedHourAngle(
+    sunset = Astronomical.correctedHourAngle(
         m0,
         solarAltitude,
         coordinates,
         true,
-        this.solar.apparentSiderealTime,
-        this.solar.rightAscension,
-        this.prevSolar.rightAscension,
-        this.nextSolar.rightAscension,
-        this.solar.declination,
-        this.prevSolar.declination,
-        this.nextSolar.declination);
+        solar.apparentSiderealTime,
+        solar.rightAscension,
+        prevSolar.rightAscension,
+        nextSolar.rightAscension,
+        solar.declination,
+        prevSolar.declination,
+        nextSolar.declination);
   }
 
   double hourAngle(angle, afterTransit) {
     return Astronomical.correctedHourAngle(
-        this.approxTransit,
+        approxTransit,
         angle,
-        this.observer,
+        observer,
         afterTransit,
-        this.solar.apparentSiderealTime,
-        this.solar.rightAscension,
-        this.prevSolar.rightAscension,
-        this.nextSolar.rightAscension,
-        this.solar.declination,
-        this.prevSolar.declination,
-        this.nextSolar.declination);
+        solar.apparentSiderealTime,
+        solar.rightAscension,
+        prevSolar.rightAscension,
+        nextSolar.rightAscension,
+        solar.declination,
+        prevSolar.declination,
+        nextSolar.declination);
   }
 
   double afternoon(shadowLength) {
     // TODO source shadow angle calculation
-    double tangent = (this.observer.latitude - this.solar.declination!).abs();
+    double tangent = (observer.latitude - solar.declination!).abs();
     double inverse = shadowLength + tan(degreesToRadians(tangent));
     double angle = radiansToDegrees(atan(1.0 / inverse));
-    return this.hourAngle(angle, true);
+    return hourAngle(angle, true);
   }
 }

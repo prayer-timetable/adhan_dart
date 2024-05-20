@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:adhan_dart/adhan_dart.dart';
@@ -11,10 +13,9 @@ main() {
   Coordinates coordinates = Coordinates(35.78056, -78.6389);
 
   // Parameters
-  CalculationParameters params = CalculationMethod.MuslimWorldLeague();
-  params.madhab = Madhab.Hanafi;
-  PrayerTimes prayerTimes =
-      PrayerTimes(coordinates, date, params, precision: true);
+  CalculationParameters params = CalculationMethod.muslimWorldLeague();
+  params.madhab = Madhab.hanafi;
+  PrayerTimes prayerTimes = PrayerTimes(coordinates, date, params, precision: true);
 
   // Prayer times
   DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr!, location);
@@ -24,23 +25,19 @@ main() {
   DateTime maghribTime = tz.TZDateTime.from(prayerTimes.maghrib!, location);
   DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha!, location);
 
-  DateTime ishabeforeTime =
-      tz.TZDateTime.from(prayerTimes.ishabefore!, location);
+  DateTime ishabeforeTime = tz.TZDateTime.from(prayerTimes.ishabefore!, location);
   DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrafter!, location);
 
   // Convenience Utilities
-  String current =
-      prayerTimes.currentPrayer(date: DateTime.now()); // date: date
+  String current = prayerTimes.currentPrayer(date: DateTime.now()); // date: date
   DateTime? currentPrayerTime = prayerTimes.timeForPrayer(current);
   String next = prayerTimes.nextPrayer();
   DateTime? nextPrayerTime = prayerTimes.timeForPrayer(next);
 
   // Sunnah Times
   SunnahTimes sunnahTimes = SunnahTimes(prayerTimes);
-  DateTime middleOfTheNight =
-      tz.TZDateTime.from(sunnahTimes.middleOfTheNight, location);
-  DateTime lastThirdOfTheNight =
-      tz.TZDateTime.from(sunnahTimes.lastThirdOfTheNight, location);
+  DateTime middleOfTheNight = tz.TZDateTime.from(sunnahTimes.middleOfTheNight, location);
+  DateTime lastThirdOfTheNight = tz.TZDateTime.from(sunnahTimes.lastThirdOfTheNight, location);
 
   // Qibla Direction
   var qiblaDirection = Qibla.qibla(coordinates);

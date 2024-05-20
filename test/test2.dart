@@ -1,12 +1,12 @@
+// ignore_for_file: avoid_print
+
 import 'package:adhan_dart/adhan_dart.dart';
 import 'package:adhan_dart/src/DateUtils.dart';
 
 main() {
-  Coordinates coordinates =
-      Coordinates(17.3850, 78.4867); //Hyderabad Coordinates [Asia/Kolkata]
-  CalculationParameters calculationParameters = CalculationMethod.Karachi();
-  PrayerTimes prayerTimes =
-      PrayerTimes(coordinates, DateTime.now(), calculationParameters);
+  Coordinates coordinates = Coordinates(17.3850, 78.4867); //Hyderabad Coordinates [Asia/Kolkata]
+  CalculationParameters calculationParameters = CalculationMethod.karachi();
+  PrayerTimes prayerTimes = PrayerTimes(coordinates, DateTime.now(), calculationParameters);
 
   int timezoneAdj = (5.5 * 60).toInt();
   int currentDayOfYear = dayOfYear(DateTime.now());

@@ -1,11 +1,11 @@
 class Prayer {
-  static String Fajr = 'fajr';
-  static String Sunrise = 'sunrise';
-  static String Dhuhr = 'dhuhr';
-  static String Asr = 'asr';
-  static String Maghrib = 'maghrib';
-  static String Isha = 'isha';
-  static String IshaBefore = 'ishabefore';
-  static String FajrAfter = 'fajrafter';
-  static String None = 'none';
+  static String fajr = 'fajr';
+  static String sunrise = 'sunrise';
+  static String dhuhr = 'dhuhr';
+  static String asr = 'asr';
+  static String maghrib = 'maghrib';
+  static String isha = 'isha';
+  static String ishaBefore = 'ishabefore';
+  static String fajrAfter = 'fajrafter';
+  static String none = 'none';
 }

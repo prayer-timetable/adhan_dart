@@ -10,36 +10,34 @@ class SolarCoordinates {
 
   SolarCoordinates(double julianDay) {
     double T = Astronomical.julianCentury(julianDay);
-    double L0 = Astronomical.meanSolarLongitude(T);
-    double Lp = Astronomical.meanLunarLongitude(T);
-    double Omega = Astronomical.ascendingLunarNodeLongitude(T);
-    double Lambda =
-        degreesToRadians(Astronomical.apparentSolarLongitude(T, L0));
-    double Theta0 = Astronomical.meanSiderealTime(T);
-    double dPsi = Astronomical.nutationInLongitude(T, L0, Lp, Omega);
-    double dEpsilon = Astronomical.nutationInObliquity(T, L0, Lp, Omega);
-    double Epsilon0 = Astronomical.meanObliquityOfTheEcliptic(T);
-    double EpsilonApparent = degreesToRadians(
-        Astronomical.apparentObliquityOfTheEcliptic(T, Epsilon0));
+    double l0 = Astronomical.meanSolarLongitude(T);
+    double lp = Astronomical.meanLunarLongitude(T);
+    double omega = Astronomical.ascendingLunarNodeLongitude(T);
+    double lambda = degreesToRadians(Astronomical.apparentSolarLongitude(T, l0));
+    double theta0 = Astronomical.meanSiderealTime(T);
+    double dPsi = Astronomical.nutationInLongitude(T, l0, lp, omega);
+    double dEpsilon = Astronomical.nutationInObliquity(T, l0, lp, omega);
+    double epsilon0 = Astronomical.meanObliquityOfTheEcliptic(T);
+    double epsilonApparent =
+        degreesToRadians(Astronomical.apparentObliquityOfTheEcliptic(T, epsilon0));
 
     /* declination: The declination of the sun, the angle between
             the rays of the Sun and the plane of the Earth's
             equator, in degrees.
             Equation from Astronomical Algorithms page 165 */
-    this.declination =
-        radiansToDegrees(asin(sin(EpsilonApparent) * sin(Lambda)));
+    declination = radiansToDegrees(asin(sin(epsilonApparent) * sin(lambda)));
 
     /* rightAscension: Right ascension of the Sun, the angular distance on the
             celestial equator from the vernal equinox to the hour circle,
             in degrees.
             Equation from Astronomical Algorithms page 165 */
-    this.rightAscension = unwindAngle(radiansToDegrees(
-        atan2(cos(EpsilonApparent) * sin(Lambda), cos(Lambda))));
+    rightAscension =
+        unwindAngle(radiansToDegrees(atan2(cos(epsilonApparent) * sin(lambda), cos(lambda))));
 
     /* apparentSiderealTime: Apparent sidereal time, the hour angle of the vernal
             equinox, in degrees.
             Equation from Astronomical Algorithms page 88 */
-    this.apparentSiderealTime = Theta0 +
-        (((dPsi * 3600) * cos(degreesToRadians(Epsilon0 + dEpsilon))) / 3600);
+    apparentSiderealTime =
+        theta0 + (((dPsi * 3600) * cos(degreesToRadians(epsilon0 + dEpsilon))) / 3600);
   }
 }
