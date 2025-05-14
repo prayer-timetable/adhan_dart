@@ -1,10 +1,9 @@
-class Madhab {
-  // Madhab(){}
-  static const String shafi = 'shafi';
-  static const String hanafi = 'hanafi';
+enum Madhab {
+  shafi,
+  hanafi
 }
 
-shadowLength(madhab) {
+int shadowLength(madhab) {
   const shafi = Madhab.shafi;
   const hanafi = Madhab.hanafi;
   switch (madhab) {
