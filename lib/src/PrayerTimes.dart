@@ -10,14 +10,14 @@ class PrayerTimes {
   CalculationParameters calculationParameters =
       CalculationMethodParameters.muslimWorldLeague();
 
-  DateTime? fajr;
-  DateTime? sunrise;
-  DateTime? dhuhr;
-  DateTime? asr;
-  DateTime? maghrib;
-  DateTime? isha;
-  DateTime? ishabefore;
-  DateTime? fajrafter;
+  late DateTime fajr;
+  late DateTime sunrise;
+  late DateTime dhuhr;
+  late DateTime asr;
+  late DateTime maghrib;
+  late DateTime isha;
+  late DateTime ishabefore;
+  late DateTime fajrafter;
 
   // TODO: added precision
   // rounded nightfraction
@@ -233,17 +233,17 @@ class PrayerTimes {
     // if (date == null) {
     //   date = DateTime.now();
     // }
-    if (date.isAfter(isha!)) {
+    if (date.isAfter(isha)) {
       return Prayer.isha;
-    } else if (date.isAfter(maghrib!)) {
+    } else if (date.isAfter(maghrib)) {
       return Prayer.maghrib;
-    } else if (date.isAfter(asr!)) {
+    } else if (date.isAfter(asr)) {
       return Prayer.asr;
-    } else if (date.isAfter(dhuhr!)) {
+    } else if (date.isAfter(dhuhr)) {
       return Prayer.dhuhr;
-    } else if (date.isAfter(sunrise!)) {
+    } else if (date.isAfter(sunrise)) {
       return Prayer.sunrise;
-    } else if (date.isAfter(fajr!)) {
+    } else if (date.isAfter(fajr)) {
       return Prayer.fajr;
     } else {
       return Prayer.ishaBefore;
@@ -252,17 +252,17 @@ class PrayerTimes {
 
   Prayer nextPrayer({DateTime? date}) {
     date ??= DateTime.now();
-    if (date.isAfter(isha!)) {
+    if (date.isAfter(isha)) {
       return Prayer.fajrAfter;
-    } else if (date.isAfter(maghrib!)) {
+    } else if (date.isAfter(maghrib)) {
       return Prayer.isha;
-    } else if (date.isAfter(asr!)) {
+    } else if (date.isAfter(asr)) {
       return Prayer.maghrib;
-    } else if (date.isAfter(dhuhr!)) {
+    } else if (date.isAfter(dhuhr)) {
       return Prayer.asr;
-    } else if (date.isAfter(sunrise!)) {
+    } else if (date.isAfter(sunrise)) {
       return Prayer.dhuhr;
-    } else if (date.isAfter(fajr!)) {
+    } else if (date.isAfter(fajr)) {
       return Prayer.sunrise;
     } else {
       return Prayer.fajr;

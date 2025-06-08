@@ -17,11 +17,11 @@ main() {
   int currentDayOfYear = dayOfYear(DateTime.now());
   int firstJan = dayOfYear(DateTime(2021, 1, 1));
 
-  print(prayerTimes.fajr!.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.dhuhr!.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.asr!.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.maghrib!.add(Duration(minutes: timezoneAdj)));
-  print(prayerTimes.isha!.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.fajr.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.dhuhr.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.asr.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.maghrib.add(Duration(minutes: timezoneAdj)));
+  print(prayerTimes.isha.add(Duration(minutes: timezoneAdj)));
   print(currentDayOfYear);
   print(firstJan);
 }

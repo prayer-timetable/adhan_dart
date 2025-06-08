@@ -22,16 +22,16 @@ main() {
       precision: true);
 
   // Prayer times
-  DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr!, location);
-  DateTime sunriseTime = tz.TZDateTime.from(prayerTimes.sunrise!, location);
-  DateTime dhuhrTime = tz.TZDateTime.from(prayerTimes.dhuhr!, location);
-  DateTime asrTime = tz.TZDateTime.from(prayerTimes.asr!, location);
-  DateTime maghribTime = tz.TZDateTime.from(prayerTimes.maghrib!, location);
-  DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha!, location);
+  DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr, location);
+  DateTime sunriseTime = tz.TZDateTime.from(prayerTimes.sunrise, location);
+  DateTime dhuhrTime = tz.TZDateTime.from(prayerTimes.dhuhr, location);
+  DateTime asrTime = tz.TZDateTime.from(prayerTimes.asr, location);
+  DateTime maghribTime = tz.TZDateTime.from(prayerTimes.maghrib, location);
+  DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha, location);
 
   DateTime ishabeforeTime =
-      tz.TZDateTime.from(prayerTimes.ishabefore!, location);
-  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrafter!, location);
+      tz.TZDateTime.from(prayerTimes.ishabefore, location);
+  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrafter, location);
 
   // Convenience Utilities
   Prayer current =

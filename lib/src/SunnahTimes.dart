@@ -1,5 +1,5 @@
-import 'package:adhan_dart/src/PrayerTimes.dart';
 import 'package:adhan_dart/src/DateUtils.dart';
+import 'package:adhan_dart/src/PrayerTimes.dart';
 
 class SunnahTimes {
   late DateTime middleOfTheNight;
@@ -14,13 +14,16 @@ class SunnahTimes {
         calculationParameters: prayerTimes.calculationParameters,
         precision: precision);
 
-    Duration nightDuration = (nextDayPrayerTimes.fajr!.difference(prayerTimes.maghrib!));
+    Duration nightDuration =
+        (nextDayPrayerTimes.fajr.difference(prayerTimes.maghrib));
 
     middleOfTheNight = roundedMinute(
-        dateByAddingSeconds(prayerTimes.maghrib!, (nightDuration.inSeconds / 2).floor()),
+        dateByAddingSeconds(
+            prayerTimes.maghrib, (nightDuration.inSeconds / 2).floor()),
         precision: precision);
     lastThirdOfTheNight = roundedMinute(
-        dateByAddingSeconds(prayerTimes.maghrib!, (nightDuration.inSeconds * (2 / 3)).floor()),
+        dateByAddingSeconds(
+            prayerTimes.maghrib, (nightDuration.inSeconds * (2 / 3)).floor()),
         precision: precision);
   }
 }
