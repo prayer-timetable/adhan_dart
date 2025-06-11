@@ -5,7 +5,7 @@ class SunnahTimes {
   late DateTime middleOfTheNight;
   late DateTime lastThirdOfTheNight;
 
-  SunnahTimes(PrayerTimes prayerTimes, {precision = true}) {
+  SunnahTimes(PrayerTimes prayerTimes, {bool precision = true}) {
     DateTime date = prayerTimes.date;
     DateTime nextDay = dateByAddingDays(date, 1);
     PrayerTimes nextDayPrayerTimes = PrayerTimes(

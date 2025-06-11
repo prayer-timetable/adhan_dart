@@ -16,8 +16,8 @@ class PrayerTimes {
   late DateTime asr;
   late DateTime maghrib;
   late DateTime isha;
-  late DateTime ishabefore;
-  late DateTime fajrafter;
+  late DateTime ishaBefore;
+  late DateTime fajrAfter;
 
   // TODO: added precision
   // rounded nightfraction
@@ -25,7 +25,7 @@ class PrayerTimes {
     required DateTime date,
     required Coordinates coordinates,
     required CalculationParameters calculationParameters,
-    precision = false,
+    bool precision = false,
   }) {
     this.date = date;
     this.coordinates = coordinates;
@@ -221,10 +221,10 @@ class PrayerTimes {
     isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment),
         precision: precision);
 
-    fajrafter = roundedMinute(
+    fajrAfter = roundedMinute(
         dateByAddingMinutes(fajrafterTime, fajrAdjustment),
         precision: precision);
-    ishabefore = roundedMinute(
+    ishaBefore = roundedMinute(
         dateByAddingMinutes(ishabeforeTime, ishaAdjustment),
         precision: precision);
   }
@@ -283,9 +283,9 @@ class PrayerTimes {
     } else if (prayer == Prayer.isha) {
       return isha;
     } else if (prayer == Prayer.ishaBefore) {
-      return ishabefore;
+      return ishaBefore;
     } else if (prayer == Prayer.fajrAfter) {
-      return fajrafter;
+      return fajrAfter;
     } else {
       return null;
     }

@@ -7,18 +7,17 @@ import 'package:timezone/timezone.dart' as tz;
 main() {
   tz.initializeTimeZones();
   // final location = tz.getLocation('America/New_York');
-  final location = tz.getLocation('Europe/Dublin');
+  final location = tz.getLocation('Asia/Riyadh');
 
   // Definitions
   DateTime date = tz.TZDateTime.from(DateTime.now(), location);
   // Coordinates coordinates = Coordinates(35.78056, -78.6389);
-  Coordinates coordinates = Coordinates(53.3046593, -6.2344076);
+  Coordinates coordinates = Coordinates(24.469874, 39.556430);
 
   // Parameters
-  CalculationParameters params =
-      CalculationMethodParameters.muslimWorldLeague();
-  params.madhab = Madhab.hanafi;
-  params.highLatitudeRule = HighLatitudeRule.seventhOfTheNight;
+  CalculationParameters params = CalculationMethodParameters.ummAlQura();
+  // params.madhab = Madhab.shafi;
+  // params.highLatitudeRule = HighLatitudeRule.seventhOfTheNight;
   PrayerTimes prayerTimes = PrayerTimes(
       coordinates: coordinates,
       date: date,
@@ -34,8 +33,8 @@ main() {
   DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha, location);
 
   DateTime ishabeforeTime =
-      tz.TZDateTime.from(prayerTimes.ishabefore, location);
-  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrafter, location);
+      tz.TZDateTime.from(prayerTimes.ishaBefore, location);
+  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrAfter, location);
 
   // Convenience Utilities
   Prayer current =

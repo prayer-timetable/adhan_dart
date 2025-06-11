@@ -30,8 +30,8 @@ main() {
   DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha, location);
 
   DateTime ishabeforeTime =
-      tz.TZDateTime.from(prayerTimes.ishabefore, location);
-  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrafter, location);
+      tz.TZDateTime.from(prayerTimes.ishaBefore, location);
+  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrAfter, location);
 
   // Convenience Utilities
   Prayer current =
