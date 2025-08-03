@@ -1,17 +1,15 @@
-enum Madhab {
-  shafi,
-  hanafi
-}
-
-int shadowLength(madhab) {
-  const shafi = Madhab.shafi;
-  const hanafi = Madhab.hanafi;
+int shadowLength(Madhab madhab) {
   switch (madhab) {
-    case shafi:
+    case Madhab.shafi:
       return 1;
-    case hanafi:
+    case Madhab.hanafi:
       return 2;
-    default:
-      throw 'Invalid Madhab';
   }
 }
+
+/// Enum containing 2 values
+/// - shafi
+/// - hanafi
+///
+/// Can be passed to the PrayerTimes class to set the madhab for calculations.
+enum Madhab { shafi, hanafi }

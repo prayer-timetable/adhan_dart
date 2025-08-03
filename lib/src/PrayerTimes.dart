@@ -4,23 +4,46 @@ import 'package:adhan_dart/src/DateUtils.dart';
 import 'package:adhan_dart/src/SolarTime.dart';
 import 'package:adhan_dart/src/TimeComponents.dart';
 
+/// Prayer times calculation for a given date, location, and calculation method.
+///
+/// Contains all five daily prayer times plus sunrise, and additional times for
+/// previous day's Isha and next day's Fajr for convenience.
 class PrayerTimes {
   DateTime date = DateTime.now();
   Coordinates coordinates = const Coordinates(0, 0);
   CalculationParameters calculationParameters =
       CalculationMethodParameters.muslimWorldLeague();
 
+  /// Fajr prayer time
   late DateTime fajr;
+
+  /// Sunrise time
   late DateTime sunrise;
+
+  /// Dhuhr prayer time
   late DateTime dhuhr;
+
+  /// Asr prayer time
   late DateTime asr;
+
+  /// Maghrib prayer time
   late DateTime maghrib;
+
+  /// Isha prayer time
   late DateTime isha;
+
+  /// Previous day's Isha prayer time
   late DateTime ishaBefore;
+
+  /// Next day's Fajr prayer time
   late DateTime fajrAfter;
 
-  // TODO: added precision
-  // rounded nightfraction
+  /// Creates prayer times for the given date, coordinates, and calculation parameters.
+  ///
+  /// [date] - Date for which to calculate prayer times
+  /// [coordinates] - Geographic coordinates (latitude, longitude)
+  /// [calculationParameters] - Calculation method and adjustments
+  /// [precision] - If true, returns times with second precision; if false, rounds to nearest minute
   PrayerTimes({
     required DateTime date,
     required Coordinates coordinates,
@@ -60,8 +83,8 @@ class PrayerTimes {
     DateTime sunsetbeforeTime = TimeComponents(solarTimeBefore.sunset)
         .utcDate(dateBefore.year, dateBefore.month, dateBefore.day);
 
-    asrTime = TimeComponents(
-            solarTime.afternoon(shadowLength(calculationParameters.madhab)))
+    asrTime = TimeComponents(solarTime.afternoon(
+            shadowLength(calculationParameters.madhab ?? Madhab.shafi)))
         .utcDate(date.year, date.month, date.day);
 
     DateTime tomorrow = dateByAddingDays(date, 1);
@@ -229,6 +252,9 @@ class PrayerTimes {
         precision: precision);
   }
 
+  /// Returns the current prayer for the given date.
+  ///
+  /// [date] - Date/time to check against prayer times
   Prayer currentPrayer({required DateTime date}) {
     // if (date == null) {
     //   date = DateTime.now();
@@ -250,6 +276,9 @@ class PrayerTimes {
     }
   }
 
+  /// Returns the next upcoming prayer.
+  ///
+  /// [date] - Optional date/time to check against. Defaults to DateTime.now()
   Prayer nextPrayer({DateTime? date}) {
     date ??= DateTime.now();
     if (date.isAfter(isha)) {
@@ -269,25 +298,25 @@ class PrayerTimes {
     }
   }
 
-  DateTime? timeForPrayer(Prayer prayer) {
-    if (prayer == Prayer.fajr) {
-      return fajr;
-    } else if (prayer == Prayer.sunrise) {
-      return sunrise;
-    } else if (prayer == Prayer.dhuhr) {
-      return dhuhr;
-    } else if (prayer == Prayer.asr) {
-      return asr;
-    } else if (prayer == Prayer.maghrib) {
-      return maghrib;
-    } else if (prayer == Prayer.isha) {
-      return isha;
-    } else if (prayer == Prayer.ishaBefore) {
-      return ishaBefore;
-    } else if (prayer == Prayer.fajrAfter) {
-      return fajrAfter;
-    } else {
-      return null;
+  /// Returns the DateTime for the specified prayer.
+  DateTime timeForPrayer(Prayer prayer) {
+    switch (prayer) {
+      case Prayer.fajr:
+        return fajr;
+      case Prayer.sunrise:
+        return sunrise;
+      case Prayer.dhuhr:
+        return dhuhr;
+      case Prayer.asr:
+        return asr;
+      case Prayer.maghrib:
+        return maghrib;
+      case Prayer.isha:
+        return isha;
+      case Prayer.ishaBefore:
+        return ishaBefore;
+      case Prayer.fajrAfter:
+        return fajrAfter;
     }
   }
 }

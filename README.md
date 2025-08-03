@@ -55,7 +55,7 @@ Create a `Coordinates` object with the latitude and longitude for the location
 you want prayer times for.
 
 ```dart
-Coordinates coordinates = Coordinates(35.78056, -78.6389);
+Coordinates coordinates = const Coordinates(35.78056, -78.6389);
 ```
 
 #### Date
@@ -77,9 +77,9 @@ objects in the `CalculationMethod` object. You can then further
 customize the calculation parameters if needed.
 
 ```dart
-CalculationParameters params = CalculationMethod.muslimWorldLeague();
+CalculationParameters params = CalculationMethodParameters.muslimWorldLeague();
 params.madhab = Madhab.hanafi;
-params.adjustments.fajr = 2;
+params.adjustments[Prayer.fajr] = 2;
 ```
 
 | Property         | Description                                                                                         |
@@ -96,19 +96,19 @@ params.adjustments.fajr = 2;
 
 | Value                                     | Description                                                                                                                                                                                                                                                                                                     |
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CalculationMethod.muslimWorldLeague()     | Muslim World League. Standard Fajr time with an angle of 18°. Earlier Isha time with an angle of 17°.                                                                                                                                                                                                           |
-| CalculationMethod.egyptian()              | Egyptian General Authority of Survey. Early Fajr time using an angle 19.5° and a slightly earlier Isha time using an angle of 17.5°.                                                                                                                                                                            |
-| CalculationMethod.karachi()               | University of Islamic Sciences, Karachi. A generally applicable method that uses standard Fajr and Isha angles of 18°.                                                                                                                                                                                          |
-| CalculationMethod.ummAlQura()             | Umm al-Qura University, Makkah. Uses a fixed interval of 90 minutes from maghrib to calculate Isha. And a slightly earlier Fajr time with an angle of 18.5°. _Note: you should add a +30 minute custom adjustment for Isha during Ramadan._                                                                     |
-| CalculationMethod.dubai()                 | Used in the UAE. Slightly earlier Fajr time and slightly later Isha time with angles of 18.2° for Fajr and Isha in addition to 3 minute offsets for sunrise, Dhuhr, Asr, and Maghrib.                                                                                                                           |
-| CalculationMethod.qatar()                 | Same Isha interval as `ummAlQura` but with the standard Fajr time using an angle of 18°.                                                                                                                                                                                                                        |
-| CalculationMethod.kuwait()                | Standard Fajr time with an angle of 18°. Slightly earlier Isha time with an angle of 17.5°.                                                                                                                                                                                                                     |
-| CalculationMethod.moonsightingCommittee() | Method developed by Khalid Shaukat, founder of Moonsighting Committee Worldwide. Uses standard 18° angles for Fajr and Isha in addition to seasonal adjustment values. This method automatically applies the 1/7 approximation rule for locations above 55° latitude. Recommended for North America and the UK. |
-| CalculationMethod.singapore()             | Used in Singapore, Malaysia, and Indonesia. Early Fajr time with an angle of 20° and standard Isha time with an angle of 18°.                                                                                                                                                                                   |
-| CalculationMethod.turkiye()               | An approximation of the Diyanet method used in Turkey. This approximation is less accurate outside the region of Turkey.                                                                                                                                                                                        |
-| CalculationMethod.tehran()                | Institute of Geophysics, University of Tehran. Early Isha time with an angle of 14°. Slightly later Fajr time with an angle of 17.7°. Calculates Maghrib based on the sun reaching an angle of 4.5° below the horizon.                                                                                          |
-| CalculationMethod.northAmerica()          | Also known as the ISNA method. Can be used for North America, but the moonsightingCommittee method is preferable. Gives later Fajr times and early Isha times with angles of 15°.                                                                                                                               |
-| CalculationMethod.other()                 | Defaults to angles of 0°, should generally be used for making a custom method and setting your own values.                                                                                                                                                                                                      |
+| CalculationMethodParameters.muslimWorldLeague()     | Muslim World League. Standard Fajr time with an angle of 18°. Earlier Isha time with an angle of 17°.                                                                                                                                                                                                           |
+| CalculationMethodParameters.egyptian()              | Egyptian General Authority of Survey. Early Fajr time using an angle 19.5° and a slightly earlier Isha time using an angle of 17.5°.                                                                                                                                                                            |
+| CalculationMethodParameters.karachi()               | University of Islamic Sciences, Karachi. A generally applicable method that uses standard Fajr and Isha angles of 18°.                                                                                                                                                                                          |
+| CalculationMethodParameters.ummAlQura()             | Umm al-Qura University, Makkah. Uses a fixed interval of 90 minutes from maghrib to calculate Isha. And a slightly earlier Fajr time with an angle of 18.5°. _Note: you should add a +30 minute custom adjustment for Isha during Ramadan._                                                                     |
+| CalculationMethodParameters.dubai()                 | Used in the UAE. Slightly earlier Fajr time and slightly later Isha time with angles of 18.2° for Fajr and Isha in addition to 3 minute offsets for sunrise, Dhuhr, Asr, and Maghrib.                                                                                                                           |
+| CalculationMethodParameters.qatar()                 | Same Isha interval as `ummAlQura` but with the standard Fajr time using an angle of 18°.                                                                                                                                                                                                                        |
+| CalculationMethodParameters.kuwait()                | Standard Fajr time with an angle of 18°. Slightly earlier Isha time with an angle of 17.5°.                                                                                                                                                                                                                     |
+| CalculationMethodParameters.moonsightingCommittee() | Method developed by Khalid Shaukat, founder of Moonsighting Committee Worldwide. Uses standard 18° angles for Fajr and Isha in addition to seasonal adjustment values. This method automatically applies the 1/7 approximation rule for locations above 55° latitude. Recommended for North America and the UK. |
+| CalculationMethodParameters.singapore()             | Used in Singapore, Malaysia, and Indonesia. Early Fajr time with an angle of 20° and standard Isha time with an angle of 18°.                                                                                                                                                                                   |
+| CalculationMethodParameters.turkiye()               | An approximation of the Diyanet method used in Turkey. This approximation is less accurate outside the region of Turkey.                                                                                                                                                                                        |
+| CalculationMethodParameters.tehran()                | Institute of Geophysics, University of Tehran. Early Isha time with an angle of 14°. Slightly later Fajr time with an angle of 17.7°. Calculates Maghrib based on the sun reaching an angle of 4.5° below the horizon.                                                                                          |
+| CalculationMethodParameters.northAmerica()          | Also known as the ISNA method. Can be used for North America, but the moonsightingCommittee method is preferable. Gives later Fajr times and early Isha times with angles of 15°.                                                                                                                               |
+| CalculationMethodParameters.other()                 | Defaults to angles of 0°, should generally be used for making a custom method and setting your own values.                                                                                                                                                                                                      |
 
 #### Madhab
 
@@ -143,9 +143,9 @@ tz.TZDateTime.from(prayerTimes.fajr, timezone);
 ```dart
 DateTime date = tz.TZDateTime.from(DateTime.now(), timezone);
 final timezone = tz.getLocation('America/New_York');
-Coordinates coordinates = Coordinates(35.78056, -78.6389);
-CalculationParameters params = CalculationMethod.MuslimWorldLeague();
-params.madhab = Madhab.Hanafi;
+Coordinates coordinates = const Coordinates(35.78056, -78.6389);
+CalculationParameters params = CalculationMethodParameters.muslimWorldLeague()
+  ..madhab = Madhab.hanafi;
 PrayerTimes prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params, precision: true);
 
 DateTime fajrTime = tz.TZDateTime.from(prayerTimes.fajr, timezone);
@@ -162,9 +162,9 @@ The `PrayerTimes` object has functions for getting the current prayer and the ne
 easier to dynamically show countdowns until the next prayer.
 
 ```dart
-var prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params, precision: true)
+var prayerTimes = PrayerTimes(coordinates: coordinates, date: date, calculationParameters: params, precision: true);
 
-var current = prayerTimes.currentPrayer();
+var current = prayerTimes.currentPrayer(date: DateTime.now());
 var next = prayerTimes.nextPrayer();
 var nextPrayerTime = prayerTimes.timeForPrayer(next);
 ```
@@ -187,7 +187,7 @@ DateTime lastThirdOfTheNight =
 Get the direction, in degrees from North, of the Qibla from a given set of coordinates.
 
 ```dart
-var coordinates = Coordinates(35.78056, -78.6389);
+var coordinates = const Coordinates(35.78056, -78.6389);
 var qiblaDirection = Qibla.qibla(coordinates);
 ```
 

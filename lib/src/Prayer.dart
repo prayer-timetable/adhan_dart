@@ -1,3 +1,14 @@
+/// Enum for each prayer
+/// * five obligatory prayers
+///   - fajr
+///   - dhuhr
+///   - asr
+///   - maghrib
+///   - isha
+/// * three additional values
+///   - sunrise
+///   - ishaBefore (isha prayer of the day before)
+///   - fajrAfter (fajr prayer of the next day)
 enum Prayer {
   fajr,
   sunrise,
@@ -7,14 +18,4 @@ enum Prayer {
   isha,
   ishaBefore,
   fajrAfter,
-
-  // static String fajr = 'fajr';
-  // static String sunrise = 'sunrise';
-  // static String dhuhr = 'dhuhr';
-  // static String asr = 'asr';
-  // static String maghrib = 'maghrib';
-  // static String isha = 'isha';
-  // static String ishaBefore = 'ishabefore';
-  // static String fajrAfter = 'fajrafter';
-  // static String none = 'none';
 }
