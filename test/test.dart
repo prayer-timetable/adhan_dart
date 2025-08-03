@@ -12,7 +12,7 @@ main() {
   // Definitions
   DateTime date = tz.TZDateTime.from(DateTime.now(), location);
   // Coordinates coordinates = Coordinates(35.78056, -78.6389);
-  Coordinates coordinates = Coordinates(24.469874, 39.556430);
+  Coordinates coordinates = const Coordinates(24.469874, 39.556430);
 
   // Parameters
   CalculationParameters params = CalculationMethodParameters.ummAlQura();

@@ -1,6 +1,7 @@
 import 'package:adhan_dart/src/DateUtils.dart';
 import 'package:adhan_dart/src/PrayerTimes.dart';
 
+
 class SunnahTimes {
   late DateTime middleOfTheNight;
   late DateTime lastThirdOfTheNight;

@@ -5,7 +5,7 @@ import 'package:adhan_dart/src/DateUtils.dart';
 
 main() {
   Coordinates coordinates =
-      Coordinates(17.3850, 78.4867); //Hyderabad Coordinates [Asia/Kolkata]
+      const Coordinates(17.3850, 78.4867); //Hyderabad Coordinates [Asia/Kolkata]
   CalculationParameters calculationParameters =
       CalculationMethodParameters.karachi();
   PrayerTimes prayerTimes = PrayerTimes(

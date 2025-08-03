@@ -10,7 +10,7 @@ main() {
 
   // Definitions
   DateTime date = tz.TZDateTime.from(DateTime.now(), location);
-  Coordinates coordinates = Coordinates(35.78056, -78.6389);
+  Coordinates coordinates = const Coordinates(35.78056, -78.6389);
 
   // Parameters
   CalculationParameters params = CalculationMethodParameters.muslimWorldLeague()

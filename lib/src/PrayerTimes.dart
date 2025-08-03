@@ -6,7 +6,7 @@ import 'package:adhan_dart/src/TimeComponents.dart';
 
 class PrayerTimes {
   DateTime date = DateTime.now();
-  Coordinates coordinates = Coordinates(0, 0);
+  Coordinates coordinates = const Coordinates(0, 0);
   CalculationParameters calculationParameters =
       CalculationMethodParameters.muslimWorldLeague();
 
