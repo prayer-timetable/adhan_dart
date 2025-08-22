@@ -10,7 +10,7 @@ main() {
 
   // Definitions
   DateTime date = tz.TZDateTime.from(DateTime.now(), location);
-  Coordinates coordinates = Coordinates(35.78056, -78.6389);
+  Coordinates coordinates = const Coordinates(35.78056, -78.6389);
 
   // Parameters
   CalculationParameters params = CalculationMethodParameters.muslimWorldLeague()
@@ -30,8 +30,8 @@ main() {
   DateTime ishaTime = tz.TZDateTime.from(prayerTimes.isha, location);
 
   DateTime ishabeforeTime =
-      tz.TZDateTime.from(prayerTimes.ishabefore, location);
-  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrafter, location);
+      tz.TZDateTime.from(prayerTimes.ishaBefore, location);
+  DateTime fajrafterTime = tz.TZDateTime.from(prayerTimes.fajrAfter, location);
 
   // Convenience Utilities
   Prayer current =
