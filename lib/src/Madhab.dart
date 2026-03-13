@@ -1,15 +1,23 @@
-int shadowLength(Madhab madhab) {
-  switch (madhab) {
-    case Madhab.shafi:
-      return 1;
-    case Madhab.hanafi:
-      return 2;
-  }
+/// Madhab for Asr prayer time calculation.
+///
+/// The madhab determines the shadow length factor used to calculate
+/// the Asr prayer time.
+enum Madhab {
+  /// Shafi madhab. Asr begins when shadow length equals the object height
+  /// plus the shadow length at noon (shadow factor = 1).
+  shafi(1),
+
+  /// Hanafi madhab. Asr begins when shadow length equals twice the object
+  /// height plus the shadow length at noon (shadow factor = 2).
+  hanafi(2);
+
+  /// The shadow length multiplier used for Asr calculation.
+  final int shadowLength;
+
+  const Madhab(this.shadowLength);
 }
 
-/// Enum containing 2 values
-/// - shafi
-/// - hanafi
+/// Returns the shadow length factor for the given madhab.
 ///
-/// Can be passed to the PrayerTimes class to set the madhab for calculations.
-enum Madhab { shafi, hanafi }
+/// Preserved for backward compatibility with existing code.
+int shadowLength(Madhab madhab) => madhab.shadowLength;
