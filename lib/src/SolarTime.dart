@@ -77,7 +77,10 @@ class SolarTime {
   }
 
   double afternoon(double shadowLength) {
-    // TODO source shadow angle calculation
+    /* Shadow angle calculation for Asr prayer.
+       When the shadow of an object equals shadowLength times its height
+       (plus the shadow at solar noon), Asr begins.
+       Based on equations from Astronomical Algorithms page 105. */
     double tangent = (observer.latitude - solar.declination!).abs();
     double inverse = shadowLength + tan(degreesToRadians(tangent));
     double angle = radiansToDegrees(atan(1.0 / inverse));
