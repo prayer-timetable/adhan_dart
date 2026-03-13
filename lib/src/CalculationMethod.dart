@@ -4,6 +4,7 @@ import 'package:adhan_dart/adhan_dart.dart';
 enum CalculationMethod {
   dubai,
   egyptian,
+  jafari,
   karachi,
   kuwait,
   moonsightingCommittee,
@@ -49,6 +50,20 @@ class CalculationMethodParameters {
         method: CalculationMethod.egyptian, fajrAngle: 19.5, ishaAngle: 17.5);
     params.methodAdjustments = {Prayer.dhuhr: 1};
     return params;
+  }
+
+  /// Shia Ithna-Ashari, Leva Institute, Qum
+  ///
+  /// Settings:
+  /// - Fajr Angle: 16°
+  /// - Isha Angle: 14°
+  /// - Maghrib Angle: 4°
+  static CalculationParameters jafari() {
+    return CalculationParameters(
+        method: CalculationMethod.jafari,
+        fajrAngle: 16,
+        ishaAngle: 14,
+        maghribAngle: 4);
   }
 
   /// University of Islamic Sciences, Karachi
