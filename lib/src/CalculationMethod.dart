@@ -14,6 +14,7 @@ enum CalculationMethod {
   qatar,
   singapore,
   tehran,
+  tunisia,
   turkiye,
   ummAlQura,
 }
@@ -185,6 +186,16 @@ class CalculationMethodParameters {
         ishaInterval: 0,
         maghribAngle: 4.5);
     return params;
+  }
+
+  /// Tunisian Ministry of Religious Affairs
+  ///
+  /// Settings:
+  /// - Fajr Angle: 18°
+  /// - Isha Angle: 18°
+  static CalculationParameters tunisia() {
+    return CalculationParameters(
+        method: CalculationMethod.tunisia, fajrAngle: 18, ishaAngle: 18);
   }
 
   /// Turkey (Diyanet)
