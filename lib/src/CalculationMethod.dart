@@ -4,6 +4,7 @@ import 'package:adhan_dart/adhan_dart.dart';
 enum CalculationMethod {
   dubai,
   egyptian,
+  gulfRegion,
   karachi,
   kuwait,
   moonsightingCommittee,
@@ -49,6 +50,19 @@ class CalculationMethodParameters {
         method: CalculationMethod.egyptian, fajrAngle: 19.5, ishaAngle: 17.5);
     params.methodAdjustments = {Prayer.dhuhr: 1};
     return params;
+  }
+
+  /// Gulf Region
+  ///
+  /// Settings:
+  /// - Fajr Angle: 19.5°
+  /// - Isha Interval: 90 minutes after Maghrib
+  static CalculationParameters gulfRegion() {
+    return CalculationParameters(
+        method: CalculationMethod.gulfRegion,
+        fajrAngle: 19.5,
+        ishaAngle: 0,
+        ishaInterval: 90);
   }
 
   /// University of Islamic Sciences, Karachi
