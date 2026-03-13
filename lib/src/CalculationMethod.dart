@@ -4,6 +4,7 @@ import 'package:adhan_dart/adhan_dart.dart';
 enum CalculationMethod {
   dubai,
   egyptian,
+  jordan,
   karachi,
   kuwait,
   moonsightingCommittee,
@@ -48,6 +49,19 @@ class CalculationMethodParameters {
     CalculationParameters params = CalculationParameters(
         method: CalculationMethod.egyptian, fajrAngle: 19.5, ishaAngle: 17.5);
     params.methodAdjustments = {Prayer.dhuhr: 1};
+    return params;
+  }
+
+  /// Ministry of Awqaf, Islamic Affairs and Holy Places, Jordan
+  ///
+  /// Settings:
+  /// - Fajr Angle: 18°
+  /// - Isha Angle: 18°
+  /// - Method Adjustments: Maghrib +5min
+  static CalculationParameters jordan() {
+    CalculationParameters params = CalculationParameters(
+        method: CalculationMethod.jordan, fajrAngle: 18, ishaAngle: 18);
+    params.methodAdjustments = {Prayer.maghrib: 5};
     return params;
   }
 
