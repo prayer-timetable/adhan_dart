@@ -4,6 +4,7 @@ import 'package:adhan_dart/adhan_dart.dart';
 enum CalculationMethod {
   dubai,
   egyptian,
+  france,
   karachi,
   kuwait,
   moonsightingCommittee,
@@ -49,6 +50,16 @@ class CalculationMethodParameters {
         method: CalculationMethod.egyptian, fajrAngle: 19.5, ishaAngle: 17.5);
     params.methodAdjustments = {Prayer.dhuhr: 1};
     return params;
+  }
+
+  /// Union des Organisations Islamiques de France (UOIF)
+  ///
+  /// Settings:
+  /// - Fajr Angle: 12°
+  /// - Isha Angle: 12°
+  static CalculationParameters france() {
+    return CalculationParameters(
+        method: CalculationMethod.france, fajrAngle: 12, ishaAngle: 12);
   }
 
   /// University of Islamic Sciences, Karachi
