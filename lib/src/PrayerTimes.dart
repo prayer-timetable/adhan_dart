@@ -227,11 +227,9 @@ class PrayerTimes {
 
   /// Returns the current prayer for the given date.
   ///
-  /// [date] - Date/time to check against prayer times
-  Prayer currentPrayer({required DateTime date}) {
-    // if (date == null) {
-    //   date = DateTime.now();
-    // }
+  /// [date] - Optional date/time to check against. Defaults to DateTime.now()
+  Prayer currentPrayer({DateTime? date}) {
+    date ??= DateTime.now();
     if (date.isAfter(isha)) {
       return Prayer.isha;
     } else if (date.isAfter(maghrib)) {
@@ -291,5 +289,11 @@ class PrayerTimes {
       case Prayer.fajrAfter:
         return fajrAfter;
     }
+  }
+
+  @override
+  String toString() {
+    return 'PrayerTimes(fajr: $fajr, sunrise: $sunrise, dhuhr: $dhuhr, '
+        'asr: $asr, maghrib: $maghrib, isha: $isha)';
   }
 }
