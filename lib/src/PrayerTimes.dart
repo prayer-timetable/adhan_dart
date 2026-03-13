@@ -55,8 +55,7 @@ class PrayerTimes {
 
     DateTime dateBefore = date.subtract(const Duration(days: 1));
     DateTime dateAfter = date.add(const Duration(days: 1));
-    // todo
-    // print(calculationParameters.ishaAngle);
+
     SolarTime solarTime = SolarTime(date, coordinates);
     SolarTime solarTimeBefore = SolarTime(dateBefore, coordinates);
     SolarTime solarTimeAfter = SolarTime(dateAfter, coordinates);
@@ -88,7 +87,6 @@ class PrayerTimes {
     var tomorrowSolarTime = SolarTime(tomorrow, coordinates);
     DateTime tomorrowSunrise = TimeComponents(tomorrowSolarTime.sunrise)
         .utcDate(tomorrow.year, tomorrow.month, tomorrow.day);
-    // var night = (tomorrowSunrise - sunsetTime) / 1000;
     int night = (tomorrowSunrise.difference(sunsetTime)).inSeconds;
 
     fajrTime = TimeComponents(solarTime.hourAngle(-1 * calculationParameters.fajrAngle, false))
@@ -116,18 +114,6 @@ class PrayerTimes {
         return dateByAddingSeconds(sunriseTime, -nightFraction!.round());
       }
     }
-
-    // TODO?
-    // DateTime safeFajrAfter() {
-    //   if (calculationParameters.method == CalculationMethod.moonsightingCommittee) {
-    //     return Astronomical.seasonAdjustedMorningTwilight(
-    //         coordinates.latitude, dayOfYear(date), date.year, sunriseTime);
-    //   } else {
-    //     var portion = calculationParameters.nightPortions()[fajr];
-    //     nightFraction = portion * night;
-    //     return dateByAddingSeconds(sunriseTime, -nightFraction!.round());
-    //   }
-    // }
 
     if (fajrTime.millisecondsSinceEpoch.isNaN || safeFajr().isAfter(fajrTime)) {
       fajrTime = safeFajr();
@@ -196,7 +182,6 @@ class PrayerTimes {
       }
     }
 
-    // double fajrAdjustment = (calculationParameters.adjustments["fajr"] && 0) + (calculationParameters.methodAdjustments["fajr"] && 0);
     int fajrAdjustment = (calculationParameters.adjustments[Prayer.fajr] ?? 0) +
         (calculationParameters.methodAdjustments[Prayer.fajr] ?? 0);
     int sunriseAdjustment = (calculationParameters.adjustments[Prayer.sunrise] ?? 0) +
@@ -229,9 +214,6 @@ class PrayerTimes {
   ///
   /// [date] - Date/time to check against prayer times
   Prayer currentPrayer({required DateTime date}) {
-    // if (date == null) {
-    //   date = DateTime.now();
-    // }
     if (date.isAfter(isha)) {
       return Prayer.isha;
     } else if (date.isAfter(maghrib)) {
