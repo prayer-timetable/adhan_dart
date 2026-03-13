@@ -1,25 +1,61 @@
-1.0.0: Initial package.
+# Changelog
 
-1.0.1: Timezone package to dev dependencies.
+All notable changes to this project will be documented in this file.
 
-1.0.2: Minor import fix.
+## 1.2.0
 
-1.0.3: Null safety.
+- Calculation method changes (full credit to MoathCodes), typing fixes.
 
-1.0.4: Day of year native DateTime implementation in DateUtils.
+## 1.1.2
 
-1.0.5: Example added.
+- Explicit `method`, `fajrAngle`, `ishaAngle` parameters for `CalculationParameters`.
+- Explicit `coordinates`, `date`, `calculationParameters` parameters for `PrayerTimes`.
 
-1.0.6: Fix for day of year.
+## 1.1.1
 
-1.0.7: Next and previous prayer do not return null even in the case of before fajr/after isha.
+- Fixed documentation.
+- Calculation parameters bug fix.
 
-1.0.8: Bug fix for UmmAlQura and Qatar calculation methods.
+## 1.1.0
 
-1.1.0: Exposed highLatitudeRule, madhab, adjustments, methodAdjustment to CalculationParameters. Updated timezone package. New lint rules, fixed some static methods naming convention. Turkey is now Turkiye.
+- Exposed `highLatitudeRule`, `madhab`, `adjustments`, `methodAdjustments` on `CalculationParameters`.
+- Updated timezone package.
+- New lint rules, fixed static methods naming convention.
+- Turkey method renamed to Turkiye.
 
-1.1.1: Fixed documentation, calculation parameters bug fix.
+## 1.0.8
 
-1.1.2: Explicit method, fajrAngle, ishaAngle for CalculationParameters; coordinates, date, params for PrayerTimes.
+- Bug fix for UmmAlQura and Qatar calculation methods.
 
-1.2.0: Calculation method changes (full credit to MoathCodes), typing fixes
+## 1.0.7
+
+- `nextPrayer()` and `currentPrayer()` no longer return null before Fajr/after Isha.
+- Added `ishaBefore` and `fajrAfter` prayer values.
+
+## 1.0.6
+
+- Fix for day of year calculation.
+
+## 1.0.5
+
+- Example added.
+
+## 1.0.4
+
+- Day of year native `DateTime` implementation in DateUtils.
+
+## 1.0.3
+
+- Null safety migration.
+
+## 1.0.2
+
+- Minor import fix.
+
+## 1.0.1
+
+- Timezone package moved to dev dependencies.
+
+## 1.0.0
+
+- Initial release.
