@@ -1,4 +1,4 @@
-// import 'package:adhan_dart/src/Astronomical.dart';
+import 'package:adhan_dart/src/Rounding.dart';
 
 DateTime dateByAddingDays(DateTime date, int days) {
   return date.add(Duration(days: days));
@@ -20,10 +20,21 @@ int dayOfYear(DateTime date) {
   return returnedDayOfYear;
 }
 
-DateTime roundedMinute(DateTime date, {bool precision = true}) {
+DateTime roundedMinute(DateTime date,
+    {bool precision = true, Rounding rounding = Rounding.nearest}) {
+  if (precision && rounding == Rounding.nearest) return date;
+
   int seconds = date.toUtc().second % 60;
-  int offset = seconds >= 30 ? 60 - seconds : -1 * seconds;
-  if (precision) return date;
+  int offset;
+
+  if (rounding == Rounding.none) {
+    return date;
+  } else if (rounding == Rounding.up) {
+    offset = seconds > 0 ? 60 - seconds : 0;
+  } else {
+    // Rounding.nearest
+    offset = seconds >= 30 ? 60 - seconds : -1 * seconds;
+  }
 
   return dateByAddingSeconds(date, offset);
 }
