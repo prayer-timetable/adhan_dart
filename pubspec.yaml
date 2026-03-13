@@ -11,4 +11,4 @@ dependencies:
 
 dev_dependencies:
     timezone: ^0.10.1
-    flutter_lints: ^6.0.0
+    lints: ^2.1.0
