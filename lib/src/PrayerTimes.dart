@@ -25,6 +25,9 @@ class PrayerTimes {
   /// Asr prayer time
   late DateTime asr;
 
+  /// Sunset time (astronomical sunset, before maghrib adjustments)
+  late DateTime sunset;
+
   /// Maghrib prayer time
   late DateTime maghrib;
 
@@ -215,6 +218,7 @@ class PrayerTimes {
         roundedMinute(dateByAddingMinutes(sunriseTime, sunriseAdjustment), precision: precision);
     dhuhr = roundedMinute(dateByAddingMinutes(dhuhrTime, dhuhrAdjustment), precision: precision);
     asr = roundedMinute(dateByAddingMinutes(asrTime, asrAdjustment), precision: precision);
+    sunset = roundedMinute(sunsetTime, precision: precision);
     maghrib =
         roundedMinute(dateByAddingMinutes(maghribTime, maghribAdjustment), precision: precision);
     isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment), precision: precision);
