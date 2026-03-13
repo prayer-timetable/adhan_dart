@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:adhan_dart/src/Coordinates.dart';
 import 'package:adhan_dart/src/MathUtils.dart';
 import 'package:adhan_dart/src/DateUtils.dart';
 
@@ -176,7 +177,7 @@ class Astronomical {
   static double correctedHourAngle(
       double? approximateTransit,
       double angle,
-      dynamic coordinates,
+      Coordinates coordinates,
       bool afterTransit,
       double siderealTime,
       double rightAscension,
