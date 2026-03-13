@@ -7,6 +7,7 @@ class CalculationParameters {
   int? ishaInterval;
   double? maghribAngle;
   Madhab? madhab;
+  PolarCircleResolution? polarCircleResolution;
 
   HighLatitudeRule? highLatitudeRule;
   late Map<Prayer, int> adjustments;
@@ -20,6 +21,7 @@ class CalculationParameters {
       double? maghribAngle,
       HighLatitudeRule? highLatitudeRule,
       Madhab? madhab,
+      PolarCircleResolution? polarCircleResolution,
       Map<Prayer, int>? adjustments,
       Map<Prayer, int>? methodAdjustments}) {
     this.method = method;
@@ -28,6 +30,8 @@ class CalculationParameters {
     this.ishaInterval = ishaInterval ?? 0;
     this.maghribAngle = maghribAngle;
     this.madhab = madhab ?? Madhab.shafi;
+    this.polarCircleResolution =
+        polarCircleResolution ?? PolarCircleResolution.unresolved;
     this.highLatitudeRule =
         highLatitudeRule ?? HighLatitudeRule.middleOfTheNight;
     this.adjustments = adjustments ??
@@ -57,6 +61,7 @@ class CalculationParameters {
     int? ishaInterval,
     double? maghribAngle,
     Madhab? madhab,
+    PolarCircleResolution? polarCircleResolution,
     HighLatitudeRule? highLatitudeRule,
     Map<Prayer, int>? adjustments,
     Map<Prayer, int>? methodAdjustments,
@@ -65,9 +70,11 @@ class CalculationParameters {
         method: method ?? this.method,
         fajrAngle: fajrAngle ?? this.fajrAngle,
         ishaAngle: ishaAngle ?? this.ishaAngle,
-
-        // maghribAngle: maghribAngle ?? this.maghribAngle,
+        ishaInterval: ishaInterval ?? this.ishaInterval,
+        maghribAngle: maghribAngle ?? this.maghribAngle,
         madhab: madhab ?? this.madhab,
+        polarCircleResolution:
+            polarCircleResolution ?? this.polarCircleResolution,
         highLatitudeRule: highLatitudeRule ?? this.highLatitudeRule,
         adjustments: adjustments ?? this.adjustments,
         methodAdjustments: methodAdjustments ?? this.methodAdjustments,
