@@ -11,6 +11,7 @@ enum CalculationMethod {
   muslimWorldLeague,
   northAmerica,
   other,
+  portugal,
   qatar,
   singapore,
   tehran,
@@ -142,6 +143,22 @@ class CalculationMethodParameters {
   static CalculationParameters other() {
     return CalculationParameters(
         method: CalculationMethod.other, fajrAngle: 0, ishaAngle: 0);
+  }
+
+  /// Comunidade Islamica de Lisboa, Portugal
+  ///
+  /// Settings:
+  /// - Fajr Angle: 18°
+  /// - Isha Interval: 77 minutes after Maghrib
+  /// - Method Adjustments: Maghrib +3min
+  static CalculationParameters portugal() {
+    CalculationParameters params = CalculationParameters(
+        method: CalculationMethod.portugal,
+        fajrAngle: 18,
+        ishaAngle: 0,
+        ishaInterval: 77);
+    params.methodAdjustments = {Prayer.maghrib: 3};
+    return params;
   }
 
   /// Qatar
