@@ -55,11 +55,27 @@ class PrayerTimes {
 
     DateTime dateBefore = date.subtract(const Duration(days: 1));
     DateTime dateAfter = date.add(const Duration(days: 1));
-    // todo
-    // print(calculationParameters.ishaAngle);
+
     SolarTime solarTime = SolarTime(date, coordinates);
     SolarTime solarTimeBefore = SolarTime(dateBefore, coordinates);
     SolarTime solarTimeAfter = SolarTime(dateAfter, coordinates);
+
+    DateTime tomorrow = dateByAddingDays(date, 1);
+    var tomorrowSolarTime = SolarTime(tomorrow, coordinates);
+
+    // Polar circle resolution: if sunrise/sunset are NaN, attempt to resolve
+    PolarCircleResolution polarCircleResolver =
+        calculationParameters.polarCircleResolution ??
+            PolarCircleResolution.unresolved;
+    if ((solarTime.sunrise.isNaN ||
+            solarTime.sunset.isNaN ||
+            tomorrowSolarTime.sunrise.isNaN) &&
+        polarCircleResolver != PolarCircleResolution.unresolved) {
+      var resolved =
+          resolvePolarCircle(polarCircleResolver, date, coordinates);
+      solarTime = resolved.solarTime;
+      tomorrowSolarTime = resolved.tomorrowSolarTime;
+    }
 
     DateTime fajrTime;
     DateTime asrTime;
@@ -84,8 +100,6 @@ class PrayerTimes {
             .afternoon(shadowLength(calculationParameters.madhab ?? Madhab.shafi).toDouble()))
         .utcDate(date.year, date.month, date.day);
 
-    DateTime tomorrow = dateByAddingDays(date, 1);
-    var tomorrowSolarTime = SolarTime(tomorrow, coordinates);
     DateTime tomorrowSunrise = TimeComponents(tomorrowSolarTime.sunrise)
         .utcDate(tomorrow.year, tomorrow.month, tomorrow.day);
     // var night = (tomorrowSunrise - sunsetTime) / 1000;
