@@ -159,8 +159,7 @@ class PrayerTimes {
         if (calculationParameters.method ==
             CalculationMethod.moonsightingCommittee) {
           return Astronomical.seasonAdjustedEveningTwilight(
-              coordinates.latitude, dayOfYear(date), date.year, sunsetTime,
-              shafaq: calculationParameters.shafaq ?? Shafaq.general);
+              coordinates.latitude, dayOfYear(date), date.year, sunsetTime);
         } else {
           double portion = calculationParameters.nightPortions()[Prayer.isha]!;
           nightFraction = portion * night;
@@ -172,8 +171,7 @@ class PrayerTimes {
         if (calculationParameters.method ==
             CalculationMethod.moonsightingCommittee) {
           return Astronomical.seasonAdjustedEveningTwilight(
-              coordinates.latitude, dayOfYear(date), date.year, sunsetTime,
-              shafaq: calculationParameters.shafaq ?? Shafaq.general);
+              coordinates.latitude, dayOfYear(date), date.year, sunsetTime);
         } else {
           var portion = calculationParameters.nightPortions()[Prayer.isha]!;
           nightFraction = portion * night;

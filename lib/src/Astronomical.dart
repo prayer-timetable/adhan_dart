@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:adhan_dart/src/MathUtils.dart';
 import 'package:adhan_dart/src/DateUtils.dart';
-import 'package:adhan_dart/src/Shafaq.dart';
 
 class Astronomical {
   /* The geometric mean longitude of the sun in degrees. */
@@ -310,27 +309,11 @@ class Astronomical {
   }
 
   static DateTime seasonAdjustedEveningTwilight(
-      double latitude, int dayOfYear, int year, DateTime sunset,
-      {Shafaq shafaq = Shafaq.general}) {
-    double a, b, c, d;
-
-    if (shafaq == Shafaq.ahmer) {
-      a = 62 + ((17.4 / 55.0) * (latitude).abs());
-      b = 62 - ((7.16 / 55.0) * (latitude).abs());
-      c = 62 + ((5.12 / 55.0) * (latitude).abs());
-      d = 62 + ((19.44 / 55.0) * (latitude).abs());
-    } else if (shafaq == Shafaq.abyad) {
-      a = 75 + ((25.60 / 55.0) * (latitude).abs());
-      b = 75 + ((7.16 / 55.0) * (latitude).abs());
-      c = 75 + ((36.84 / 55.0) * (latitude).abs());
-      d = 75 + ((81.84 / 55.0) * (latitude).abs());
-    } else {
-      // Shafaq.general (default)
-      a = 75 + ((25.60 / 55.0) * (latitude).abs());
-      b = 75 + ((2.050 / 55.0) * (latitude).abs());
-      c = 75 - ((9.210 / 55.0) * (latitude).abs());
-      d = 75 + ((6.140 / 55.0) * (latitude).abs());
-    }
+      double latitude, int dayOfYear, int year, DateTime sunset) {
+    double a = 75 + ((25.60 / 55.0) * (latitude).abs());
+    double b = 75 + ((2.050 / 55.0) * (latitude).abs());
+    double c = 75 - ((9.210 / 55.0) * (latitude).abs());
+    double d = 75 + ((6.140 / 55.0) * (latitude).abs());
 
     double adjustment() {
       int dyy = Astronomical.daysSinceSolstice(dayOfYear, year, latitude);
