@@ -8,4 +8,3 @@ export 'package:adhan_dart/src/Prayer.dart';
 export 'package:adhan_dart/src/PrayerTimes.dart';
 export 'package:adhan_dart/src/Qibla.dart';
 export 'package:adhan_dart/src/HighLatitudeRule.dart';
-export 'package:adhan_dart/src/Shafaq.dart';
