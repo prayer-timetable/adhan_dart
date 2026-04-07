@@ -181,6 +181,7 @@ class CalculationMethodParameters {
     CalculationParameters params = CalculationParameters(
         method: CalculationMethod.singapore, fajrAngle: 20, ishaAngle: 18);
     params.methodAdjustments = {Prayer.dhuhr: 1};
+    params.rounding = Rounding.up;
     return params;
   }
 
