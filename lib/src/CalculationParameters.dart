@@ -90,4 +90,11 @@ class CalculationParameters {
         throw ('Invalid high latitude rule found when attempting to compute night portions: $highLatitudeRule');
     }
   }
+
+  @override
+  String toString() {
+    return 'CalculationParameters(method: $method, fajrAngle: $fajrAngle, '
+        'ishaAngle: $ishaAngle, ishaInterval: $ishaInterval, '
+        'maghribAngle: $maghribAngle, madhab: $madhab)';
+  }
 }
