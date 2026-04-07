@@ -65,8 +65,8 @@ class CalculationParameters {
         method: method ?? this.method,
         fajrAngle: fajrAngle ?? this.fajrAngle,
         ishaAngle: ishaAngle ?? this.ishaAngle,
-
-        // maghribAngle: maghribAngle ?? this.maghribAngle,
+        ishaInterval: ishaInterval ?? this.ishaInterval,
+        maghribAngle: maghribAngle ?? this.maghribAngle,
         madhab: madhab ?? this.madhab,
         highLatitudeRule: highLatitudeRule ?? this.highLatitudeRule,
         adjustments: adjustments ?? this.adjustments,
