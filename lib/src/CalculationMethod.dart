@@ -2,6 +2,7 @@ import 'package:adhan_dart/adhan_dart.dart';
 
 /// Enum holding all the available methods
 enum CalculationMethod {
+  algerian,
   dubai,
   egyptian,
   indonesian,
@@ -21,6 +22,16 @@ enum CalculationMethod {
 
 /// Class holding the calculation parameters for each method
 class CalculationMethodParameters {
+  /// Algerian Ministry of Religious Affairs and Wakfs
+  ///
+  /// Settings:
+  /// - Fajr Angle: 18°
+  /// - Isha Angle: 17°
+  static CalculationParameters algerian() {
+    return CalculationParameters(
+        method: CalculationMethod.algerian, fajrAngle: 18, ishaAngle: 17);
+  }
+
   /// Dubai
   ///
   /// Settings:
