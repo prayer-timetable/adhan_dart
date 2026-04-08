@@ -38,4 +38,10 @@ class SunnahTimes {
             prayerTimes.maghrib, (nightDuration.inSeconds * (2 / 3)).floor()),
         precision: precision);
   }
+
+  @override
+  String toString() {
+    return 'SunnahTimes(middleOfTheNight: $middleOfTheNight, '
+        'lastThirdOfTheNight: $lastThirdOfTheNight)';
+  }
 }
