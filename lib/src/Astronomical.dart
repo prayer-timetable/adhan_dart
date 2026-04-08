@@ -202,7 +202,9 @@ class Astronomical {
         (sin(degreesToRadians(coordinates.latitude)) * sin(degreesToRadians(d2)));
     double term2 = cos(degreesToRadians(coordinates.latitude)) * cos(degreesToRadians(d2));
 
-    // TODO: acos with term1/term2 > 1 or < -1
+    /* Clamp the cosine value to [-1, 1] to avoid NaN from acos.
+       Values outside this range occur when the sun does not reach
+       the requested altitude at the given location (e.g., polar regions). */
     double h021 = (term1 / term2).abs() > 1 ? 1.0 : radiansToDegrees(acos(term1 / term2));
 
     double m = afterTransit ? m0! + (h021 / 360) : m0! - (h021 / 360);
