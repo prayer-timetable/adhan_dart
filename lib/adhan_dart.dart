@@ -1,4 +1,3 @@
-// original file - not in use
 export 'package:adhan_dart/src/SunnahTimes.dart';
 export 'package:adhan_dart/src/Coordinates.dart';
 export 'package:adhan_dart/src/CalculationMethod.dart';

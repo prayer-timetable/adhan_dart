@@ -1,5 +1,3 @@
-// import 'package:adhan_dart/src/Astronomical.dart';
-
 DateTime dateByAddingDays(DateTime date, int days) {
   return date.add(Duration(days: days));
 }
