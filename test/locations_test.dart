@@ -209,12 +209,12 @@ void main() {
       final pt = PrayerTimes(
           coordinates: coordinates, date: date, calculationParameters: params);
 
-      expect(timeString(pt.fajr, location), equals('04:24'));
-      expect(timeString(pt.sunrise, location), equals('05:48'));
+      expect(timeString(pt.fajr, location), equals('04:25')); // Rounding.up on Singapore method
+      expect(timeString(pt.sunrise, location), equals('05:49'));
       expect(timeString(pt.dhuhr, location), equals('12:03'));
       expect(timeString(pt.asr, location), equals('15:27'));
-      expect(timeString(pt.maghrib, location), equals('18:15'));
-      expect(timeString(pt.isha, location), equals('19:30'));
+      expect(timeString(pt.maghrib, location), equals('18:16'));
+      expect(timeString(pt.isha, location), equals('19:31'));
     });
 
     test('July — 2024-07-15', () {
@@ -223,12 +223,12 @@ void main() {
       final pt = PrayerTimes(
           coordinates: coordinates, date: date, calculationParameters: params);
 
-      expect(timeString(pt.fajr, location), equals('04:42'));
+      expect(timeString(pt.fajr, location), equals('04:43')); // Rounding.up on Singapore method
       expect(timeString(pt.sunrise, location), equals('06:05'));
       expect(timeString(pt.dhuhr, location), equals('12:00'));
       expect(timeString(pt.asr, location), equals('15:21'));
       expect(timeString(pt.maghrib, location), equals('17:53'));
-      expect(timeString(pt.isha, location), equals('19:06'));
+      expect(timeString(pt.isha, location), equals('19:07'));
     });
   });
 
