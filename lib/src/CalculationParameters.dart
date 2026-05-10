@@ -9,6 +9,7 @@ class CalculationParameters {
   Madhab? madhab;
   Shafaq? shafaq;
   late Rounding rounding;
+  PolarCircleResolution? polarCircleResolution;
 
   HighLatitudeRule? highLatitudeRule;
   late Map<Prayer, int> adjustments;
@@ -24,6 +25,7 @@ class CalculationParameters {
       Madhab? madhab,
       Shafaq? shafaq,
       Rounding? rounding,
+      PolarCircleResolution? polarCircleResolution,
       Map<Prayer, int>? adjustments,
       Map<Prayer, int>? methodAdjustments}) {
     this.method = method;
@@ -34,6 +36,8 @@ class CalculationParameters {
     this.madhab = madhab ?? Madhab.shafi;
     this.shafaq = shafaq ?? Shafaq.general;
     this.rounding = rounding ?? Rounding.nearest;
+    this.polarCircleResolution =
+        polarCircleResolution ?? PolarCircleResolution.unresolved;
     this.highLatitudeRule =
         highLatitudeRule ?? HighLatitudeRule.middleOfTheNight;
     this.adjustments = adjustments ??
@@ -65,6 +69,7 @@ class CalculationParameters {
     Madhab? madhab,
     Shafaq? shafaq,
     Rounding? rounding,
+    PolarCircleResolution? polarCircleResolution,
     HighLatitudeRule? highLatitudeRule,
     Map<Prayer, int>? adjustments,
     Map<Prayer, int>? methodAdjustments,
@@ -78,6 +83,8 @@ class CalculationParameters {
         madhab: madhab ?? this.madhab,
         shafaq: shafaq ?? this.shafaq,
         rounding: rounding ?? this.rounding,
+        polarCircleResolution:
+            polarCircleResolution ?? this.polarCircleResolution,
         highLatitudeRule: highLatitudeRule ?? this.highLatitudeRule,
         adjustments: adjustments ?? this.adjustments,
         methodAdjustments: methodAdjustments ?? this.methodAdjustments,
