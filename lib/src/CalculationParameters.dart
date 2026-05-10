@@ -8,6 +8,7 @@ class CalculationParameters {
   double? maghribAngle;
   Madhab? madhab;
   Shafaq? shafaq;
+  late Rounding rounding;
 
   HighLatitudeRule? highLatitudeRule;
   late Map<Prayer, int> adjustments;
@@ -22,6 +23,7 @@ class CalculationParameters {
       HighLatitudeRule? highLatitudeRule,
       Madhab? madhab,
       Shafaq? shafaq,
+      Rounding? rounding,
       Map<Prayer, int>? adjustments,
       Map<Prayer, int>? methodAdjustments}) {
     this.method = method;
@@ -31,6 +33,7 @@ class CalculationParameters {
     this.maghribAngle = maghribAngle;
     this.madhab = madhab ?? Madhab.shafi;
     this.shafaq = shafaq ?? Shafaq.general;
+    this.rounding = rounding ?? Rounding.nearest;
     this.highLatitudeRule =
         highLatitudeRule ?? HighLatitudeRule.middleOfTheNight;
     this.adjustments = adjustments ??
@@ -61,6 +64,7 @@ class CalculationParameters {
     double? maghribAngle,
     Madhab? madhab,
     Shafaq? shafaq,
+    Rounding? rounding,
     HighLatitudeRule? highLatitudeRule,
     Map<Prayer, int>? adjustments,
     Map<Prayer, int>? methodAdjustments,
@@ -73,6 +77,7 @@ class CalculationParameters {
         maghribAngle: maghribAngle ?? this.maghribAngle,
         madhab: madhab ?? this.madhab,
         shafaq: shafaq ?? this.shafaq,
+        rounding: rounding ?? this.rounding,
         highLatitudeRule: highLatitudeRule ?? this.highLatitudeRule,
         adjustments: adjustments ?? this.adjustments,
         methodAdjustments: methodAdjustments ?? this.methodAdjustments,

@@ -219,25 +219,26 @@ class PrayerTimes {
     int ishaAdjustment = (calculationParameters.adjustments[Prayer.isha] ?? 0) +
         (calculationParameters.methodAdjustments[Prayer.isha] ?? 0);
 
-    fajr = roundedMinute(dateByAddingMinutes(fajrTime, fajrAdjustment),
-        precision: precision);
-    sunrise = roundedMinute(dateByAddingMinutes(sunriseTime, sunriseAdjustment),
-        precision: precision);
-    dhuhr = roundedMinute(dateByAddingMinutes(dhuhrTime, dhuhrAdjustment),
-        precision: precision);
-    asr = roundedMinute(dateByAddingMinutes(asrTime, asrAdjustment),
-        precision: precision);
-    maghrib = roundedMinute(dateByAddingMinutes(maghribTime, maghribAdjustment),
-        precision: precision);
-    isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment),
-        precision: precision);
+    Rounding rounding =
+        precision ? Rounding.none : calculationParameters.rounding;
 
-    fajrAfter = roundedMinute(
-        dateByAddingMinutes(fajrafterTime, fajrAdjustment),
-        precision: precision);
-    ishaBefore = roundedMinute(
-        dateByAddingMinutes(ishabeforeTime, ishaAdjustment),
-        precision: precision);
+    fajr = roundedMinute(dateByAddingMinutes(fajrTime, fajrAdjustment),
+        precision: false, rounding: rounding);
+    sunrise = roundedMinute(dateByAddingMinutes(sunriseTime, sunriseAdjustment),
+        precision: false, rounding: rounding);
+    dhuhr = roundedMinute(dateByAddingMinutes(dhuhrTime, dhuhrAdjustment),
+        precision: false, rounding: rounding);
+    asr = roundedMinute(dateByAddingMinutes(asrTime, asrAdjustment),
+        precision: false, rounding: rounding);
+    maghrib = roundedMinute(dateByAddingMinutes(maghribTime, maghribAdjustment),
+        precision: false, rounding: rounding);
+    isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment),
+        precision: false, rounding: rounding);
+
+    fajrAfter = roundedMinute(dateByAddingMinutes(fajrafterTime, fajrAdjustment),
+        precision: false, rounding: rounding);
+    ishaBefore = roundedMinute(dateByAddingMinutes(ishabeforeTime, ishaAdjustment),
+        precision: false, rounding: rounding);
   }
 
   /// Returns the current prayer for the given date.
