@@ -8,6 +8,7 @@ enum CalculationMethod {
   france,
   gulfRegion,
   indonesian,
+  jafari,
   jordan,
   karachi,
   kuwait,
@@ -102,6 +103,20 @@ class CalculationMethodParameters {
         method: CalculationMethod.indonesian, fajrAngle: 20, ishaAngle: 18);
     params.methodAdjustments = {Prayer.dhuhr: 1};
     return params;
+  }
+
+  /// Shia Ithna-Ashari, Leva Institute, Qum
+  ///
+  /// Settings:
+  /// - Fajr Angle: 16°
+  /// - Isha Angle: 14°
+  /// - Maghrib Angle: 4°
+  static CalculationParameters jafari() {
+    return CalculationParameters(
+        method: CalculationMethod.jafari,
+        fajrAngle: 16,
+        ishaAngle: 14,
+        maghribAngle: 4);
   }
 
   /// Ministry of Awqaf, Islamic Affairs and Holy Places, Jordan
