@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 — 2026-05-10
+
+### Added
+
+- Configurable **`Rounding`** on `CalculationParameters`; **`PolarCircleResolution`** for extreme latitudes; **`sunset`** on `PrayerTimes`; **`Shafaq`** for Moonsighting Committee Isha (where applicable).
+- Many **calculation methods** (e.g. Gulf, Russia, Jordan, Tunisia, Algeria, France UOIF, Portugal, Jafari, and others); **`displayName`** on `Prayer` and `CalculationMethod`; **`toString`** on `PrayerTimes`, `SunnahTimes`, and `CalculationParameters`.
+- **`Madhab`** as an enhanced enum with **`shadowLength`**; `shadowLength(Madhab)` kept for compatibility.
+- **Coordinate range validation** on `Coordinates`; expanded **tests**; **GitHub Actions** CI; **`lints`**; changelog and README updates; **pubspec** metadata and **`.gitignore`** improvements.
+
+### Changed
+
+- **Type safety** (e.g. `Coordinates` instead of `dynamic` where appropriate); docs/TODO cleanup; **dart formatting** applied across sources.
+
+### Breaking changes
+
+- **`PrayerTimes.currentPrayer` / `PrayerTimes.nextPrayer`** — The time argument is now an optional **named** parameter (`{DateTime? date}`) defaulting to `DateTime.now()`. Replace positional calls such as `currentPrayer(dateTime)` with **`currentPrayer(date: dateTime)`** (and likewise for `nextPrayer`). This is a compile-time break for existing call sites.
+- **`CalculationMethod` and other public enums** — Many new calculation methods were added. **`switch` statements that are exhaustive over these enums must be updated** to handle the new values or use a default branch.
+- **Singapore preset rounding** — `CalculationMethodParameters.singapore()` now sets **`Rounding.up`** for minute rounding. Published times can differ by up to a minute at boundaries compared to earlier releases that always used implicit nearest-minute behavior for that preset.
+- **`Coordinates`** — **Assertions** enforce latitude ∈ [−90, 90] and longitude ∈ [−180, 180]. Out-of-range values that previously propagated may **fail in debug mode** (asserts are omitted in some release builds depending on your compile flags).
+- **`PolarCircleResolution`** — When set to anything other than **`unresolved`**, polar-day/night edge cases use the new resolution logic and **may produce different times** than before for extreme latitudes.
+
+Contributions in this release were driven largely by **Mahmoud Hamdi ([@mahmoodhamdi](https://github.com/mahmoodhamdi))** via GitHub pull requests **#17–#48** (stacked features, tests, docs, and tooling). Thank you for the extensive work on calculation methods, API polish, and quality improvements.
+
 ## 1.2.0
 
 - Calculation method changes (full credit to MoathCodes), typing fixes.

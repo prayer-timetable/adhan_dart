@@ -12,7 +12,16 @@ Implementations of Adhan (JavaScript only for now) in other languages can be fou
 
 There are other 'adhan' packages available in this repository. This one is like-for-like port of tried and tested JS repo mentioned above. Several aspects are adjusted to take advantage of Dart's features and some functionality added in the process. For example, `prayerTimes.currentPrayer()` will not return null in case the time is after midnight and before fajr; rather it will return 'ishabefore', isha prayer of the day before. Likewise `prayerTimes.nextPrayer()` will return 'fajrafter' - meaning fajr prayer for the day after.
 
-Another addition is 'precise: true' parameter for prayer calculations. On absence of this parameter, the time returned will be rounded to the nearest minute; having precision as a parameter will return second-precision DateTime value. For example: `PrayerTimes prayerTimes = PrayerTimes(coordinates, date, params, precision: true);`.
+Another addition is the **`precision`** parameter on `PrayerTimes`. With `precision: false` (the default), times are rounded to the minute using **`CalculationParameters.rounding`** (default `Rounding.nearest`; the Singapore preset uses `Rounding.up`). With **`precision: true`**, times keep second precision (`Rounding.none` for that step). Example:
+
+```dart
+PrayerTimes prayerTimes = PrayerTimes(
+  coordinates: coordinates,
+  date: date,
+  calculationParameters: params,
+  precision: true,
+);
+```
 
 ## Installation
 
@@ -21,7 +30,7 @@ Adhan was designed to work be easy to import to any Dart or Flutter project.
 Insert under dependencies in your pubspec.yaml file:
 
 ```
-  adhan_dart: ^1.2.0
+  adhan_dart: ^2.0.0
 ```
 
 Or use the latest dev version:
@@ -29,7 +38,7 @@ Or use the latest dev version:
 ```
   adhan_dart:
     git:
-      url: git://github.com/prayer-timetable/adhan_dart.git
+      url: https://github.com/prayer-timetable/adhan_dart.git
 ```
 
 ### Import
@@ -73,7 +82,7 @@ DateTime date = DateTime(2015, 11, 1); // set specific date
 
 The rest of the needed information is contained within the `CalculationParameters` object.
 Instead of manually initializing this object it is recommended to use one of the pre-populated
-objects in the `CalculationMethod` object. You can then further
+factories on **`CalculationMethodParameters`**. You can then further
 customize the calculation parameters if needed.
 
 ```dart
@@ -82,17 +91,22 @@ params.madhab = Madhab.hanafi;
 params.adjustments[Prayer.fajr] = 2;
 ```
 
-| Property         | Description                                                                                         |
-| ---------------- | --------------------------------------------------------------------------------------------------- |
-| method           | CalculationMethod name                                                                              |
-| fajrAngle        | Angle of the sun used to calculate Fajr                                                             |
-| ishaAngle        | Angle of the sun used to calculate Isha                                                             |
-| ishaInterval     | Minutes after Maghrib (if set, the time for Isha will be Maghrib plus ishaInterval)                 |
-| madhab           | Value from the Madhab object, used to calculate Asr                                                 |
-| highLatitudeRule | Value from the HighLatitudeRule object, used to set a minimum time for Fajr and a max time for Isha |
-| adjustments      | Object with custom prayer time adjustments (in minutes) for each prayer time                        |
+| Property               | Description                                                                                                                |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| method                 | Calculation method identifier                                                                                              |
+| fajrAngle              | Angle of the sun used to calculate Fajr                                                                                  |
+| ishaAngle              | Angle of the sun used to calculate Isha                                                                                    |
+| ishaInterval           | Minutes after Maghrib (if set, Isha is Maghrib plus this interval)                                                       |
+| maghribAngle           | Optional; when set, Maghrib may use angle-based twilight instead of sunset alone (e.g. Jafari, Tehran)                     |
+| madhab                 | `Madhab` value used to calculate Asr (shadow length)                                                                      |
+| shafaq                 | Optional; for `moonsightingCommittee`, affects seasonal Isha adjustment (`Shafaq.general` default)                        |
+| rounding               | Minute rounding when `PrayerTimes` is built with `precision: false` (`nearest`, `up`, or `none`)                           |
+| polarCircleResolution | Optional; how to handle sun never rise/set at extreme latitudes (`unresolved` by default)                                  |
+| highLatitudeRule       | Caps Fajr/Isha at high latitudes; see also `HighLatitudeRule.recommended(coordinates)`                                    |
+| adjustments            | Per-prayer manual adjustments in minutes                                                                                  |
+| methodAdjustments      | Per-prayer offsets defined by some presets (e.g. Dhuhr +1 for Singapore)                                                 |
 
-#### CalculationMethod
+#### Calculation presets (`CalculationMethodParameters`)
 
 | Value                                               | Description                                                                                                                                                                                                                                                                                                     |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -110,10 +124,10 @@ params.adjustments[Prayer.fajr] = 2;
 | CalculationMethodParameters.portugal()              | Comunidade Islamica de Lisboa. Uses a standard Fajr angle of 18° with a 77 minute fixed interval for Isha and a +3 minute Maghrib adjustment.                                                                                                                                                                   |
 | CalculationMethodParameters.qatar()                 | Same Isha interval as `ummAlQura` but with the standard Fajr time using an angle of 18°.                                                                                                                                                                                                                        |
 | CalculationMethodParameters.kuwait()                | Standard Fajr time with an angle of 18°. Slightly earlier Isha time with an angle of 17.5°.                                                                                                                                                                                                                     |
-| CalculationMethodParameters.moonsightingCommittee() | Method developed by Khalid Shaukat, founder of Moonsighting Committee Worldwide. Uses standard 18° angles for Fajr and Isha in addition to seasonal adjustment values. This method automatically applies the 1/7 approximation rule for locations above 55° latitude. Recommended for North America and the UK. |
+| CalculationMethodParameters.moonsightingCommittee() | Method developed by Khalid Shaukat, founder of Moonsighting Committee Worldwide. Uses standard 18° angles for Fajr and Isha in addition to seasonal adjustment values (optional **`shafaq`** on parameters). This method automatically applies the 1/7 approximation rule for locations above 55° latitude. Recommended for North America and the UK. |
 | CalculationMethodParameters.morocco()               | Moroccan Ministry of Habous and Islamic Affairs. Uses Fajr angle of 19° and Isha angle of 17° with adjustments of -3 for sunrise, +5 for Dhuhr, and +5 for Maghrib.                                                                                                                                            |
 | CalculationMethodParameters.russia()                | Spiritual Administration of Muslims of Russia. Uses a Fajr angle of 16° and Isha angle of 15°.                                                                                                                                                                                                                  |
-| CalculationMethodParameters.singapore()             | Used in Singapore, Malaysia, and Indonesia. Early Fajr time with an angle of 20° and standard Isha time with an angle of 18°.                                                                                                                                                                                   |
+| CalculationMethodParameters.singapore()             | Used in Singapore, Malaysia, and Indonesia. Fajr 20°, Isha 18°, Dhuhr +1 min; minute rounding uses **`Rounding.up`** (may differ slightly from older nearest-minute behavior).                                                                                                                                              |
 | CalculationMethodParameters.tunisia()               | Tunisian Ministry of Religious Affairs. Uses standard Fajr and Isha angles of 18°.                                                                                                                                                                                                                              |
 | CalculationMethodParameters.turkiye()               | An approximation of the Diyanet method used in Turkey. This approximation is less accurate outside the region of Turkey.                                                                                                                                                                                        |
 | CalculationMethodParameters.tehran()                | Institute of Geophysics, University of Tehran. Early Isha time with an angle of 14°. Slightly later Fajr time with an angle of 17.7°. Calculates Maghrib based on the sun reaching an angle of 4.5° below the horizon.                                                                                          |
@@ -134,12 +148,12 @@ params.adjustments[Prayer.fajr] = 2;
 | HighLatitudeRule.middleOfTheNight  | Fajr will never be earlier than the middle of the night and Isha will never be later than the middle of the night                                          |
 | HighLatitudeRule.seventhOfTheNight | Fajr will never be earlier than the beginning of the last seventh of the night and Isha will never be later than the end of the first seventh of the night |
 | HighLatitudeRule.twilightAngle     | Similar to SeventhOfTheNight, but instead of 1/7, the fraction of the night used is fajrAngle/60 and ishaAngle/60                                          |
+| `HighLatitudeRule.recommended(coordinates)` | Static helper: latitude **above 48°** uses `seventhOfTheNight`; otherwise `middleOfTheNight`. |
 
 ### Prayer Times
 
 Once the `PrayerTimes` object has been initialized it will contain values
-for all five prayer times and the time for sunrise. The prayer times will be
-DateTime object instances initialized with UTC values. You will then need to format
+for all five prayer times, **sunrise** and **sunset** (astronomical sunset; see also `PrayerTimes.sunset`), and `ishaBefore` / `fajrAfter` for wraparound logic. The returned times are **DateTime** instances initialized with UTC values. You will then need to format
 the times for the correct timezone. You can do that by using a timezone aware
 date formatting library like _timezone_.
 
@@ -151,8 +165,8 @@ tz.TZDateTime.from(prayerTimes.fajr, timezone);
 ### Full Example
 
 ```dart
-DateTime date = tz.TZDateTime.from(DateTime.now(), timezone);
 final timezone = tz.getLocation('America/New_York');
+DateTime date = tz.TZDateTime.from(DateTime.now(), timezone);
 Coordinates coordinates = const Coordinates(35.78056, -78.6389);
 CalculationParameters params = CalculationMethodParameters.muslimWorldLeague()
   ..madhab = Madhab.hanafi;
@@ -200,6 +214,10 @@ Get the direction, in degrees from North, of the Qibla from a given set of coord
 var coordinates = const Coordinates(35.78056, -78.6389);
 var qiblaDirection = Qibla.qibla(coordinates);
 ```
+
+## Upgrading from 1.x
+
+Version **2.0.0** includes API and behavior changes (named `date` on `currentPrayer` / `nextPrayer`, new enum values, Singapore rounding, coordinate asserts, and optional polar-circle handling). See **[CHANGELOG.md](CHANGELOG.md)** under **2.0.0** for the full breaking-change list and migration notes.
 
 ## Contributing
 
