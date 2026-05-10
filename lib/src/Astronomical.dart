@@ -54,7 +54,8 @@ class Astronomical {
     double T = julianCentury;
     /* Equation from Astronomical Algorithms page 164 */
     double mrad = degreesToRadians(meanAnomaly);
-    double term1 = (1.914602 - (0.004817 * T) - (0.000014 * pow(T, 2))) * sin(mrad);
+    double term1 =
+        (1.914602 - (0.004817 * T) - (0.000014 * pow(T, 2))) * sin(mrad);
     double term2 = (0.019993 - (0.000101 * T)) * sin(2 * mrad);
     double term3 = 0.000289 * sin(3 * mrad);
     return term1 + term2 + term3;
@@ -62,14 +63,17 @@ class Astronomical {
 
   /* The apparent longitude of the Sun, referred to the
         true equinox of the date. */
-  static double apparentSolarLongitude(double julianCentury, double meanLongitude) {
+  static double apparentSolarLongitude(
+      double julianCentury, double meanLongitude) {
     double T = julianCentury;
     double l0 = meanLongitude;
     /* Equation from Astronomical Algorithms page 164 */
-    double longitude =
-        l0 + Astronomical.solarEquationOfTheCenter(T, Astronomical.meanSolarAnomaly(T));
+    double longitude = l0 +
+        Astronomical.solarEquationOfTheCenter(
+            T, Astronomical.meanSolarAnomaly(T));
     double omega = 125.04 - (1934.136 * T);
-    double lambda = longitude - 0.00569 - (0.00478 * sin(degreesToRadians(omega)));
+    double lambda =
+        longitude - 0.00569 - (0.00478 * sin(degreesToRadians(omega)));
     return unwindAngle(lambda);
   }
 
@@ -110,8 +114,8 @@ class Astronomical {
     return unwindAngle(theta);
   }
 
-  static double nutationInLongitude(
-      double julianCentury, double solarLongitude, double lunarLongitude, double ascendingNode) {
+  static double nutationInLongitude(double julianCentury, double solarLongitude,
+      double lunarLongitude, double ascendingNode) {
     double l0 = solarLongitude;
     double lp = lunarLongitude;
     double omega = ascendingNode;
@@ -123,8 +127,8 @@ class Astronomical {
     return term1 - term2 - term3 + term4;
   }
 
-  static double nutationInObliquity(
-      double julianCentury, double solarLongitude, double lunarLongitude, double ascendingNode) {
+  static double nutationInObliquity(double julianCentury, double solarLongitude,
+      double lunarLongitude, double ascendingNode) {
     double l0 = solarLongitude;
     double lp = lunarLongitude;
     double omega = ascendingNode;
@@ -143,12 +147,14 @@ class Astronomical {
     double H = localHourAngle;
     /* Equation from Astronomical Algorithms page 93 */
     double term1 = sin(degreesToRadians(phi)) * sin(degreesToRadians(delta));
-    double term2 =
-        cos(degreesToRadians(phi)) * cos(degreesToRadians(delta)) * cos(degreesToRadians(H));
+    double term2 = cos(degreesToRadians(phi)) *
+        cos(degreesToRadians(delta)) *
+        cos(degreesToRadians(H));
     return radiansToDegrees(asin(term1 + term2));
   }
 
-  static double approximateTransit(double longitude, double siderealTime, double rightAscension) {
+  static double approximateTransit(
+      double longitude, double siderealTime, double rightAscension) {
     double L = longitude;
     double theta0 = siderealTime;
     double a2 = rightAscension;
@@ -158,8 +164,13 @@ class Astronomical {
   }
 
   /* The time at which the sun is at its highest point in the sky (in universal time) */
-  static double correctedTransit(double approximateTransit, double longitude, double siderealTime,
-      double rightAscension, double? previousRightAscension, double nextRightAscension) {
+  static double correctedTransit(
+      double approximateTransit,
+      double longitude,
+      double siderealTime,
+      double rightAscension,
+      double? previousRightAscension,
+      double nextRightAscension) {
     double m0 = approximateTransit;
     double L = longitude;
     double theta0 = siderealTime;
@@ -200,18 +211,22 @@ class Astronomical {
     /* Equation from page Astronomical Algorithms 102 */
     double lw = coordinates.longitude * -1;
     double term1 = sin(degreesToRadians(h02)) -
-        (sin(degreesToRadians(coordinates.latitude)) * sin(degreesToRadians(d2)));
-    double term2 = cos(degreesToRadians(coordinates.latitude)) * cos(degreesToRadians(d2));
+        (sin(degreesToRadians(coordinates.latitude)) *
+            sin(degreesToRadians(d2)));
+    double term2 =
+        cos(degreesToRadians(coordinates.latitude)) * cos(degreesToRadians(d2));
 
     // TODO: acos with term1/term2 > 1 or < -1
-    double h021 = (term1 / term2).abs() > 1 ? 1.0 : radiansToDegrees(acos(term1 / term2));
+    double h021 =
+        (term1 / term2).abs() > 1 ? 1.0 : radiansToDegrees(acos(term1 / term2));
 
     double m = afterTransit ? m0! + (h021 / 360) : m0! - (h021 / 360);
     double theta = unwindAngle((theta0 + (360.985647 * m)));
     double a = unwindAngle(Astronomical.interpolateAngles(a2, a1, a3, m)!);
     double delta = Astronomical.interpolate(d2, d1, d3, m)!;
     double H = (theta - lw - a);
-    double h = Astronomical.altitudeOfCelestialBody(coordinates.latitude, delta, H);
+    double h =
+        Astronomical.altitudeOfCelestialBody(coordinates.latitude, delta, H);
     double term3 = h - h02;
     double term4 = 360 *
         cos(degreesToRadians(delta)) *

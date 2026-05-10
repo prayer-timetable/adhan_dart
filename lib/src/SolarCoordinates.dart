@@ -13,13 +13,14 @@ class SolarCoordinates {
     double l0 = Astronomical.meanSolarLongitude(T);
     double lp = Astronomical.meanLunarLongitude(T);
     double omega = Astronomical.ascendingLunarNodeLongitude(T);
-    double lambda = degreesToRadians(Astronomical.apparentSolarLongitude(T, l0));
+    double lambda =
+        degreesToRadians(Astronomical.apparentSolarLongitude(T, l0));
     double theta0 = Astronomical.meanSiderealTime(T);
     double dPsi = Astronomical.nutationInLongitude(T, l0, lp, omega);
     double dEpsilon = Astronomical.nutationInObliquity(T, l0, lp, omega);
     double epsilon0 = Astronomical.meanObliquityOfTheEcliptic(T);
-    double epsilonApparent =
-        degreesToRadians(Astronomical.apparentObliquityOfTheEcliptic(T, epsilon0));
+    double epsilonApparent = degreesToRadians(
+        Astronomical.apparentObliquityOfTheEcliptic(T, epsilon0));
 
     /* declination: The declination of the sun, the angle between
             the rays of the Sun and the plane of the Earth's
@@ -31,13 +32,13 @@ class SolarCoordinates {
             celestial equator from the vernal equinox to the hour circle,
             in degrees.
             Equation from Astronomical Algorithms page 165 */
-    rightAscension =
-        unwindAngle(radiansToDegrees(atan2(cos(epsilonApparent) * sin(lambda), cos(lambda))));
+    rightAscension = unwindAngle(radiansToDegrees(
+        atan2(cos(epsilonApparent) * sin(lambda), cos(lambda))));
 
     /* apparentSiderealTime: Apparent sidereal time, the hour angle of the vernal
             equinox, in degrees.
             Equation from Astronomical Algorithms page 88 */
-    apparentSiderealTime =
-        theta0 + (((dPsi * 3600) * cos(degreesToRadians(epsilon0 + dEpsilon))) / 3600);
+    apparentSiderealTime = theta0 +
+        (((dPsi * 3600) * cos(degreesToRadians(epsilon0 + dEpsilon))) / 3600);
   }
 }

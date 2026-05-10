@@ -75,8 +75,7 @@ class PrayerTimes {
             solarTime.sunset.isNaN ||
             tomorrowSolarTime.sunrise.isNaN) &&
         polarCircleResolver != PolarCircleResolution.unresolved) {
-      var resolved =
-          resolvePolarCircle(polarCircleResolver, date, coordinates);
+      var resolved = resolvePolarCircle(polarCircleResolver, date, coordinates);
       solarTime = resolved.solarTime;
       tomorrowSolarTime = resolved.tomorrowSolarTime;
     }
@@ -254,10 +253,14 @@ class PrayerTimes {
     isha = roundedMinute(dateByAddingMinutes(ishaTime, ishaAdjustment),
         precision: false, rounding: rounding);
 
-    fajrAfter = roundedMinute(dateByAddingMinutes(fajrafterTime, fajrAdjustment),
-        precision: false, rounding: rounding);
-    ishaBefore = roundedMinute(dateByAddingMinutes(ishabeforeTime, ishaAdjustment),
-        precision: false, rounding: rounding);
+    fajrAfter = roundedMinute(
+        dateByAddingMinutes(fajrafterTime, fajrAdjustment),
+        precision: false,
+        rounding: rounding);
+    ishaBefore = roundedMinute(
+        dateByAddingMinutes(ishabeforeTime, ishaAdjustment),
+        precision: false,
+        rounding: rounding);
   }
 
   /// Returns the current prayer for the given date.
