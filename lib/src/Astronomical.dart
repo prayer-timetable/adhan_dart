@@ -216,7 +216,8 @@ class Astronomical {
     double term2 =
         cos(degreesToRadians(coordinates.latitude)) * cos(degreesToRadians(d2));
 
-    // TODO: acos with term1/term2 > 1 or < -1
+    /* Guard acos domain: when |term1/term2| > 1, the sun does not reach the
+       requested altitude at this location (e.g., polar regions). */
     double h021 =
         (term1 / term2).abs() > 1 ? 1.0 : radiansToDegrees(acos(term1 / term2));
 
