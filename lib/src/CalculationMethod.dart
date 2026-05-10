@@ -2,29 +2,34 @@ import 'package:adhan_dart/adhan_dart.dart';
 
 /// Enum holding all the available methods
 enum CalculationMethod {
-  algerian,
-  dubai,
-  egyptian,
-  france,
-  gulfRegion,
-  indonesian,
-  jafari,
-  jordan,
-  karachi,
-  kuwait,
-  moonsightingCommittee,
-  morocco,
-  muslimWorldLeague,
-  northAmerica,
-  other,
-  portugal,
-  qatar,
-  russia,
-  singapore,
-  tehran,
-  tunisia,
-  turkiye,
-  ummAlQura,
+  algerian('Algerian Ministry of Religious Affairs'),
+  dubai('Dubai'),
+  egyptian('Egyptian General Authority of Survey'),
+  france('Union des Organisations Islamiques de France (UOIF)'),
+  gulfRegion('Gulf Region'),
+  indonesian('Indonesia (KEMENAG)'),
+  jafari('Jafari (Shia Ithna-Ashari)'),
+  jordan('Jordan'),
+  karachi('University of Islamic Sciences, Karachi'),
+  kuwait('Kuwait'),
+  moonsightingCommittee('Moonsighting Committee'),
+  morocco('Morocco'),
+  muslimWorldLeague('Muslim World League'),
+  northAmerica('North America (ISNA)'),
+  other('Other'),
+  portugal('Portugal (Islamic Community of Lisbon)'),
+  qatar('Qatar'),
+  russia('Russia (Spiritual Administration of Muslims)'),
+  singapore('Singapore'),
+  tehran('Tehran'),
+  tunisia('Tunisia'),
+  turkiye('Turkiye (Diyanet)'),
+  ummAlQura('Umm al-Qura');
+
+  /// The display name for this calculation method.
+  final String displayName;
+
+  const CalculationMethod(this.displayName);
 }
 
 /// Class holding the calculation parameters for each method
