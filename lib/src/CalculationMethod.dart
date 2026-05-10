@@ -6,6 +6,7 @@ enum CalculationMethod {
   dubai,
   egyptian,
   france,
+  gulfRegion,
   indonesian,
   jordan,
   karachi,
@@ -75,6 +76,19 @@ class CalculationMethodParameters {
   static CalculationParameters france() {
     return CalculationParameters(
         method: CalculationMethod.france, fajrAngle: 12, ishaAngle: 12);
+  }
+
+  /// Gulf Region
+  ///
+  /// Settings:
+  /// - Fajr Angle: 19.5°
+  /// - Isha Interval: 90 minutes after Maghrib
+  static CalculationParameters gulfRegion() {
+    return CalculationParameters(
+        method: CalculationMethod.gulfRegion,
+        fajrAngle: 19.5,
+        ishaAngle: 0,
+        ishaInterval: 90);
   }
 
   /// Kementerian Agama Republik Indonesia (KEMENAG)
