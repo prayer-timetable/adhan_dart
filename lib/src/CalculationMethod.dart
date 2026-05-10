@@ -7,6 +7,7 @@ enum CalculationMethod {
   egyptian,
   france,
   indonesian,
+  jordan,
   karachi,
   kuwait,
   moonsightingCommittee,
@@ -84,6 +85,19 @@ class CalculationMethodParameters {
     CalculationParameters params = CalculationParameters(
         method: CalculationMethod.indonesian, fajrAngle: 20, ishaAngle: 18);
     params.methodAdjustments = {Prayer.dhuhr: 1};
+    return params;
+  }
+
+  /// Ministry of Awqaf, Islamic Affairs and Holy Places, Jordan
+  ///
+  /// Settings:
+  /// - Fajr Angle: 18°
+  /// - Isha Angle: 18°
+  /// - Method Adjustments: Maghrib +5min
+  static CalculationParameters jordan() {
+    CalculationParameters params = CalculationParameters(
+        method: CalculationMethod.jordan, fajrAngle: 18, ishaAngle: 18);
+    params.methodAdjustments = {Prayer.maghrib: 5};
     return params;
   }
 
