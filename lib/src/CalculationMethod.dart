@@ -16,6 +16,7 @@ enum CalculationMethod {
   northAmerica,
   other,
   qatar,
+  russia,
   singapore,
   tehran,
   tunisia,
@@ -206,6 +207,16 @@ class CalculationMethodParameters {
         fajrAngle: 18,
         ishaAngle: 0,
         ishaInterval: 90);
+  }
+
+  /// Spiritual Administration of Muslims of Russia
+  ///
+  /// Settings:
+  /// - Fajr Angle: 16°
+  /// - Isha Angle: 15°
+  static CalculationParameters russia() {
+    return CalculationParameters(
+        method: CalculationMethod.russia, fajrAngle: 16, ishaAngle: 15);
   }
 
   /// Singapore
