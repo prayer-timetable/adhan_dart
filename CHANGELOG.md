@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 — 2026-05-11
+
+### Changed
+
+- **Dev dependency** `timezone` updated to **^0.11.0** (Dart **^3.10.0** for package consumers running tests or examples that load tzdata).
+- **Tests and examples** initialize the full IANA database via **`package:timezone/data/latest_all.dart`** so zone names used in tests (e.g. `Europe/Oslo`, `Asia/Kuala_Lumpur`) remain available; **`latest.dart`** in timezone 0.11+ embeds a reduced zone set.
+- **CI** minimum matrix SDK set to **3.10.0** to match timezone 0.11.
+- **README**: documenting **`latest_all`** vs **`latest`**, and that local development/tests need Dart **3.10+** with current dev dependencies.
+
 ## 2.0.0 — 2026-05-10
 
 ### Added
