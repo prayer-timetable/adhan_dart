@@ -1,6 +1,6 @@
 import 'package:adhan_dart/adhan_dart.dart';
 import 'package:test/test.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 /// Helper to extract HH:mm from a UTC DateTime in a given timezone.

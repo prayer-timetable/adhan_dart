@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:adhan_dart/adhan_dart.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 void main() {

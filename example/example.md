@@ -4,7 +4,7 @@ Example dart app showing how to use adhan_dart.
 
 ```dart
 import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:adhan_dart/adhan_dart.dart';
 
 void main() {

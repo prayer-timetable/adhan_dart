@@ -155,7 +155,7 @@ params.adjustments[Prayer.fajr] = 2;
 Once the `PrayerTimes` object has been initialized it will contain values
 for all five prayer times, **sunrise** and **sunset** (astronomical sunset; see also `PrayerTimes.sunset`), and `ishaBefore` / `fajrAfter` for wraparound logic. The returned times are **DateTime** instances initialized with UTC values. You will then need to format
 the times for the correct timezone. You can do that by using a timezone aware
-date formatting library like _timezone_.
+date formatting library like _timezone_. With **timezone** 0.11 and later, call `initializeTimeZones()` from **`package:timezone/data/latest_all.dart`** if you rely on `getLocation` with arbitrary IANA names—the default **`latest.dart`** embeds a reduced zone set and may not include locations such as `Europe/Oslo` or `Asia/Kuala_Lumpur`.
 
 ```dart
 final timezone = tz.getLocation('America/New_York');
@@ -220,6 +220,8 @@ var qiblaDirection = Qibla.qibla(coordinates);
 Version **2.0.0** includes API and behavior changes (named `date` on `currentPrayer` / `nextPrayer`, new enum values, Singapore rounding, coordinate asserts, and optional polar-circle handling). See **[CHANGELOG.md](CHANGELOG.md)** under **2.0.0** for the full breaking-change list and migration notes.
 
 ## Contributing
+
+Developing this package (running `dart pub get`, tests, and examples that use **timezone**) needs **Dart SDK 3.10.0 or newer**, because `timezone` ^0.11.x declares `sdk: ^3.10.0`. The library itself has **no runtime dependencies**; apps on older SDKs can still depend on `adhan_dart` per the `pubspec.yaml` SDK constraint.
 
 Adhan is made publicly available to provide a well tested and well documented library for Islamic prayer times to all
 developers. We accept feature contributions provided that they are properly documented and include the appropriate
