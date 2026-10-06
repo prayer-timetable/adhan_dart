@@ -16,6 +16,10 @@ class SolarTime {
   late double sunrise;
   late double sunset;
 
+  /// Whether the sun rises and sets on this day. When it does not (a polar
+  /// day or night), [sunrise] and [sunset] are not real times.
+  late bool hasSunriseAndSunset;
+
   SolarTime(DateTime date, Coordinates coordinates) {
     double julianDay =
         Astronomical.julianDay(date.year, date.month, date.day, 0);
@@ -31,6 +35,9 @@ class SolarTime {
     const solarAltitude = -50.0 / 60.0;
 
     approxTransit = m0;
+
+    hasSunriseAndSunset = Astronomical.hourAngleExists(
+        solarAltitude, coordinates, solar.declination!);
 
     transit = Astronomical.correctedTransit(
         m0,

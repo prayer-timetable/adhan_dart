@@ -186,6 +186,21 @@ class Astronomical {
     return (m0 + dm) * 24;
   }
 
+  /// Whether the sun reaches [altitude] (degrees) on a day with the given
+  /// [declination] at [coordinates]: false in a polar day or night for the
+  /// sunrise altitude, or where twilight never ends for a twilight angle.
+  /// [correctedHourAngle] cannot return NaN in that case (it guards the
+  /// `acos` domain), so this is how callers tell.
+  static bool hourAngleExists(
+      double altitude, Coordinates coordinates, double declination) {
+    double term1 = sin(degreesToRadians(altitude)) -
+        (sin(degreesToRadians(coordinates.latitude)) *
+            sin(degreesToRadians(declination)));
+    double term2 = cos(degreesToRadians(coordinates.latitude)) *
+        cos(degreesToRadians(declination));
+    return (term1 / term2).abs() <= 1;
+  }
+
   static double correctedHourAngle(
       double? approximateTransit,
       double angle,
@@ -217,7 +232,8 @@ class Astronomical {
         cos(degreesToRadians(coordinates.latitude)) * cos(degreesToRadians(d2));
 
     /* Guard acos domain: when |term1/term2| > 1, the sun does not reach the
-       requested altitude at this location (e.g., polar regions). */
+       requested altitude at this location (e.g., polar regions). The value
+       returned then is not a time: callers check [hourAngleExists] first. */
     double h021 =
         (term1 / term2).abs() > 1 ? 1.0 : radiansToDegrees(acos(term1 / term2));
 

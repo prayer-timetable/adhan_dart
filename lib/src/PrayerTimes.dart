@@ -67,13 +67,14 @@ class PrayerTimes {
     DateTime tomorrow = dateByAddingDays(date, 1);
     var tomorrowSolarTime = SolarTime(tomorrow, coordinates);
 
-    // Polar circle resolution: if sunrise/sunset are NaN, attempt to resolve
+    // Polar circle resolution: if the sun does not rise or set today, or
+    // does not rise tomorrow, attempt to resolve. (The hour angle is never
+    // NaN: Astronomical.correctedHourAngle guards the acos domain.)
     PolarCircleResolution polarCircleResolver =
         calculationParameters.polarCircleResolution ??
             PolarCircleResolution.unresolved;
-    if ((solarTime.sunrise.isNaN ||
-            solarTime.sunset.isNaN ||
-            tomorrowSolarTime.sunrise.isNaN) &&
+    if ((!solarTime.hasSunriseAndSunset ||
+            !tomorrowSolarTime.hasSunriseAndSunset) &&
         polarCircleResolver != PolarCircleResolution.unresolved) {
       var resolved = resolvePolarCircle(polarCircleResolver, date, coordinates);
       solarTime = resolved.solarTime;
