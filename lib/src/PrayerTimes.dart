@@ -144,9 +144,22 @@ class PrayerTimes {
       fajrTime = safeFajr();
     }
 
+    // Tomorrow's Fajr: bounded from tomorrow's sunrise, over tonight.
+    DateTime safeFajrAfter() {
+      if (calculationParameters.method ==
+          CalculationMethod.moonsightingCommittee) {
+        return Astronomical.seasonAdjustedMorningTwilight(coordinates.latitude,
+            dayOfYear(dateAfter), dateAfter.year, sunriseafterTime);
+      } else {
+        var portion = calculationParameters.nightPortions()[Prayer.fajr]!;
+        return dateByAddingSeconds(
+            sunriseafterTime, -(portion * night).round());
+      }
+    }
+
     if (fajrafterTime.millisecondsSinceEpoch.isNaN ||
-        safeFajr().isAfter(fajrafterTime)) {
-      fajrafterTime = safeFajr();
+        safeFajrAfter().isAfter(fajrafterTime)) {
+      fajrafterTime = safeFajrAfter();
     }
 
     if (calculationParameters.ishaInterval != null &&
@@ -185,16 +198,21 @@ class PrayerTimes {
         }
       }
 
+      // Yesterday's Isha: bounded from yesterday's sunset, over last night.
       DateTime safeIshaBefore() {
         if (calculationParameters.method ==
             CalculationMethod.moonsightingCommittee) {
           return Astronomical.seasonAdjustedEveningTwilight(
-              coordinates.latitude, dayOfYear(date), date.year, sunsetTime,
+              coordinates.latitude,
+              dayOfYear(dateBefore),
+              dateBefore.year,
+              sunsetbeforeTime,
               shafaq: calculationParameters.shafaq ?? Shafaq.general);
         } else {
           var portion = calculationParameters.nightPortions()[Prayer.isha]!;
-          nightFraction = portion * night;
-          return dateByAddingSeconds(sunsetTime, nightFraction!.round());
+          int lastNight = sunriseTime.difference(sunsetbeforeTime).inSeconds;
+          return dateByAddingSeconds(
+              sunsetbeforeTime, (portion * lastNight).round());
         }
       }
 

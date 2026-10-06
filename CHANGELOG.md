@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Fixed
+
+- **`ishaBefore` and `fajrAfter` took their high-latitude bound from the wrong day.** Where twilight never ends (Oslo in June with any angle method), `fajrAfter` was replaced by *today's* bounded Fajr and `ishaBefore` by *today's* bounded Isha: `fajrAfter` came before tonight's Isha and `ishaBefore` after this morning's Fajr. They are now bounded from tomorrow's sunrise and yesterday's sunset, over the night in between.
+
 ## 2.0.1 — 2026-05-11
 
 ### Changed
