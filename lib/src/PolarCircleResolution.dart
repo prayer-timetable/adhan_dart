@@ -51,7 +51,7 @@ PolarCircleResolvedValues? _aqrabYaumResolver(
     return null;
   }
 
-  DateTime testDate = date.add(Duration(days: direction * daysAdded));
+  DateTime testDate = dateByAddingDays(date, direction * daysAdded);
   DateTime tomorrow = dateByAddingDays(testDate, 1);
   SolarTime solarTime = SolarTime(testDate, coordinates);
   SolarTime tomorrowSolarTime = SolarTime(tomorrow, coordinates);
