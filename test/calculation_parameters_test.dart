@@ -234,12 +234,11 @@ void main() {
   group('HighLatitudeRule', () {
     test('enum has three values', () {
       expect(HighLatitudeRule.values.length, 3);
-      expect(HighLatitudeRule.values,
-          contains(HighLatitudeRule.middleOfTheNight));
+      expect(
+          HighLatitudeRule.values, contains(HighLatitudeRule.middleOfTheNight));
       expect(HighLatitudeRule.values,
           contains(HighLatitudeRule.seventhOfTheNight));
-      expect(
-          HighLatitudeRule.values, contains(HighLatitudeRule.twilightAngle));
+      expect(HighLatitudeRule.values, contains(HighLatitudeRule.twilightAngle));
     });
   });
 
@@ -258,7 +257,9 @@ void main() {
   });
 
   group('PrayerTimes edge cases', () {
-    test('prayer times ordering is correct (fajr < sunrise < dhuhr < asr < maghrib < isha)', () {
+    test(
+        'prayer times ordering is correct (fajr < sunrise < dhuhr < asr < maghrib < isha)',
+        () {
       var coordinates = const Coordinates(35.78056, -78.6389);
       var date = DateTime(2015, 7, 12);
       var params = CalculationMethodParameters.northAmerica();
@@ -461,8 +462,8 @@ void main() {
       var sunnah = SunnahTimes(pt);
 
       expect(sunnah.middleOfTheNight.isAfter(pt.maghrib), isTrue);
-      expect(sunnah.lastThirdOfTheNight.isAfter(sunnah.middleOfTheNight),
-          isTrue);
+      expect(
+          sunnah.lastThirdOfTheNight.isAfter(sunnah.middleOfTheNight), isTrue);
     });
 
     test('lastThirdOfTheNight is after middleOfTheNight', () {
@@ -476,8 +477,8 @@ void main() {
       );
       var sunnah = SunnahTimes(pt);
 
-      expect(sunnah.lastThirdOfTheNight.isAfter(sunnah.middleOfTheNight),
-          isTrue);
+      expect(
+          sunnah.lastThirdOfTheNight.isAfter(sunnah.middleOfTheNight), isTrue);
     });
   });
 
@@ -500,8 +501,7 @@ void main() {
 
     test('qibla direction in different hemispheres', () {
       // Southern hemisphere
-      var sydneyDirection =
-          Qibla.qibla(const Coordinates(-33.8688, 151.2093));
+      var sydneyDirection = Qibla.qibla(const Coordinates(-33.8688, 151.2093));
       expect(sydneyDirection, greaterThan(0));
       expect(sydneyDirection, lessThan(360));
 
@@ -513,7 +513,9 @@ void main() {
   });
 
   group('HighLatitudeRule effect', () {
-    test('seventhOfTheNight gives earlier isha than middleOfTheNight at high latitudes', () {
+    test(
+        'seventhOfTheNight gives earlier isha than middleOfTheNight at high latitudes',
+        () {
       // Edinburgh, Scotland - high latitude
       var coordinates = const Coordinates(55.9533, -3.1883);
       var date = DateTime(2015, 6, 15); // Summer - long days
