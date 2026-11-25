@@ -57,8 +57,8 @@ class PrayerTimes {
     this.coordinates = coordinates;
     this.calculationParameters = calculationParameters;
 
-    DateTime dateBefore = date.subtract(const Duration(days: 1));
-    DateTime dateAfter = date.add(const Duration(days: 1));
+    DateTime dateBefore = dateByAddingDays(date, -1);
+    DateTime dateAfter = dateByAddingDays(date, 1);
 
     SolarTime solarTime = SolarTime(date, coordinates);
     SolarTime solarTimeBefore = SolarTime(dateBefore, coordinates);

@@ -1,8 +1,19 @@
 import 'package:adhan_dart/src/Rounding.dart';
 
-
 DateTime dateByAddingDays(DateTime date, int days) {
-  return date.add(Duration(days: days));
+  final shifted = date.add(Duration(days: days));
+  final expected = DateTime.utc(date.year, date.month, date.day + days,
+      date.hour, date.minute, date.second, date.millisecond, date.microsecond);
+  final actual = DateTime.utc(
+      shifted.year,
+      shifted.month,
+      shifted.day,
+      shifted.hour,
+      shifted.minute,
+      shifted.second,
+      shifted.millisecond,
+      shifted.microsecond);
+  return shifted.add(expected.difference(actual));
 }
 
 DateTime dateByAddingMinutes(DateTime date, int minutes) {
@@ -14,11 +25,8 @@ DateTime dateByAddingSeconds(DateTime date, int seconds) {
 }
 
 int dayOfYear(DateTime date) {
-  Duration diff = date.difference(DateTime(date.year, 1, 1, 0, 0));
-
-  int returnedDayOfYear = diff.inDays + 1; // 1st Jan should be day 1
-
-  return returnedDayOfYear;
+  final day = DateTime.utc(date.year, date.month, date.day);
+  return day.difference(DateTime.utc(date.year)).inDays + 1;
 }
 
 DateTime roundedMinute(DateTime date,
