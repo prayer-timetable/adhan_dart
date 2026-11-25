@@ -2,12 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 2.0.2 — 2026-11-25
+
+High-latitude and daylight-saving corrections. No API changes.
 
 ### Fixed
 
-- **Polar circle resolution never ran.** `Astronomical.correctedHourAngle` guards the `acos` domain, so `SolarTime.sunrise`/`sunset` are never NaN and the NaN check that triggered `PolarCircleResolution` never fired: on a polar day or night `aqrabBalad`/`aqrabYaum` returned the same (wrong) times as `unresolved`, e.g. Tromsø on 21 June had sunrise on 30 May. `SolarTime.hasSunriseAndSunset` (from the new `Astronomical.hourAngleExists`) now decides it.
-- **`ishaBefore` and `fajrAfter` took their high-latitude bound from the wrong day.** Where twilight never ends (Oslo in June with any angle method), `fajrAfter` was replaced by *today's* bounded Fajr and `ishaBefore` by *today's* bounded Isha: `fajrAfter` came before tonight's Isha and `ishaBefore` after this morning's Fajr. They are now bounded from tomorrow's sunrise and yesterday's sunset, over the night in between.
+- **Polar circle resolution never ran.** `Astronomical.correctedHourAngle` guards the `acos` domain, so `SolarTime.sunrise`/`sunset` are never NaN and the NaN check that triggered `PolarCircleResolution` never fired: on a polar day or night `aqrabBalad`/`aqrabYaum` returned the same (wrong) times as `unresolved`, e.g. Tromsø on 21 June had sunrise on 30 May. `SolarTime.hasSunriseAndSunset` (from the new `Astronomical.hourAngleExists`) now decides it. *(#50, [@rovshan-b](https://github.com/rovshan-b))*
+- **`ishaBefore` and `fajrAfter` took their high-latitude bound from the wrong day.** Where twilight never ends (Oslo in June with any angle method), `fajrAfter` was replaced by *today's* bounded Fajr and `ishaBefore` by *today's* bounded Isha: `fajrAfter` came before tonight's Isha and `ishaBefore` after this morning's Fajr. They are now bounded from tomorrow's sunrise and yesterday's sunset, over the night in between. *(#51, [@rovshan-b](https://github.com/rovshan-b))*
+- **Calendar days were lost across daylight saving.** `dateByAddingDays` used a fixed 24-hour duration, so on a 23- or 25-hour day the neighbouring day could be the wrong civil date and `fajr`/`isha` night bounds were measured from it (Brussels on 25 October, at midnight local time). Civil dates are now preserved, `dayOfYear` counts calendar fields, and adjacent-day and polar-circle calculations use the same helper. *(#52, [@mhatipog](https://github.com/mhatipog))*
+- **Midnight spring-forward zones stepped a day back.** On zones that move the clock forward at 00:00 (`Africa/Cairo`, `Asia/Beirut`, `America/Havana`, `Atlantic/Azores`) the offset correction landed on the previous civil date, leaving that day's Fajr, Maghrib and Isha unordered (Cairo, 23 April). The shifted instant is kept when the correction leaves the wanted day.
+- **`ishaBefore`/`fajrAfter` kept unresolved neighbour days in the polar circle.** Resolving only today's sunrise/sunset left the neighbouring day's bound weeks away: Tromsø on 21 June bounded `fajrAfter` from 23 May. The resolved tomorrow now also serves `solarTimeAfter`, and `solarTimeBefore` is resolved on its own day when needed.
+
+### Changed
+
+- **Dart formatting.** Files that had drifted from `dart format` are formatted, so the CI format job passes with current stable.
+
+### Thanks
+
+Contributions in this release came from **[Rovshan Baghirov (@rovshan-b)](https://github.com/rovshan-b)** — polar circle resolution and the high-latitude `ishaBefore`/`fajrAfter` bounds — and **[Metin Hatipoğulları (@mhatipog)](https://github.com/mhatipog)** — calendar-day preservation across DST. Thank you both.
 
 ## 2.0.1 — 2026-05-11
 

@@ -30,7 +30,7 @@ Adhan was designed to work be easy to import to any Dart or Flutter project.
 Insert under dependencies in your pubspec.yaml file:
 
 ```
-  adhan_dart: ^2.0.1
+  adhan_dart: ^2.0.2
 ```
 
 Or use the latest dev version:
@@ -218,6 +218,8 @@ var qiblaDirection = Qibla.qibla(coordinates);
 ## Upgrading from 1.x
 
 Version **2.0.0** includes API and behavior changes (named `date` on `currentPrayer` / `nextPrayer`, new enum values, Singapore rounding, coordinate asserts, and optional polar-circle handling). See **[CHANGELOG.md](CHANGELOG.md)** under **2.0.0** for the full breaking-change list and migration notes.
+
+Version **2.0.2** fixes high-latitude and daylight-saving calculations and needs no API changes. If you set `polarCircleResolution` to `aqrabBalad` or `aqrabYaum`, prayer times inside the polar circle now differ from 2.0.1 (previously the resolution never ran). See the **2.0.2** entry in **[CHANGELOG.md](CHANGELOG.md)**.
 
 ## Contributing
 
