@@ -47,5 +47,11 @@ jobs:
         with:
           sdk: stable
 
+      # Without the package config `dart format` has no language version to
+      # resolve and falls back to the SDK's latest (tall) style, which this
+      # package's 2.x language version does not use.
+      - name: Install dependencies
+        run: dart pub get
+
       - name: Check formatting
         run: dart format --set-exit-if-changed .
