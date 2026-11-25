@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - **Polar circle resolution never ran.** `Astronomical.correctedHourAngle` guards the `acos` domain, so `SolarTime.sunrise`/`sunset` are never NaN and the NaN check that triggered `PolarCircleResolution` never fired: on a polar day or night `aqrabBalad`/`aqrabYaum` returned the same (wrong) times as `unresolved`, e.g. Tromsø on 21 June had sunrise on 30 May. `SolarTime.hasSunriseAndSunset` (from the new `Astronomical.hourAngleExists`) now decides it.
+- **`ishaBefore` and `fajrAfter` took their high-latitude bound from the wrong day.** Where twilight never ends (Oslo in June with any angle method), `fajrAfter` was replaced by *today's* bounded Fajr and `ishaBefore` by *today's* bounded Isha: `fajrAfter` came before tonight's Isha and `ishaBefore` after this morning's Fajr. They are now bounded from tomorrow's sunrise and yesterday's sunset, over the night in between.
 
 ## 2.0.1 — 2026-05-11
 
