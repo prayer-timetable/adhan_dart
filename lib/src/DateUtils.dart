@@ -13,7 +13,17 @@ DateTime dateByAddingDays(DateTime date, int days) {
       shifted.second,
       shifted.millisecond,
       shifted.microsecond);
-  return shifted.add(expected.difference(actual));
+  final candidate = shifted.add(expected.difference(actual));
+
+  // Where the clock moves forward at 00:00 the next day starts an hour later,
+  // so the correction above steps back onto the previous calendar day. Keep
+  // the shifted instant then: it is already on the wanted day.
+  if (candidate.year == expected.year &&
+      candidate.month == expected.month &&
+      candidate.day == expected.day) {
+    return candidate;
+  }
+  return shifted;
 }
 
 DateTime dateByAddingMinutes(DateTime date, int minutes) {

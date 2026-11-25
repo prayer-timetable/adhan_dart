@@ -70,15 +70,29 @@ class PrayerTimes {
     // Polar circle resolution: if the sun does not rise or set today, or
     // does not rise tomorrow, attempt to resolve. (The hour angle is never
     // NaN: Astronomical.correctedHourAngle guards the acos domain.)
+    // ishaBefore and fajrAfter belong to the neighbouring days, so resolve
+    // their solar times too: otherwise they keep the unresolved (weeks off)
+    // sunrise/sunset while today's are replaced.
     PolarCircleResolution polarCircleResolver =
         calculationParameters.polarCircleResolution ??
             PolarCircleResolution.unresolved;
     if ((!solarTime.hasSunriseAndSunset ||
-            !tomorrowSolarTime.hasSunriseAndSunset) &&
+            !tomorrowSolarTime.hasSunriseAndSunset ||
+            !solarTimeBefore.hasSunriseAndSunset) &&
         polarCircleResolver != PolarCircleResolution.unresolved) {
-      var resolved = resolvePolarCircle(polarCircleResolver, date, coordinates);
-      solarTime = resolved.solarTime;
-      tomorrowSolarTime = resolved.tomorrowSolarTime;
+      if (!solarTime.hasSunriseAndSunset ||
+          !tomorrowSolarTime.hasSunriseAndSunset) {
+        var resolved =
+            resolvePolarCircle(polarCircleResolver, date, coordinates);
+        solarTime = resolved.solarTime;
+        tomorrowSolarTime = resolved.tomorrowSolarTime;
+        solarTimeAfter = resolved.tomorrowSolarTime;
+      }
+      if (!solarTimeBefore.hasSunriseAndSunset) {
+        solarTimeBefore =
+            resolvePolarCircle(polarCircleResolver, dateBefore, coordinates)
+                .solarTime;
+      }
     }
 
     DateTime fajrTime;

@@ -67,4 +67,52 @@ void main() {
       isNot(timesOn(solstice, PolarCircleResolution.unresolved).sunrise),
     );
   });
+
+  // ishaBefore and fajrAfter belong to the neighbouring days, so their solar
+  // times must be resolved for those days too: resolving only today's left
+  // them on the unresolved sunrise/sunset, which the guarded acos rule puts
+  // weeks away (Tromsø, 21 June: 28 days early).
+  void expectNeighbouringDaysAdjacent(
+      String label, DateTime date, PolarCircleResolution resolution) {
+    final times = timesOn(date, resolution);
+
+    expect(times.fajrAfter.difference(times.isha).inHours.abs(),
+        lessThanOrEqualTo(24),
+        reason: '$label: isha ${times.isha}, fajrAfter ${times.fajrAfter}');
+    expect(times.fajr.difference(times.ishaBefore).inHours.abs(),
+        lessThanOrEqualTo(24),
+        reason: '$label: ishaBefore ${times.ishaBefore}, fajr ${times.fajr}');
+  }
+
+  test('neighbouring days stay adjacent in the midnight sun', () {
+    expectNeighbouringDaysAdjacent('the midnight sun',
+        DateTime.utc(2026, 6, 21), PolarCircleResolution.aqrabBalad);
+  });
+
+  test('neighbouring days stay adjacent in the polar night', () {
+    expectNeighbouringDaysAdjacent('the polar night',
+        DateTime.utc(2026, 12, 21), PolarCircleResolution.aqrabYaum);
+  });
+
+  test('neighbouring days stay ordered below the polar circle', () {
+    // Where the sunrise and sunset exist, resolution must not run at all and
+    // ishaBefore/fajrAfter stay strictly ordered around tonight.
+    const dublin = Coordinates(53.3498, -6.2603);
+    final date = DateTime.utc(2026, 6, 21);
+    for (final resolution in PolarCircleResolution.values) {
+      final times = PrayerTimes(
+        date: date,
+        coordinates: dublin,
+        calculationParameters: CalculationMethodParameters.muslimWorldLeague()
+          ..polarCircleResolution = resolution
+          ..highLatitudeRule = HighLatitudeRule.twilightAngle,
+      );
+      expect(times.fajrAfter.isAfter(times.isha), isTrue,
+          reason: '$resolution: isha ${times.isha}, '
+              'fajrAfter ${times.fajrAfter}');
+      expect(times.ishaBefore.isBefore(times.fajr), isTrue,
+          reason: '$resolution: ishaBefore ${times.ishaBefore}, '
+              'fajr ${times.fajr}');
+    }
+  });
 }
