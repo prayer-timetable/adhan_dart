@@ -22,7 +22,9 @@ const double _latitudeVariationStep = 0.5;
 const double _unsafeLatitude = 65.0;
 
 bool _isValidSolarTime(SolarTime solarTime) {
-  return !solarTime.sunrise.isNaN && !solarTime.sunset.isNaN;
+  return solarTime.hasSunriseAndSunset &&
+      !solarTime.sunrise.isNaN &&
+      !solarTime.sunset.isNaN;
 }
 
 class PolarCircleResolvedValues {

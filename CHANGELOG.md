@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Fixed
+
+- **Polar circle resolution never ran.** `Astronomical.correctedHourAngle` guards the `acos` domain, so `SolarTime.sunrise`/`sunset` are never NaN and the NaN check that triggered `PolarCircleResolution` never fired: on a polar day or night `aqrabBalad`/`aqrabYaum` returned the same (wrong) times as `unresolved`, e.g. Tromsø on 21 June had sunrise on 30 May. `SolarTime.hasSunriseAndSunset` (from the new `Astronomical.hourAngleExists`) now decides it.
+
 ## 2.0.1 — 2026-05-11
 
 ### Changed
